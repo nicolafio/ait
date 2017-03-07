@@ -17,6 +17,8 @@
     background-image: linear-gradient(to top,
                                       var(--arc-border-color) 1px,
                                       transparent 1px);
+    margin-top: 1px;
+    margin-left: -10px;
 }
 
 #bottom-events-box,
