@@ -1,10 +1,12 @@
 /*
-
-    Style integration made by Nicola Fiori (JD342) based on horst3180's Arc Theme.
-
-    This file is licensed under GNU General Public License Version 3, it comes with the license file, alternatively the license is found at http://www.gnu.org/licenses/gpl-3.0.html. 
-
-*/
+ ~
+ ~  Integration made by Nicola Fiori (JD342) based on horst3180's Arc Theme.
+ ~
+ ~  This file is licensed under GNU General Public License Version 3, it comes
+ ~  with the license file, alternatively the license is found at
+ ~  http://www.gnu.org/licenses/gpl-3.0.html.
+ ~
+ */
 
 :root {
     --arc-border-color: #d5d6dc;
