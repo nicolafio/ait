@@ -1,5 +1,5 @@
 #!/bin/bash
-build_file=arcthunderbird@jd342.net.xpi
+build_file=arcthunderbird.xpi
 mkdir -p build
 rm -f build/$build_file
 cd source; zip -r ../build/$build_file .
