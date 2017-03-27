@@ -2,7 +2,7 @@
 
 ![alt tag](preview.png)
 
-> Tested in Thunderbird 45.6.0, GNOME 45.6.0, Debian GNU/Linux 9, Surface Pro 4, Arc Theme 20161119-1.
+> Tested in Thunderbird 45.6.0, GNOME 3.22.3, Debian GNU/Linux 9, Surface Pro 4, Arc Theme 20161119-1.
 
 > Stability in other versions is not guaranteed, but you can still try.
 
