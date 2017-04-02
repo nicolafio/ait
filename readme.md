@@ -36,7 +36,7 @@ The content in this repository is licensed under GPLv3.
 
 ## History
 
-  - 0.3.0 2017/02/03
+  - 0.3.0 2017/04/02
     - Integrated several (but not all) icons
     - Dynamically restyled some stock icons in Thunderbird to match the general look and feel
     - Applied further style changes to the tab browser to match the official theme
