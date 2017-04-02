@@ -2,6 +2,7 @@
 
     "parserOptions": { "ecmaVersion": 6 },
     "env": { "es6": true, "browser": true },
+    "globals": { "AIT": false },
 
     "rules": {
 
@@ -26,7 +27,6 @@
         "valid-typeof": "error",
         "constructor-super": "error",
         "no-class-assign": "error",
-        "no-const-assign": "error",
         "no-new-symbol": "error",
         "no-this-before-super": "error",
         "prefer-const": "warn",
