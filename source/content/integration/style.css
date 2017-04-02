@@ -1,0 +1,1200 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird.
+ ~
+ ~  The Arc Integration for Thunderbird is free software: you can
+ ~  redistribute it and/or modify it under the terms of the
+ ~  GNU General Public License Version 3 as published by the
+ ~  Free Software Foundation.
+ ~
+ ~  The Arc Integration for Thunderbird is distributed in the hope
+ ~  that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ ~  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ ~  See the GNU General Public License for more details.
+ ~
+ ~  You should have received a copy of the GNU General Public License
+ ~  along with the Arc Integration for Thunderbird.
+ ~  If not, see <http://www.gnu.org/licenses/>.
+ ~
+ */
+
+/* -- general --------------------------------------------------------------- */
+
+:root {
+
+    /* colors */
+
+    --ait-gray: rgb(128, 128, 128);
+    --ait-dusty-gray: rgb(153, 153, 153);
+    --ait-shuttle-gray: rgb(92, 97, 108);
+    --ait-mischka-gray: rgb(213, 214, 220);
+    --ait-froly-red: rgb(243, 112, 118);
+    --ait-athens-gray: rgb(251, 251, 252);
+    --ait-darker-athens-gray: rgb(237, 238, 240);
+    --ait-botticelli-blue: rgb(207, 214, 230);
+    --ait-havelock-blue: rgb(82, 148, 226);
+    --ait-porcelain-blue: rgb(245, 246, 247);
+    --ait-porcelain-blue-60-opacity: rgba(245, 246, 247, 0.6);
+
+    /* coloring */
+
+    --ait-border-color: var(--ait-mischka-gray);
+    --ait-splitter-color-hover: var(--ait-havelock-blue);
+    --ait-actions-footer-bg-color: var(--ait-darker-athens-gray);
+    --ait-side-pane-bg-color: var(--ait-athens-gray);
+    --ait-tab-color: var(--ait-porcelain-blue);
+    --ait-tab-hover-color: var(--ait-porcelain-blue-60-opacity);
+    --ait-button-color: var(--ait-athens-gray);
+    --ait-button-hover-color: rgb(255, 255, 255);
+    --ait-button-active-color: var(--ait-havelock-blue);
+    --ait-button-border-color: var(--ait-botticelli-blue);
+    --ait-button-icon-color: var(--ait-shuttle-gray);
+    --ait-button-active-icon-color: rgb(255, 255, 255);
+    --ait-input-bg-color: rgb(255, 255, 255);
+    --ait-input-border-color: var(--ait-botticelli-blue);
+    --ait-input-focused-border-color: var(--ait-havelock-blue);
+    --ait-input-icon-color: var(--ait-dusty-gray);
+
+    /* dimensions */
+
+    --ait-actions-footer-height: 34px;
+    --ait-input-border-radius: 3px;
+    --ait-input-height: 28px;
+    --ait-input-font-size: 14.37px;
+    --ait-input-horizontal-padding: 6px;
+
+    /* computed values */
+
+    --ait-actions-footer-input-margin: calc((var(--ait-actions-footer-height) -
+                                             var(--ait-input-height)) / 2);
+    --ait-input-text-vertical-spacing: calc((var(--ait-input-height) -
+                                             var(--ait-input-font-size)) / 2);
+
+}
+
+
+.ait-icons {
+
+    /* hides from view the element containing all the custom icons */
+
+    width: 0;
+    height: 0;
+    overflow: hidden;
+
+}
+
+.ait-icons object {
+
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+
+}
+
+/* -- icons ----------------------------------------------------------------- */
+
+@-moz-document regexp(".*\.svg(?:#.*)?") {
+
+    svg:root {
+        overflow: hidden;
+    }
+
+    rect, path {
+        fill-opacity: 1 !important;
+    }
+
+    [ait-close] path {
+
+        fill: var(--ait-gray) !important;
+
+    }
+
+    [ait-close-hover] path {
+
+        fill: var(--ait-froly-red) !important;
+
+    }
+
+
+    [ait-close-active] path {
+
+        fill: var(--ait-havelock-blue) !important;
+
+    }
+
+    :-moz-any([ait-menu],
+              [ait-down],
+              [ait-save],
+              [ait-inbox],
+              [ait-avatar],
+              [ait-filter],
+              [ait-tag],
+              [ait-message],
+              [ait-write],
+              [ait-sync],
+              [ait-new],
+              [ait-task],
+              [ait-properties],
+              [ait-delete],
+              [ait-frame],
+              [ait-search],
+              [ait-printer],
+              [ait-calendar],
+              [ait-schedule],
+              [ait-cut],
+              [ait-copy],
+              [ait-paste]) :-moz-any(rect,
+                                     path) {
+
+        fill: var(--ait-button-icon-color) !important;
+
+    }
+
+    :-moz-any([ait-menu-active],
+              [ait-down-active],
+              [ait-save-active],
+              [ait-inbox-active],
+              [ait-avatar-active],
+              [ait-filter-active],
+              [ait-tag-active],
+              [ait-message-active],
+              [ait-write-active],
+              [ait-sync-active],
+              [ait-new-active],
+              [ait-task-active],
+              [ait-properties-active],
+              [ait-delete-active],
+              [ait-search-active],
+              [ait-printer-active],
+              [ait-calendar-active],
+              [ait-schedule-active],
+              [ait-cut-active],
+              [ait-copy-active],
+              [ait-paste-active]) :-moz-any(rect,
+                                            path) {
+
+        fill: var(--ait-button-active-icon-color) !important;
+
+    }
+
+
+
+    [ait-search-searchbox] path {
+
+        fill: var(--ait-input-icon-color) !important;
+
+    }
+
+    [ait-filter] {
+
+        transform: scale(1.25, 1.25);
+
+    }
+
+    :-moz-any([ait-inbox],
+              [ait-write],
+              [ait-filter]) path {
+
+        stroke: var(--ait-button-icon-color) !important;
+        stroke-width: 0.788px !important;
+
+    }
+
+    :-moz-any([ait-inbox-active],
+              [ait-write-active],
+              [ait-filter-active]) path {
+
+        stroke: var(--ait-button-active-icon-color) !important;
+
+    }
+
+    [ait-schedule],
+    [ait-schedule-active] {
+
+        transform: translateY(-1px);
+
+    }
+
+}
+
+/* -- main view ------------------------------------------------------------- */
+
+@-moz-document url("chrome://messenger/content/messenger.xul") {
+
+    /* border colors */
+
+    #bottom-events-box,
+    #calendar-task-tree-detail,
+    #task-addition-box,
+    #today-pane-panel,
+    #unifinder-searchBox,
+    #view-tabs > tab,
+    .navigation-inner-box,
+    #messagepanebox,
+    #folderTree,
+    #threadTree,
+    #view-deck,
+    #calendar-nav-control,
+    .navigation-spacer-box,
+    #ltnSidebar,
+    splitter {
+
+        border-color: var(--ait-border-color) !important;
+        border-inline-start-color: var(--ait-border-color);
+        border-inline-end-color: var(--ait-border-color);
+
+    }
+
+    /* hover effect for splitters */
+
+    splitter {
+
+        transition: border-color 300ms ease !important;
+
+    }
+
+    splitter:hover {
+
+        border-color: var(--ait-splitter-color-hover) !important;
+
+    }
+
+    /* other */
+
+    #contentTabBrowser0 {
+
+        /* puts content windows (ex. Add-ons Manager) on top to hide artifacts
+           from the tab browser  */
+
+        position: relative;
+        z-index: 2;
+
+    }
+
+/* -- tab browser ----------------------------------------------------------- */
+
+    /* tabs styling */
+
+    #tabs-toolbar {
+
+        --ait-tab-border-radius: 1.1px;
+
+        background: linear-gradient(to top,
+                                    var(--ait-border-color) 1px,
+                                    transparent 1px);
+        margin-top: 1px;
+        margin-left: -10px;
+        position: relative;
+
+    }
+
+    .tab-background {
+
+        background: none !important;
+
+    }
+
+    .tab-background::after {
+
+        content: "";
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: block;
+        box-shadow: 2px 0 var(--ait-tab-color),
+                    -2px 0 var(--ait-tab-color);
+
+    }
+
+    .tab-background-start,
+    .tab-background-middle,
+    .tab-background-end {
+
+        opacity: 0 !important;
+        margin-bottom: -1px;
+        height: 10px !important;
+        overflow: hidden;
+
+    }
+
+    .tab-background-middle {
+
+        background: var(--ait-tab-color) !important;
+        margin-top: 1px;
+        box-shadow: 0 0 0 1px var(--ait-border-color);
+        border-top-left-radius: var(--ait-tab-border-radius);
+        border-top-right-radius: var(--ait-tab-border-radius);
+
+    }
+
+    .tab-background-middle[selected="true"] {
+
+        opacity: 1 !important;
+
+    }
+
+    .tabmail-tab:hover:not([selected="true"]) .tab-background-middle {
+
+        opacity: 1 !important;
+        background: linear-gradient(to top,
+                                    var(--ait-tab-color) 2px,
+                                    var(--ait-border-color) 2px,
+                                    var(--ait-border-color) 3px,
+                                    var(--ait-tab-hover-color) 3px) !important;
+
+    }
+
+    .tabmail-tab::before {
+
+        display: none;
+
+    }
+
+    /* calendar and task buttons styling */
+
+    #calendar-tab-button,
+    #task-tab-button {
+
+        box-shadow: none !important;
+        border-radius: 0;
+        border-top-left-radius: var(--ait-tab-border-radius);
+        border-top-right-radius: var(--ait-tab-border-radius);
+        border: 1px solid rgba(0,0,0,0);
+        border-bottom: none;
+        transition: none;
+        height: 27px;
+        margin-top: 0;
+        width: 36px;
+
+    }
+    :-moz-any(#calendar-tab-button,
+              #task-tab-button) .toolbarbutton-icon {
+
+        list-style-image: none !important;
+        width: 16px !important;
+        height: 16px !important;
+
+    }
+
+    :-moz-any(#calendar-tab-button,
+              #task-tab-button):hover {
+
+        background: var(--ait-tab-hover-color) !important;
+        border-color: var(--ait-border-color) !important;
+
+    }
+
+    #calendar-tab-button .toolbarbutton-icon {
+
+        background: -moz-element(#ait-calendar-icon);
+
+    }
+
+    #task-tab-button .toolbarbutton-icon {
+
+        background: -moz-element(#ait-task-icon);
+
+    }
+
+    /* tab close button styling */
+
+    .tab-close-button {
+
+        background: -moz-element(#ait-close-icon) !important;
+        overflow: hidden;
+
+    }
+
+    .tab-close-button::before {
+
+        display: block;
+        content: "";
+        width: 16px;
+        height: 16px;
+        pointer-events: none;
+        background: -moz-element(#ait-close-hover-icon);
+        position: absolute;
+        opacity: 0;
+        transition: opacity 300ms ease;
+
+    }
+
+    .tab-close-button:hover::before {
+
+        opacity: 1;
+
+    }
+
+    .tab-close-button:active::before  {
+
+        background: -moz-element(#ait-close-active-icon);
+
+    }
+
+/* -- toolbox --------------------------------------------------------------- */
+
+    /* toolbox styling */
+
+    .mail-toolbox {
+
+        --ait-toolbox-height: 36px;
+        --ait-toolbox-button-height: var(--ait-input-height);
+
+        --ait-toolbox-button-vertical-spacing:
+            calc((var(--ait-toolbox-height) -
+                  var(--ait-toolbox-button-height)) / 2);
+        --ait-toolbox-button-vertical-spacing-half:
+            calc((var(--ait-toolbox-height) -
+                  var(--ait-toolbox-button-height)) / 4);
+
+        background: var(--ait-tab-color) !important;
+        box-shadow: none !important;
+
+    }
+
+    .mail-toolbox[labelalign="bottom"][mode="full"] {
+
+        --ait-toolbox-height: 50px;
+        --ait-toolbox-button-height: 40px;
+
+    }
+
+    .mail-toolbox::after {
+
+        background-color: var(--ait-border-color) !important;
+
+    }
+
+    .mail-toolbox toolbar {
+
+        min-height: var(--ait-toolbox-height) !important;
+        margin: 0 var(--ait-toolbox-button-vertical-spacing-half) !important;
+
+    }
+
+    /* toolbox items styling */
+
+    .mail-toolbox toolbarbutton {
+
+        min-width: 16px !important;
+        border: none !important;
+        background: none;
+        padding: 0 var(--ait-input-horizontal-padding);
+        outline: none !important;
+        box-shadow: none;
+        transition: none !important;
+        position: relative !important;
+
+    }
+
+    .mail-toolbox .toolbarbutton-image {
+
+        width: 16px !important;
+        height: 16px !important;
+
+    }
+
+    .mail-toolbox .toolbarbutton-text {
+
+        font-size: var(--ait-input-font-size);
+        padding-left: var(--ait-input-text-vertical-spacing) !important;
+        color: var(--ait-button-icon-color) !important;
+        max-height: 1em;
+
+    }
+
+    .mail-toolbox menulist,
+    .mail-toolbox toolbaritem toolbarbutton,
+    .mail-toolbox toolbar > toolbarbutton {
+
+        min-height: var(--ait-toolbox-button-height);
+        margin: var(--ait-toolbox-button-vertical-spacing)
+                var(--ait-toolbox-button-vertical-spacing-half) !important;
+        box-shadow: inset 0 0 0 1px rgba(0,0,0,0) !important;
+        transition: background 200ms ease-out,
+                    box-shadow 200ms ease-out !important;
+        border-radius: var(--ait-input-border-radius);
+
+    }
+
+    .mail-toolbox menulist {
+
+        border: none;
+
+    }
+
+    .mail-toolbox .menulist-label-box {
+
+        background: none;
+        padding: 0;
+
+    }
+
+    .mail-toolbox .menulist-label-box::after {
+
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: -moz-element(#ait-down-icon);
+
+    }
+
+    .mail-toolbox menulist[open="true"] .menulist-label-box::after {
+
+        background: -moz-element(#ait-down-active-icon);
+
+    }
+
+    .mail-toolbox *[disabled="true"] {
+
+        pointer-events: none;
+
+    }
+
+    .mail-toolbox toolbaritem menulist,
+    .mail-toolbox toolbar toolbaritem toolbarbutton:hover,
+    .mail-toolbox toolbar >
+        toolbarbutton:not(:-moz-any([disabled="true"],
+                                    [type="menu-button"])):hover {
+
+        background: var(--ait-button-color);
+        box-shadow: inset 0 0 0 1px var(--ait-button-border-color) !important;
+
+    }
+
+    .mail-toolbox toolbaritem menulist:hover {
+
+        background: var(--ait-button-hover-color) !important;
+
+    }
+
+    .mail-toolbox toolbaritem menulist[open="true"],
+    .mail-toolbox toolbar toolbaritem toolbarbutton:active,
+    .mail-toolbox toolbar >
+        toolbarbutton:not([type="menu-button"]):-moz-any(:active,
+                                                         [open="true"],
+                                                         [checked="true"]) {
+
+        background: var(--ait-button-active-color) !important;
+        box-shadow: none !important;
+        transition: none !important;
+
+    }
+
+    .mail-toolbox toolbaritem menulist[open="true"],
+    .mail-toolbox
+        toolbarbutton:not([type="menu-button"]):-moz-any(:active,
+                                                         [open="true"],
+                                                         [checked="true"])
+            .toolbarbutton-text {
+
+        color: white !important;
+
+    }
+
+    .mail-toolbox toolbarbutton[type="menu-button"] {
+
+        background: var(--ait-button-color) !important;
+
+    }
+
+    .mail-toolbox :-moz-any(.toolbarbutton-menubutton-button,
+                            .toolbarbutton-menubutton-dropmarker) {
+
+        background: rgba(0,0,0,0);
+        border-top: 1px solid var(--ait-button-border-color) !important;
+        border-bottom: 1px solid var(--ait-button-border-color) !important;
+        box-shadow: none !important;
+        min-height: var(--ait-toolbox-button-height);
+
+    }
+
+    .mail-toolbox .toolbarbutton-menubutton-button {
+
+        border-top-left-radius: var(--ait-input-border-radius);
+        border-bottom-left-radius: var(--ait-input-border-radius);
+        border-left: 1px solid var(--ait-button-border-color) !important;
+        transition: background 300ms ease !important;
+        padding-right: calc(var(--ait-input-horizontal-padding) + 1px);
+
+    }
+
+    .mail-toolbox .toolbarbutton-menubutton-dropmarker {
+
+        border-top-right-radius: var(--ait-input-border-radius);
+        border-bottom-right-radius: var(--ait-input-border-radius);
+        border-right: 1px solid var(--ait-button-border-color) !important;
+        background: none !important;
+        z-index: 2;
+        position: relative;
+        box-shadow: -1px 0 rgba(0,0,0,0) !important;
+        transition: background 300ms ease,
+                    box-shadow 300ms ease !important;
+
+    }
+
+    .mail-toolbox toolbarbutton image {
+
+        width: 16px !important;
+        height: 16px !important;
+
+    }
+
+    .mail-toolbox toolbarbutton:hover .toolbarbutton-menubutton-dropmarker {
+
+        box-shadow: -1px 0 var(--ait-button-border-color) !important;
+
+    }
+
+    .mail-toolbox toolbarbutton:not(:active)
+        .toolbarbutton-menubutton-button:hover,
+    .mail-toolbox toolbarbutton:not([open="true"]):hover
+        .toolbarbutton-menubutton-button:not(:hover) +
+            .toolbarbutton-menubutton-dropmarker {
+
+        background: var(--ait-button-hover-color) !important;
+
+    }
+
+    .mail-toolbox toolbarbutton[type="menu-button"]
+        :-moz-any(toolbarbutton:active,
+                  dropmarker[open="true"]) {
+
+        background: var(--ait-button-active-color) !important;
+        transition: none !important;
+        border-color: var(--ait-button-active-color) !important;
+
+    }
+
+    .mail-toolbox toolbarbutton[type="menu-button"] dropmarker::before {
+
+        display: none !important;
+
+    }
+
+    .mail-toolbox toolbarbutton[type="menu-button"] .dropmarker-icon {
+
+        max-width: 16px !important;
+        max-height: 16px !important;
+        margin: calc((var(--ait-toolbox-button-height) - 16px) / 2)
+                calc(var(--ait-input-horizontal-padding) - 3px) !important;
+
+    }
+
+    .mail-toolbox .dropmarker-icon {
+
+        background: -moz-element(#ait-down-icon) !important;
+
+    }
+
+    .mail-toolbox toolbarbutton[type="menu-button"]
+        dropmarker[open="true"] .dropmarker-icon,
+    .mail-toolbox toolbarbutton[type="menu"][open="true"] .dropmarker-icon {
+
+        background: -moz-element(#ait-down-active-icon) !important;
+
+    }
+
+    .mail-toolbox toolbarseparator {
+
+        -moz-appearance: none !important;
+        margin: 0 3px !important;
+        min-width: 1px;
+        height: var(--ait-toolbox-height);
+        background: var(--ait-border-color);
+
+    }
+
+    /* toolbox menu popups styling */
+
+    #appmenuSecondaryPane {
+        border-color: var(--ait-border-color);
+        background: var(--ait-side-pane-bg-color);
+    }
+
+    .mail-toolbox toolbar > toolbarbutton > menupopup {
+        -moz-appearance: none !important;
+        background: transparent !important;
+        overflow: hidden;
+        border-radius: 5px;
+        margin: 0 -3px;
+    }
+
+    .mail-toolbox toolbar > toolbarbutton > menupopup > .popup-internal-box {
+        background: white;
+        margin: 3px;
+        box-shadow: 0 0 3px rgba(0,0,0,0.125);
+        border-radius: 5px;
+        overflow: hidden !important;
+        border: 1px solid var(--ait-border-color);
+    }
+
+    /* toolbox button icons styling */
+
+    .button-appmenu .toolbarbutton-icon[label="AppMenu"] {
+
+        list-style-image: none;
+        background: -moz-element(#ait-menu-icon);
+
+    }
+
+    .button-appmenu:-moz-any([open="true"],
+                             :active) .toolbarbutton-icon[label="AppMenu"] {
+
+        background: -moz-element(#ait-menu-active-icon);
+
+    }
+
+    #button-getmsg .toolbarbutton-menubutton-button .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-inbox-icon);
+
+    }
+
+    #button-getmsg .toolbarbutton-menubutton-button:active .toolbarbutton-icon {
+
+        background: -moz-element(#ait-inbox-active-icon);
+
+    }
+
+    #button-newmsg .toolbarbutton-menubutton-button .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-write-icon);
+
+    }
+
+    #button-newmsg .toolbarbutton-menubutton-button:active .toolbarbutton-icon {
+
+        background: -moz-element(#ait-write-active-icon);
+
+    }
+
+    #button-address .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-avatar-icon);
+
+    }
+
+    #button-address:active .toolbarbutton-icon {
+
+        background: -moz-element(#ait-avatar-active-icon);
+
+    }
+
+    #qfb-show-filter-bar .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-filter-icon);
+
+    }
+
+    #qfb-show-filter-bar:-moz-any([checked="true"],
+                                  :active) .toolbarbutton-icon {
+
+        background: -moz-element(#ait-filter-active-icon);
+
+    }
+
+    #calendar-unifinder-button .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-search-icon);
+
+    }
+
+    #calendar-unifinder-button:-moz-any([checked="true"],
+                                        :active) .toolbarbutton-icon {
+
+        background: -moz-element(#ait-search-active-icon);
+
+    }
+
+    #button-tag .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-tag-icon);
+
+    }
+
+    #button-tag[open="true"] .toolbarbutton-icon {
+
+        background: -moz-element(#ait-tag-active-icon);
+
+    }
+
+    #button-chat .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-message-icon);
+
+    }
+
+    #button-chat:active .toolbarbutton-icon {
+
+        background: -moz-element(#ait-message-active-icon);
+
+    }
+
+    #lightning-button-tasks .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-task-icon);
+
+    }
+
+    #lightning-button-tasks:active .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-task-active-icon);
+
+    }
+
+    :-moz-any(#lightning-button-calendar,
+              #calendar-goto-today-button) .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-calendar-icon);
+
+    }
+
+    :-moz-any(#lightning-button-calendar,
+              #calendar-goto-today-button):active .toolbarbutton-icon {
+
+        background: -moz-element(#ait-calendar-active-icon);
+
+    }
+
+    :-moz-any(#calendar-synchronize-button,
+              #task-synchronize-button) .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-sync-icon);
+
+    }
+
+    :-moz-any(#calendar-synchronize-button,
+              #task-synchronize-button):active .toolbarbutton-icon {
+
+        background: -moz-element(#ait-sync-active-icon);
+
+    }
+
+    :-moz-any(#calendar-delete-button,
+              #task-delete-button) .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-delete-icon);
+
+    }
+
+    :-moz-any(#calendar-delete-button,
+              #task-delete-button):active .toolbarbutton-icon {
+
+        background: -moz-element(#ait-delete-active-icon);
+
+    }
+
+    :-moz-any(#calendar-edit-button,
+              #task-edit-button) .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-properties-icon);
+
+    }
+
+    :-moz-any(#calendar-edit-button,
+              #task-edit-button):active .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-properties-active-icon);
+
+    }
+
+    #button-print .toolbarbutton-menubutton-button .toolbarbutton-icon,
+    :-moz-any(#calendar-print-button,
+              #task-print-button) .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-printer-icon);
+
+    }
+
+    #button-print .toolbarbutton-menubutton-button:active .toolbarbutton-icon,
+    :-moz-any(#calendar-print-button,
+              #task-print-button):active .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-printer-active-icon);
+
+    }
+
+    #extractTaskButton .toolbarbutton-menubutton-button .toolbarbutton-icon,
+    :-moz-any(#calendar-newtask-button,
+              #calendar-add-task-button,
+              #task-newtask-button) .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-new-icon);
+
+    }
+
+    #extractTaskButton .toolbarbutton-menubutton-button:active
+       .toolbarbutton-icon,
+    :-moz-any(#calendar-newtask-button,
+              #task-newtask-button):active .toolbarbutton-icon {
+
+        background: -moz-element(#ait-new-active-icon);
+
+    }
+
+    #extractEventButton .toolbarbutton-menubutton-button .toolbarbutton-icon,
+    :-moz-any(#calendar-newevent-button,
+              #task-newevent-button,
+              #todaypane-new-event-button) .toolbarbutton-icon {
+
+        list-style-image: none;
+        background: -moz-element(#ait-schedule-icon);
+
+    }
+
+    #extractEventButton .toolbarbutton-menubutton-button:active
+        .toolbarbutton-icon,
+    :-moz-any(#calendar-newevent-button,
+              #task-newevent-button):active .toolbarbutton-icon {
+
+        background: -moz-element(#ait-schedule-active-icon);
+
+    }
+
+    :-moz-any(#calendar-add-task-button,
+              #todaypane-new-event-button) .toolbarbutton-icon {
+
+        width: 16px !important;
+        height: 16px !important;
+        margin: 1px !important;
+
+    }
+
+
+/* -- text boxes ------------------------------------------------------------ */
+
+    textbox {
+
+        border-color: var(--ait-button-border-color) !important;
+        transition: border-color 100ms linear;
+        border-radius: var(--ait-input-border-radius) !important;
+        height: var(--ait-input-height);
+
+    }
+
+    textbox[focused="true"] {
+
+        border-color: var(--ait-input-focused-border-color) !important;
+
+    }
+
+    textbox:not(.searchBox):not([focused="true"]) input {
+
+        opacity: 0.5
+
+    }
+
+    .searchBox {
+
+        border-radius: 1em !important;
+        position: relative;
+        padding: 0 var(--ait-input-horizontal-padding);
+        padding-left: calc(var(--ait-input-horizontal-padding) * 2 + 16px)
+
+    }
+
+    .searchBox > hbox:last-child,
+    .searchBox .textbox-search-icons {
+
+        display: none;
+
+    }
+
+    .searchBox::before {
+
+        content: "";
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: -moz-element(#ait-search-searchbox-icon);
+        margin-right: var(--ait-input-horizontal-padding);
+        position: absolute;
+        top: 50%;
+        left: var(--ait-input-horizontal-padding);
+        transform: translateY(-50%);
+
+    }
+
+/* -- calendar view --------------------------------------------------------- */
+
+    #view-tabs > tab {
+
+        border-radius: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin: 0 -1px;
+
+    }
+
+    #view-tabs > tab:not([selected="true"]) {
+
+        background: none;
+        border-left-color: rgba(0,0,0,0) !important;
+        border-top-color: rgba(0,0,0,0) !important;
+        border-right-color: rgba(0,0,0,0) !important;
+        color: rgba(0,0,0,0.4);
+        padding-bottom: 4px;
+
+    }
+
+    #view-tabs > tab:not([selected="true"]):hover {
+
+        background: rgba(255,255,255,0.7);
+        border-color: var(--ait-border-color) !important;
+        color: rgba(0,0,0,0.6);
+
+    }
+
+    #view-tabs > tab label {
+
+        font-weight: normal !important;
+
+    }
+
+/* -- left side panel ------------------------------------------------------- */
+
+    #today-pane-panel,
+    #today-pane-panel sidebarheader {
+
+        background: var(--ait-side-pane-bg-color);
+
+    }
+
+    #today-pane-panel {
+
+        box-shadow: -1px -1px var(--ait-border-color);
+        position: relative;
+
+    }
+
+    #today-pane-panel sidebarheader {
+
+        font-weight: bold;
+        margin: 0.5em 0.5em 0.5em 0;
+
+    }
+
+    #calendar-task-tree-detail {
+
+        margin: 3px;
+        background: var(--ait-actions-footer-bg-color);
+        border: 1px solid var(--ait-border-color);
+        border-radius: var(--ait-input-border-radius);
+        overflow: hidden;
+        display: flex;
+        flex-flow: column;
+
+    }
+
+    #unifinder-todo-tree {
+
+        flex: 1;
+
+    }
+
+    #unifinder-todo-tree tree {
+
+        width: 100%;
+        height: 100%;
+
+    }
+
+    #unifinder-todo-tree .calendar-task-tree {
+
+        border-bottom: 1px solid var(--ait-border-color);
+
+    }
+
+    #unifinder-task-edit-field {
+
+        margin: var(--ait-actions-footer-input-margin);
+
+    }
+
+/* -- buttons --------------------------------------------------------------- */
+
+    :-moz-any(#folderview-cycler-prev,
+              #previous-view-button) .toolbarbutton-icon {
+
+        list-style-image: none;
+        width: 16px;
+        height: 16px;
+        background: -moz-element(#ait-down-icon) !important;
+        transform: rotate(90deg) !important;
+
+    }
+
+    :-moz-any(#folderview-cycler-next,
+              #next-view-button) .toolbarbutton-icon {
+
+        list-style-image: none;
+        width: 16px;
+        height: 16px;
+        background: -moz-element(#ait-down-icon) !important;
+        transform: rotate(-90deg) !important;
+
+    }
+
+/* -- status bar ------------------------------------------------------------ */
+
+    #status-bar,
+    #calendar-status-todaypane-button {
+
+        color: var(--ait-button-icon-color) !important;
+
+    }
+
+    #calendar-status-todaypane-button .toolbarbutton-icon-begin {
+
+        list-style-image: none !important;
+        background: -moz-element(#ait-frame-icon) no-repeat;
+        transform: scale(1.1) translate(1.5px, 1px);
+
+    }
+
+    #calendar-status-todaypane-button .toolbarbutton-icon-end {
+
+        list-style-image: none !important;
+        width: 16px;
+        height: 16px;
+        background: -moz-element(#ait-down-icon);
+        transition: transform 500ms ease;
+
+    }
+
+    #calendar-status-todaypane-button[checked="false"]
+        .toolbarbutton-icon-end {
+
+        transform: rotate(180deg);
+
+    }
+
+    #calendar-status-todaypane-button .toolbarbutton-day-text {
+
+        transform: scale(0.75) translateY(-1px);
+
+    }
+
+}

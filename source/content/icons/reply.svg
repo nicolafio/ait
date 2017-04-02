@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+   ~  Copyright (c) 2016 horst3180 <http://horst3180.deviantart.com/>
+   ~  Copyright (c) 2017 Nicola Fiori (JD342)
+   ~
+   ~  This file is part of the Arc Integration for Thunderbird, with content
+   ~  originating from horst3180's Arc Icon Theme.
+   ~
+   ~  The Arc Integration for Thunderbird is free software: you can
+   ~  redistribute it and/or modify it under the terms of the
+   ~  GNU General Public License Version 3 as published by the
+   ~  Free Software Foundation.
+   ~
+   ~  The Arc Integration for Thunderbird is distributed in the hope
+   ~  that it will be useful, but WITHOUT ANY WARRANTY; without even the
+   ~  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+   ~  See the GNU General Public License for more details.
+   ~
+   ~  You should have received a copy of the GNU General Public License
+   ~  along with the Arc Integration for Thunderbird.
+   ~  If not, see <http://www.gnu.org/licenses/>.
+   ~
+   -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="16"
+   height="16"
+   id="icon"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="reply.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="938"
+     inkscape:window-height="554"
+     id="namedview7"
+     showgrid="false"
+     inkscape:zoom="23.3125"
+     inkscape:cx="1.2654156"
+     inkscape:cy="7.9142091"
+     inkscape:current-layer="layer1-33"
+     inkscape:window-x="0"
+     inkscape:window-y="54"
+     inkscape:window-maximized="0" />
+  <title
+     id="title9167">Gnome Symbolic Icon Theme</title>
+  <defs
+     id="defs11" />
+  <metadata
+     id="metadata90">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Gnome Symbolic Icon Theme</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="mail-reply-sender_16"
+     transform="translate(-19,-508.36215)"
+     inkscape:label="#g8376">
+    <g
+       transform="translate(19,508.26215)"
+       id="g5876"
+       style="display:inline">
+      <g
+         style="display:inline"
+         inkscape:label="Calque 1"
+         id="layer1-33">
+        <path
+           sodipodi:nodetypes="cccccczc"
+           inkscape:connector-curvature="0"
+           id="path3874-3"
+           d="M 12.109113,13.2 C 13.61792,9.36014 11.610398,9.2779205 8,10 L 8,13 2,8 8,3 8,6 C 10.166239,6 11.657357,5.6091712 13.191776,7.3241101 14.726195,9.0390492 13.914312,10.672722 12.109113,13.2 Z"
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:none" />
+      </g>
+    </g>
+  </g>
+</svg>

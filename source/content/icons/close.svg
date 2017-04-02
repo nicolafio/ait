@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+   ~  Copyright (c) 2015-2017 horst3180 <http://horst3180.deviantart.com/>
+   ~  Copyright (c) 2017 Nicola Fiori (JD342)
+   ~
+   ~  This file is part of the Arc Integration for Thunderbird, with content
+   ~  originating from horst3180's Arc Theme.
+   ~
+   ~  The Arc Integration for Thunderbird is free software: you can
+   ~  redistribute it and/or modify it under the terms of the
+   ~  GNU General Public License Version 3 as published by the
+   ~  Free Software Foundation.
+   ~
+   ~  The Arc Integration for Thunderbird is distributed in the hope
+   ~  that it will be useful, but WITHOUT ANY WARRANTY; without even the
+   ~  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+   ~  See the GNU General Public License for more details.
+   ~
+   ~  You should have received a copy of the GNU General Public License
+   ~  along with the Arc Integration for Thunderbird.
+   ~  If not, see <http://www.gnu.org/licenses/>.
+   ~
+   -->
+
+<svg
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    enable-background="new 0 0 32 32"
+    height="16"
+    id="icon"
+    version="1.1"
+    viewBox="0 0 16 16"
+    width="16"
+    xml:space="preserve"
+    inkscape:version="0.48.5 r10040"
+    sodipodi:docname="close.svg">
+    <style> @import url("chrome://arcthunderbird/content/integration.css"); </style>
+    <metadata id="metadata26">
+        <rdf:RDF>
+            <cc:Work rdf:about="">
+                <dc:format>image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/><dc:title/></cc:Work>
+        </rdf:RDF>
+    </metadata><defs id="defs24"/>
+    <sodipodi:namedview
+        pagecolor="#cecece"
+        bordercolor="#666666"
+        borderopacity="1"
+        objecttolerance="10"
+        gridtolerance="10"
+        guidetolerance="10"
+        inkscape:pageopacity="0"
+        inkscape:pageshadow="2"
+        inkscape:window-width="1920"
+        inkscape:window-height="1026"
+        id="namedview22"
+        showgrid="true"
+        inkscape:zoom="45.254834"
+        inkscape:cx="10.204282"
+        inkscape:cy="7.356184"
+        inkscape:window-x="3840"
+        inkscape:window-y="25"
+        inkscape:window-maximized="1"
+        inkscape:current-layer="titlebutton-close"
+        inkscape:snap-bbox="true"
+        inkscape:bbox-paths="true"
+        inkscape:bbox-nodes="true"
+        inkscape:snap-bbox-edge-midpoints="true"><inkscape:grid type="xygrid" id="grid3003" empspacing="5" visible="true" enabled="true" snapvisiblegridlinesonly="true"/></sodipodi:namedview>
+    <g style="display:inline" id="titlebutton-close" inkscape:label="#g6210" transform="translate(-645,185.71594)">
+        <g id="g4927-9" style="display:inline;fill:#000000;fill-opacity:1" transform="translate(-678,-432.63782)">
+            <g transform="translate(-103,0)" style="display:inline;fill:#000000;fill-opacity:1" id="g4490-6-5-2"><g id="g4092-0-2-21-0" style="display:inline;fill:#000000;fill-opacity:1" transform="translate(58,0)"/></g>
+            <g id="g4778-2-68" transform="translate(1323,246.86719)" style="fill:#000000;fill-opacity:1"><g style="fill:#000000;fill-opacity:1;display:inline" id="layer9-9-4-4" transform="translate(-60,-518)"/><g id="layer10-2-1-8" transform="translate(-60,-518)" style="fill:#000000;fill-opacity:1"/><g id="layer11-16-4-9" transform="translate(-60,-518)" style="fill:#000000;fill-opacity:1"/>
+                <g transform="matrix(0.75,0,0,0.75,2,2.0546875)" id="g2996-76-5" style="fill:#000000;fill-opacity:1">
+                    <g transform="translate(-60,-518)" id="layer12-4-5-7" style="fill:#000000;fill-opacity:1">
+                        <g transform="translate(19,-242)" id="layer4-4-1-9-5" style="fill:#000000;fill-opacity:1;display:inline"><path
+                            inkscape:connector-curvature="0"
+                            d="m 45,764 1,0 c 0.01037,-1.2e-4 0.02079,-4.6e-4 0.03125,0 0.254951,0.0112 0.50987,0.12858 0.6875,0.3125 L 49,766.59375 51.3125,764.3125 C 51.578125,764.082 51.759172,764.007 52,764 l 1,0 0,1 c 0,0.28647 -0.03434,0.55065 -0.25,0.75 l -2.28125,2.28125 2.25,2.25 C 52.906938,770.46942 52.999992,770.7347 53,771 l 0,1 -1,0 c -0.265301,-10e-6 -0.530586,-0.0931 -0.71875,-0.28125 L 49,769.4375 46.71875,771.71875 C 46.530586,771.90694 46.26529,772 46,772 l -1,0 0,-1 c -3e-6,-0.26529 0.09306,-0.53058 0.28125,-0.71875 l 2.28125,-2.25 L 45.28125,765.75 C 45.070508,765.55537 44.97809,765.28075 45,765 l 0,-1 z"
+                            id="path10839-9-2-2"
+                            style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#bebebe;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.78124988000000006;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:new;font-family:Andale Mono;-inkscape-font-specification:Andale Mono"/></g>
+                    </g>
+                </g><g id="layer13-2-6-11" transform="translate(-60,-518)" style="fill:#000000;fill-opacity:1"/><g id="layer14-4-0-33" transform="translate(-60,-518)" style="fill:#000000;fill-opacity:1"/><g id="layer15-7-3-0" transform="translate(-60,-518)" style="fill:#000000;fill-opacity:1"/></g>
+        </g><rect y="-185.63782" x="645" height="16" width="16" id="rect17883-39" style="fill:none;stroke:none;display:inline"/></g>
+</svg>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+   ~  Copyright (c) 2016 horst3180 <http://horst3180.deviantart.com/>
+   ~  Copyright (c) 2017 Nicola Fiori (JD342)
+   ~
+   ~  This file is part of the Arc Integration for Thunderbird, with content
+   ~  originating from horst3180's Arc Icon Theme.
+   ~
+   ~  The Arc Integration for Thunderbird is free software: you can
+   ~  redistribute it and/or modify it under the terms of the
+   ~  GNU General Public License Version 3 as published by the
+   ~  Free Software Foundation.
+   ~
+   ~  The Arc Integration for Thunderbird is distributed in the hope
+   ~  that it will be useful, but WITHOUT ANY WARRANTY; without even the
+   ~  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+   ~  See the GNU General Public License for more details.
+   ~
+   ~  You should have received a copy of the GNU General Public License
+   ~  along with the Arc Integration for Thunderbird.
+   ~  If not, see <http://www.gnu.org/licenses/>.
+   ~
+   -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="16"
+   height="16"
+   id="icon"
+   sodipodi:docname="tag.svg"
+   inkscape:version="0.92.1 r15371">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2736"
+     inkscape:window-height="1714"
+     id="namedview11"
+     showgrid="false"
+     inkscape:zoom="32"
+     inkscape:cx="-2.1306171"
+     inkscape:cy="2.6490674"
+     inkscape:window-x="0"
+     inkscape:window-y="54"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs5223" />
+  <metadata
+     id="metadata5226">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1">
+    <g
+       transform="matrix(1.0012005,0,0,1.0009518,-5.0070386,-0.99826181)"
+       id="g13790"
+       style="display:inline;fill:#000000;fill-opacity:1">
+      <g
+         id="layer1-663"
+         style="display:inline;fill:#000000;fill-opacity:1">
+        <path
+           d="M 6.6875,2 C 6.2993838,2.0715686 5.9917024,2.4491776 6,2.84375 L 6,7.25 C 6.0011,7.4703874 6.093125,7.6889536 6.25,7.84375 L 14.15625,15.75 c 0.310975,0.310733 0.876525,0.310733 1.1875,0 L 19.75,11.34375 c 0.310733,-0.310975 0.310733,-0.876525 0,-1.1875 L 11.84375,2.25 C 11.688954,2.0931246 11.470387,2.0010967 11.25,2 L 6.84375,2 C 6.7918174,1.995149 6.7394326,1.995149 6.6875,2 z M 9.5,4 C 10.328427,4 11,4.6715729 11,5.5 11,6.3284271 10.328427,7 9.5,7 8.6715729,7 8,6.3284271 8,5.5 8,4.6715729 8.6715729,4 9.5,4 z"
+           id="path3048-5"
+           style="fill:#000000;fill-opacity:1;stroke:none;display:inline" />
+      </g>
+    </g>
+  </g>
+</svg>
