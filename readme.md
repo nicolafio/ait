@@ -10,7 +10,7 @@
 
 I still don't feel like that the project is ready to be considered "finished". However, I also thought that after one month the folks that are watching this repo would like to be aware of the progress. So here you go, version 0.3.0.
 
-Because this project is still in alpha state, feedback is appreciated. Due to the lack of knowledge of how things work in Thunderbird, mess-ups may be very likely, therefore everyone is wellcome to report any visual bug that might be found.
+Because this project is still in alpha state, feedback is appreciated. Due to the lack of knowledge of how things work in Thunderbird, mess-ups may be very likely, therefore everyone is welcome to report any visual bug that might be found.
 
 ## Features
 
