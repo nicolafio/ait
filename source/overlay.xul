@@ -23,8 +23,8 @@
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
          xmlns:html="http://www.w3.org/1999/xhtml">
     <html:style class="ait-style">
-        @import url("chrome://ait/content/integration/style.css");
+        @import url("chrome://ait/content/style.css");
     </html:style>
     <html:div class="ait-icons"></html:div>
-    <script src="chrome://ait/content/integration/logic.js"></script>
+    <script src="chrome://ait/content/logic.js"></script>
 </overlay>

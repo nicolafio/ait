@@ -1,0 +1,2 @@
+content ait-lr ./
+overlay chrome://messenger/content/messenger.xul chrome://ait-lr/content/overlay.xul

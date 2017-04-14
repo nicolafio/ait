@@ -1,2 +1,2 @@
-content ait content/
-overlay chrome://messenger/content/messenger.xul chrome://ait/content/integration/overlay.xul
+content ait ./
+overlay chrome://messenger/content/messenger.xul chrome://ait/content/overlay.xul
