@@ -8,53 +8,18 @@
 
 {
 
-    window.AIT = {
-        get events() { return events; },
-        get icons() { return icons; },
-        get style() { return style; },
-        get ready() { return ready; }
-    };
-
-    const xhtmlns = 'http://www.w3.org/1999/xhtml';
-    const documentRoot = document.firstElementChild;
-    const events = new DocumentFragment();
-    let ready = false;
-
     /** @type {HTMLElement} */
     let icons;
 
     /** @type {HTMLStyleElement} */
     let style;
 
+    /** @type {Promise} */
+    let ready;
+
     const main = () => {
 
-        const onStateUpdate = () => {
-
-            if (document.readyState === 'complete') {
-                document.removeEventListener('readystatechange', onStateUpdate);
-                onceDocumentIsReady();
-            }
-
-        };
-
-        const onceDocumentIsReady = () => {
-
-            icons = documentRoot.querySelector('.ait-icons');
-            style = documentRoot.querySelector('.ait-style');
-
-            ready = true;
-            events.dispatchEvent(new CustomEvent('ready'));
-
-            includeIcons();
-
-        };
-
-        document.addEventListener('readystatechange', onStateUpdate);
-        onStateUpdate();
-
-    };
-
-    const includeIcons = () => {
+        init();
 
         // Icons from Arc Theme/Arc Icon Theme/Adwaita Icon Theme
 
@@ -199,6 +164,35 @@
 
     };
 
+    const init = () => {
+
+        ready = new Promise((resolve) => {
+
+            const onFrame = () => {
+
+                if (document.readyState === 'interactive' ||
+                    document.readyState === 'complete') {
+                    onceReady();
+                }
+                else requestAnimationFrame(onFrame);
+
+            };
+
+            const onceReady = () => {
+
+                const root = document.firstElementChild;
+                icons = root.querySelector('.ait-icons');
+                style = root.querySelector('.ait-style');
+                resolve();
+
+            };
+
+            requestAnimationFrame(onFrame);
+
+        });
+
+    };
+
     /**
      * @param {string} name
      * @param {string} relativePath
@@ -209,41 +203,51 @@
 
     };
 
-
     /**
      * @param {string} name
      * @param {string} path
      */
     const addGlobalIcon = (name, path) => {
 
-        const icon = document.createElementNS(xhtmlns, 'object');
+        /** @type {HTMLObjectElement} */
+        const icon = document.createElementNS(
+            'http://www.w3.org/1999/xhtml',
+            'object'
+        );
 
-        const onFrame = () => {
+        Object.assign(icon, {
+            id: `ait-${name}-icon`,
+            type: 'image/svg+xml',
+            data: path
+        });
 
-            if (icon.contentDocument &&
-                icon.contentDocument.readyState === 'complete') onceIconLoads();
-            else requestAnimationFrame(onFrame);
+        ready.then(() => {
 
-        };
+            const onFrame = () => {
 
-        const onceIconLoads = () => {
+                const svgDocument = icon.contentDocument;
 
-            const svgDocument = icon.contentDocument;
-            const svgRoot = svgDocument.firstElementChild;
-            const includedInit = { detail: { svgDocument } };
-            const included = new CustomEvent('icon-included', includedInit);
+                if (svgDocument !== null &&
+                    svgDocument.firstElementChild !== null) {
+                    onceSVGDocmentLoads();
+                }
+                else requestAnimationFrame(onFrame);
 
-            svgRoot.setAttribute(`ait-${name}`, '');
-            svgRoot.appendChild(style.cloneNode(true));
-            events.dispatchEvent(included);
+            };
 
-        };
+            const onceSVGDocmentLoads = () => {
 
-        icon.setAttribute('id', `ait-${name}-icon`);
-        icon.setAttribute('type', 'image/svg+xml');
-        icon.setAttribute('data', path);
-        icons.appendChild(icon);
-        requestAnimationFrame(onFrame);
+                const iconStyle = style.cloneNode(true);
+                const svgRoot = icon.contentDocument.firstElementChild;
+                svgRoot.appendChild(iconStyle);
+                svgRoot.setAttribute('ait-icon', name);
+
+            };
+
+            icons.appendChild(icon);
+            requestAnimationFrame(onFrame);
+
+        });
 
     };
 

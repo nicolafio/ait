@@ -11,41 +11,81 @@
     const host = 'localhost';
     const port = 8001;
     const address = `ws://${host}:${port}`;
-    const retryDelay = 2000;
+    const retryDelay = 500;
     const events = new DocumentFragment();
     let css = null;
 
     const main = () => {
 
+        attemptConnection();
+        promiseInclusion('.ait-style').then(handleStyle);
+
+        promiseInclusion('.ait-icons').then((icons) => {
+
+            const observer = new MutationObserver((records) => {
+
+                records.forEach((record) => {
+
+                    Array.from(record.addedNodes).forEach(handleIcon);
+
+                });
+
+            });
+
+            Array.from(icons.children).forEach(handleIcon);
+            observer.observe(icons, { childList: true });
+
+        });
+
+    };
+
+    /**
+     * @param {string} query
+     * @returns {Promise<HTMLElement>}
+     */
+    const promiseInclusion = (query) => new Promise((resolve) => {
+
         const onFrame = () => {
 
-            if ('AIT' in window) {
-                if (AIT.ready) handleIntegration();
-                else AIT.events.addEventListener('ready', handleIntegration);
+            const element = document.querySelector(query);
+            if (element !== null) resolve(element);
+            else requestAnimationFrame(onFrame);
+
+        };
+
+        requestAnimationFrame(onFrame);
+
+    });
+
+    /**
+     * @param {HTMLObjectElement} icon
+     */
+    const handleIcon = (icon) => {
+
+        const onFrame = () => {
+
+            const svgDocument = icon.contentDocument;
+
+            if (svgDocument !== null &&
+                svgDocument.firstElementChild !== null) {
+                requestAnimationFrame(onceDocumentIsReady);
             }
             else requestAnimationFrame(onFrame);
 
         };
 
-        attemptConnection();
-        onFrame();
+        const onceDocumentIsReady = () => {
 
-    };
+            const svgDocument = icon.contentDocument;
 
-    const handleIntegration = () => {
+            /** @type {HTMLStyleElement} */
+            const style = svgDocument.querySelector('.ait-style');
 
-        /**
-         * @param {CustomEvent} event
-         */
-        const onIconInclusion = (event) => {
-
-            handleStyle(event.detail.svgDocument.querySelector('.ait-style'));
+            handleStyle(style);
 
         };
 
-        handleStyle(AIT.style);
-        AIT.events.addEventListener('icon-included', onIconInclusion);
-
+        requestAnimationFrame(onFrame);
 
     };
 
@@ -61,10 +101,7 @@
 
     };
 
-
     const attemptConnection = () => {
-
-        const socket = new WebSocket(address);
 
         /**
          * @param {MessageEvent} event
@@ -76,18 +113,19 @@
 
         };
 
-        const onceConnectionEnds = () => {
+        const onceConnectionAborts = () => {
 
             socket.close();
-            setTimeout(attemptConnection, retryDelay);
-            socket.removeEventListener('close', onceConnectionEnds);
-            socket.removeEventListener('error', onceConnectionEnds);
+            socket.removeEventListener('close', onceConnectionAborts);
+            socket.removeEventListener('error', onceConnectionAborts);
             socket.removeEventListener('message', onMessage);
+            setTimeout(attemptConnection, retryDelay);
 
         };
 
-        socket.addEventListener('close', onceConnectionEnds);
-        socket.addEventListener('error', onceConnectionEnds);
+        const socket = new WebSocket(address);
+        socket.addEventListener('close', onceConnectionAborts);
+        socket.addEventListener('error', onceConnectionAborts);
         socket.addEventListener('message', onMessage);
 
     };
