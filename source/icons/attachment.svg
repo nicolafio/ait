@@ -1,105 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
-   ~  Copyright (c) 2016 horst3180 <http://horst3180.deviantart.com/>
-   ~  Copyright (c) 2017 Nicola Fiori (JD342)
+   ~  Copyright 2016 horst3180 <http://horst3180.deviantart.com/>
+   ~  Copyright 2017 Nicola Fiori (JD342)
    ~
-   ~  This file is part of the Arc Integration for Thunderbird, with content
-   ~  originating from horst3180's Arc Icon Theme.
-   ~
-   ~  The Arc Integration for Thunderbird is free software: you can
-   ~  redistribute it and/or modify it under the terms of the
-   ~  GNU General Public License Version 3 as published by the
-   ~  Free Software Foundation.
-   ~
-   ~  The Arc Integration for Thunderbird is distributed in the hope
-   ~  that it will be useful, but WITHOUT ANY WARRANTY; without even the
-   ~  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-   ~  See the GNU General Public License for more details.
-   ~
-   ~  You should have received a copy of the GNU General Public License
-   ~  along with the Arc Integration for Thunderbird.
-   ~  If not, see <http://www.gnu.org/licenses/>.
+   ~  This file contains work originating from horst3180's Arc Icon Theme
+   ~  and is part of the Arc Integration for Thunderbird, licensed under
+   ~  the terms of the GNU General Public License 3.0.
    ~
    -->
 
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="16"
-   height="16"
-   id="icon"
-   sodipodi:version="0.32"
-   inkscape:version="0.48.5 r10040"
-   version="1.0"
-   sodipodi:docname="mail-attachment.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
-  <defs
-     id="defs4" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#9a9a9a"
-     borderopacity="1"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="32.982692"
-     inkscape:cx="1.8146542"
-     inkscape:cy="10.828046"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:showpageshadow="false"
-     showguides="true"
-     inkscape:guide-bbox="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1026"
-     inkscape:window-x="3840"
-     inkscape:window-y="25"
-     inkscape:window-maximized="1">
-    <sodipodi:guide
-       orientation="1,0"
-       position="0,112"
-       id="guide2383" />
-    <sodipodi:guide
-       orientation="0,1"
-       position="26.278146,128"
-       id="guide2385" />
-    <sodipodi:guide
-       orientation="1,0"
-       position="128,54.082119"
-       id="guide2387" />
-    <inkscape:grid
-       type="xygrid"
-       id="grid3672"
-       visible="true"
-       enabled="true" />
-  </sodipodi:namedview>
-  <metadata
-     id="metadata7">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     inkscape:label="Calque 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     style="display:inline">
-    <path
-       style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.99999970000000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline"
-       d="M 8.3023266,0.99999999 C 8.1052713,1.0029689 7.9033829,1.0769916 7.7674505,1.218813 L 2.4916262,6.4703242 C 2.3013963,6.6544912 2.2293059,6.9437942 2.2971258,7.1997012 C 2.3649481,7.4556062 2.5507489,7.6427162 2.8076894,7.7102642 C 3.064633,7.7778132 3.3521529,7.7052272 3.537066,7.5157642 L 8.5940773,2.4830658 L 12.727211,2.4830658 L 12.727211,6.7134502 L 6.1871343,13.229214 L 3.5613786,10.603458 L 7.8647007,6.3244492 L 8.861515,6.3244492 L 8.861515,7.3698882 L 6.1385091,10.092894 C 5.9482776,10.277062 5.8761872,10.542052 5.9440087,10.797958 C 6.011831,11.053864 6.2219452,11.240973 6.4788849,11.308522 C 6.7358269,11.37607 6.9990343,11.303486 7.1839489,11.114022 L 10.125768,8.1722032 C 10.268163,8.0368182 10.365912,7.8579002 10.368894,7.6616392 L 10.368894,5.5950722 C 10.371961,5.3963712 10.291335,5.2008802 10.150081,5.0601962 C 10.00883,4.9195128 9.814709,4.8383296 9.615204,4.8413834 L 7.5729501,4.8413834 C 7.3758947,4.8443523 7.1740061,4.9183744 7.0380736,5.0601962 L 1.9810626,10.092894 C 1.693854,10.379004 1.6932005,10.851575 1.9810626,11.138334 L 5.6522581,14.785217 C 5.9401778,15.071918 6.4104301,15.07127 6.6976979,14.785217 L 13.991464,7.5157642 C 14.133859,7.3803792 14.23161,7.2014612 14.234589,7.0052002 L 14.210277,1.7536892 C 14.209355,1.5242948 14.102545,1.3085568 13.918526,1.1701879 C 13.789195,1.0664606 13.646763,1.0015665 13.4809,0.99999999 L 8.3023266,0.99999999 z"
-       id="Symbol"
-       sodipodi:nodetypes="cccssccccccccccssccccsccccccccccscc" />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1">
+    <path d="M8.302 1a.762.762 0 0 0-.535.219L2.492 6.47a.76.76 0 0 0-.195.73.701.701 0 0 0 .51.51.762.762 0 0 0 .73-.194l5.057-5.033h4.133v4.23l-6.54 6.516-2.626-2.626 4.304-4.279h.997V7.37l-2.723 2.723a.716.716 0 0 0-.195.705.733.733 0 0 0 .535.51.718.718 0 0 0 .705-.194l2.942-2.942a.73.73 0 0 0 .243-.51V5.595a.745.745 0 0 0-.754-.754H7.573a.762.762 0 0 0-.535.22l-5.057 5.032a.741.741 0 0 0 0 1.045l3.671 3.647a.743.743 0 0 0 1.046 0l7.293-7.27a.73.73 0 0 0 .244-.51l-.025-5.251a.732.732 0 0 0-.291-.584.698.698 0 0 0-.438-.17H8.302z"/>
 </svg>

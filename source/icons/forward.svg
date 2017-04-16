@@ -1,97 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
-   ~  Copyright (c) 2016 horst3180 <http://horst3180.deviantart.com/>
-   ~  Copyright (c) 2017 Nicola Fiori (JD342)
+   ~  Copyright 2016 horst3180 <http://horst3180.deviantart.com/>
+   ~  Copyright 2017 Nicola Fiori (JD342)
    ~
-   ~  This file is part of the Arc Integration for Thunderbird, with content
-   ~  originating from horst3180's Arc Icon Theme.
-   ~
-   ~  The Arc Integration for Thunderbird is free software: you can
-   ~  redistribute it and/or modify it under the terms of the
-   ~  GNU General Public License Version 3 as published by the
-   ~  Free Software Foundation.
-   ~
-   ~  The Arc Integration for Thunderbird is distributed in the hope
-   ~  that it will be useful, but WITHOUT ANY WARRANTY; without even the
-   ~  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-   ~  See the GNU General Public License for more details.
-   ~
-   ~  You should have received a copy of the GNU General Public License
-   ~  along with the Arc Integration for Thunderbird.
-   ~  If not, see <http://www.gnu.org/licenses/>.
+   ~  This file contains work originating from horst3180's Arc Icon Theme
+   ~  and is part of the Arc Integration for Thunderbird, licensed under
+   ~  the terms of the GNU General Public License 3.0.
    ~
    -->
 
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   width="16"
-   height="16"
-   id="icon"
-   inkscape:version="0.48.5 r10040"
-   sodipodi:docname="mail-forward.svg">
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1026"
-     id="namedview7"
-     showgrid="false"
-     inkscape:zoom="65.937707"
-     inkscape:cx="4.7520692"
-     inkscape:cy="6.1777534"
-     inkscape:current-layer="svg7384"
-     inkscape:window-x="3840"
-     inkscape:window-y="25"
-     inkscape:window-maximized="1" />
-  <title
-     id="title9167">Gnome Symbolic Icon Theme</title>
-  <defs
-     id="defs11" />
-  <metadata
-     id="metadata90">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>Gnome Symbolic Icon Theme</dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="mail-forward_16"
-     transform="translate(-76,-470.36215)"
-     inkscape:label="#g8327"
-     style="fill:#000000;fill-opacity:1">
-    <g
-       transform="translate(76.030627,470.26215)"
-       id="g5718"
-       style="display:inline;fill:#000000;fill-opacity:1">
-      <g
-         style="display:inline;fill:#000000;fill-opacity:1"
-         inkscape:label="Calque 1"
-         id="layer1-019">
-        <path
-           sodipodi:nodetypes="cccccczc"
-           inkscape:connector-curvature="0"
-           id="path3874"
-           d="M 3.8602604,13.2 C 2.3514534,9.36014 4.3589754,9.2779205 7.9693734,10 l 0,3 5.9999996,-5 -5.9999996,-5 0,3 C 5.8031344,6 4.3120164,5.6091712 2.7775974,7.3241101 1.2431784,9.0390492 2.0550614,10.672722 3.8602604,13.2 Z"
-           style="display:inline;fill:#000000;fill-opacity:1;stroke:none" />
-      </g>
-    </g>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+    <path d="M3.89 13.1C2.383 9.26 4.39 9.178 8 9.9v3l6-5-6-5v3c-2.166 0-3.657-.39-5.192 1.324-1.534 1.715-.722 3.349 1.083 5.876z"/>
 </svg>
