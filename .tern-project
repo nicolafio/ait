@@ -1,4 +1,0 @@
-{
-    "ecmaVersion": 6,
-    "libs": ["browser", "ecmascript"]
-}
