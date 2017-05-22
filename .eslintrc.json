@@ -34,9 +34,8 @@
         "prefer-const": "warn",
         "prefer-spread": "warn",
 
-        "curly": ["warn", "multi-line"],
+        "curly": ["warn", "multi"],
         "camelcase": ["warn"],
-        "new-cap": "warn",
         "wrap-iife": ["warn", "inside"],
         "quotes": ["warn", "single"],
         "semi": ["warn", "always"],
