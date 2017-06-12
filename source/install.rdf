@@ -12,10 +12,11 @@
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
     <Description rdf:about="urn:mozilla:install-manifest">
         <em:id>arcthunderbird@jd342.net</em:id>
-        <em:name>Arc Theme Integration</em:name>
-        <em:version>0.2.0</em:version>
+        <em:name>Arc Integration for Thunderbird</em:name>
+        <em:version>0.4.0</em:version>
         <em:creator>Nicola Fiori (JD342)</em:creator>
         <em:homepageURL>https://github.com/JD342/arc-thunderbird-integration</em:homepageURL>
+        <em:bootstrap>true</em:bootstrap>
         <em:type>2</em:type>
         <em:targetApplication>
             <Description>

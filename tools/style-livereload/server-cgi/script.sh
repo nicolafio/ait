@@ -5,7 +5,7 @@
 #  This file is part of the Arc Integration for Thunderbird, licensed under
 #  the terms of the GNU General Public License 3.0.
 
-target_file=`dirname "$0"`/../../../source/style.less
+target_file=`dirname "$0"`/../../../source/styling.less
 
 # Repeats the action until the user stops the process
 while true

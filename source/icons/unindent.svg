@@ -9,6 +9,6 @@
    ~
    -->
 
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
     <path d="M6 1v2h9V1H6zM1 5v2h9V5H1zm14 0l-4 3 4 3V5zM1 9v2h7V9H1zm5 4v2h9v-2H6z"/>
 </svg>

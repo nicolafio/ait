@@ -10,6 +10,5 @@
    -->
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-    <path d="M2 0C.948 0 0 .845 0 1.938v11.124C0 14.155.948 15 2 15h11c1.052 0 2-.845 2-1.938V1.938C15 .845 14.052 0 13 0H2zm0 5h3.03v2H2V5zm4.03 0H9v2H6.03V5zM10 5h3v2h-3V5zM2 8h3.03v2H2V8zm4.03 0H9v2H6.03V8zM10 8h3v2h-3V8zm-8 3h3.03v2H2v-2zm4.03 0H9v2H6.03v-2zM10 11h3v2h-3v-2z"/>
-    <path opacity=".35" d="M10 8h3v2h-3z"/>
+    <path d="M6 1v1.003h5V1zm0 2v2h5V3zm0 3v2H3l5.5 7L14 8h-3V6z"/>
 </svg>

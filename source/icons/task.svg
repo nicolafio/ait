@@ -9,7 +9,7 @@
    ~
    -->
 
-<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
     <g transform="translate(-60 -668)">
         <path d="M64.031 673.031V680h5l1.991-1.987-.022-4.982h-6.969z"/>
         <rect x="65" y="668" rx=".53" ry=".53" height="4" width="5.063"/>

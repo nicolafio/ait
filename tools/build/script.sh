@@ -68,7 +68,7 @@ run_build() {
     temp_dir=`mktemp -d`
     build_file=`realpath "$1"`
 
-    lessc -sm=on "$source_dir/style.less" "$temp_dir/style.css" || {
+    lessc -sm=on "$source_dir/styling.less" "$temp_dir/styling.css" || {
         echo less compilation failed, aborting
         rm -rf "$temp_dir"
         exit $?
@@ -77,10 +77,10 @@ run_build() {
     rm -f "$build_file"
 
     cd "$temp_dir"
-    zip "$build_file" style.css
+    zip "$build_file" styling.css
 
     cd "$source_dir"
-    zip "$build_file" `find . -not -path ./style.less`
+    zip "$build_file" `find . -not -path ./styling.less`
 
     cd ..
     zip "$build_file" license

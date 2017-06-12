@@ -15,74 +15,22 @@ let css = null;
 
 attemptConnection();
 
-promiseInclusion('.ait-style').then(handleStyle);
+requestAnimationFrame(function f() {
 
-promiseInclusion('.ait-icons').then((icons) => {
+    for (let style of document.querySelectorAll(':root > style')) {
 
-    const observer = new MutationObserver((records) => {
+        const css = style.textContent;
 
-        records.forEach((record) => {
+        if (css.includes('@import url("chrome://ait/content/styling.css")')) {
+            handleStyle(style);
+            return;
+        }
 
-            [...record.addedNodes].forEach(handleIcon);
+    }
 
-        });
-
-    });
-
-    [...icons.children].forEach(handleIcon);
-    observer.observe(icons, { childList: true });
+    setTimeout(f, 250);
 
 });
-
-/**
- * @param   {string} query
- * @returns {Promise<Element>}
- */
-function promiseInclusion(query) {
-
-    return new Promise((resolve) => {
-
-        requestAnimationFrame(onFrame);
-
-        function onFrame() {
-
-            const element = document.querySelector(query);
-
-            if (element !== null) resolve(element);
-            else requestAnimationFrame(onFrame);
-
-        }
-
-    });
-
-}
-
-/**
- * @param {HTMLObjectElement} icon
- */
-function handleIcon(icon) {
-
-    requestAnimationFrame(onFrame);
-
-    function onFrame() {
-
-        const svgDocument = icon.contentDocument;
-
-        if (svgDocument !== null &&
-            svgDocument.firstElementChild !== null) {
-            requestAnimationFrame(onceDocumentIsReady);
-        }
-        else requestAnimationFrame(onFrame);
-
-    }
-
-    function onceDocumentIsReady() {
-
-        handleStyle(icon.contentDocument.querySelector('.ait-style'));
-
-    }
-
-}
 
 /**
  * @param {HTMLStyleElement} style
@@ -92,11 +40,7 @@ function handleStyle(style) {
     if (css !== null) onStyleUpdate();
     events.addEventListener('update', onStyleUpdate);
 
-    function onStyleUpdate() {
-
-        style.textContent = css;
-
-    }
+    function onStyleUpdate() { style.textContent = css; }
 
 }
 

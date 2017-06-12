@@ -31,7 +31,6 @@
         "no-class-assign": "error",
         "no-new-symbol": "error",
         "no-this-before-super": "error",
-        "prefer-const": "warn",
         "prefer-spread": "warn",
 
         "curly": ["warn", "multi"],
