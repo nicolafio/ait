@@ -21,7 +21,7 @@ A major addition in the 0.4.0 version is support for "Dark" and "Darker" theme v
 If you are using Ark Dark or Ark Darker as your OS theme, you should change the styling of the integration to match the theme variant.
 You can switch to those variants by going to **Preferences > Display > Arc Integration** and tweaking the styling as you like.
 
-Similarly to [Arc Firefox Theme](https://github.com/horst3180/arc-firefox-theme), this integration is meant to be used along with the official [Arc Theme](https://github.com/horst3180/arc-theme), you can however also use it with other operating systems and themses. If the integration is used with other OS theming, it is possible that some parts will look broken. It is possible to tweak or disable certain styling through the preferences panel.
+Similarly to [Arc Firefox Theme](https://github.com/horst3180/arc-firefox-theme), this integration is meant to be used along with the official [Arc Theme](https://github.com/horst3180/arc-theme), you can however also use it with other operating systems and themes. If the integration is used with other OS theming, it is possible that some parts will look broken. It is possible to tweak or disable certain styling through the preferences panel.
 
 <img height=300 src="variants.png"/>
 
