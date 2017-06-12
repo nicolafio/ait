@@ -1,4 +1,4 @@
-# Arc Theme integration for Thunderbird (alpha v0.4.0)
+# Arc Theme integration for Thunderbird (alpha v0.4.1)
 
 ![alt tag](preview.png)
 
@@ -51,6 +51,8 @@ The content in this repository is licensed under GPLv3.
 
 ## History
 
+  - 0.4.1 2017/06/12
+    - Fixed message body visibility bug
   - 0.4.0 2017/06/12
     - Added support for Dark and Darker theme variants
     - Included panel for configuring the integration in the preferences window
