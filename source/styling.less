@@ -854,7 +854,7 @@ svg[id|="ait"] {
 
             & .tab-close-button {
 
-                overflow: hidden;
+                position: relative;
                 background-image: -moz-element(~"#ait-tab-close-icon")
                                   !important;
 
@@ -865,12 +865,17 @@ svg[id|="ait"] {
                     width: 16px;
                     height: 16px;
                     display: block;
-                    position: absolute;
                     pointer-events: none;
                     transition: opacity 300ms ease;
 
                     background-image:
                         -moz-element(~"#ait-tab-hover-button-close-icon");
+
+                }
+
+                & image {
+
+                    display: none;
 
                 }
 
