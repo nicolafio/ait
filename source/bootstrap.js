@@ -995,7 +995,7 @@ const StyleIntegration = (() => {
 /* -- preferences handling module ------------------------------------------- */
 
 // The integration preferences module has the job to interface the whole add-on
-// with the XPCOM preferences service. It exposes the proferences in a
+// with the XPCOM preferences service. It exposes the preferences in a
 // prototypical OOP way and also implements the concept of parent/child
 // preferences, where parent preferences generalize more specific child
 // preferences, making customization more simple for the end-user.
