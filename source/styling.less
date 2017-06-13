@@ -109,28 +109,32 @@
 
     }
 
+    &#messengerWindow[ait-lightning-main-view-preference="light"]
+        svg[id|="ait-lightning-main-view-searhcbox"],
     &#messengerWindow[ait-frame-contents-preference="light"]
         svg[id|="ait-frame-toolset-searchbox"],
     &#messengerWindow:-moz-any([ait-main-toolbox-preference="light"],
                                [ait-main-toolbox-preference="darker"])
         svg[id|="ait-pane-toolset-searchbox"],
+    &#messengerWindow[ait-mails-main-view-preference="light"]
+        svg[id|="ait-mails-view-searchbox"],
     &#addressbookWindow[ait-frame-contents-preference="light"]
-        svg[id|="ait-toolset-searchbox"],
-    &#messengerWindow[ait-lightning-main-view-preference="light"]
-        svg[id|="ait-lightning-main-view-searhcbox"] {
+        svg[id|="ait-toolset-searchbox"] {
 
         --ait-icon-color: var(--ait-light-text-input-icon-color);
 
     }
 
+    &#messengerWindow[ait-lightning-main-view-preference="dark"]
+        svg[id|="ait-lightning-main-view-searhcbox"],
     &#messengerWindow[ait-frame-contents-preference="dark"]
         svg[id|="ait-frame-toolset-searchbox"],
     &#messengerWindow[ait-main-toolbox-preference="dark"]
         svg[id|="ait-pane-toolset-searchbox"],
+    &#messengerWindow[ait-mails-main-view-preference="dark"]
+        svg[id|="ait-mails-view-searchbox"],
     &#addressbookWindow[ait-frame-contents-preference="dark"]
-        svg[id|="ait-toolset-searchbox"],
-    &#messengerWindow[ait-lightning-main-view-preference="dark"]
-        svg[id|="ait-lightning-main-view-searhcbox"] {
+        svg[id|="ait-toolset-searchbox"] {
 
         --ait-icon-color: var(--ait-dark-text-input-icon-color);
 
