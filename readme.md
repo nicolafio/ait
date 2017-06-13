@@ -1,4 +1,4 @@
-# Arc Theme integration for Thunderbird (alpha v0.4.1)
+# Arc Theme integration for Thunderbird (alpha v0.4.2)
 
 ![alt tag](preview.png)
 
@@ -51,6 +51,9 @@ The content in this repository is licensed under GPLv3.
 
 ## History
 
+  - 0.4.2 2017/06/13
+    - Fixed visual bug when hovering on the close button of a tab
+    - Fixed coloring of search icons for search boxes in the mails view
   - 0.4.1 2017/06/12
     - Fixed message body visibility bug
   - 0.4.0 2017/06/12

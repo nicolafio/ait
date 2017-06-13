@@ -13,7 +13,7 @@
     <Description rdf:about="urn:mozilla:install-manifest">
         <em:id>arcthunderbird@jd342.net</em:id>
         <em:name>Arc Integration for Thunderbird</em:name>
-        <em:version>0.4.1</em:version>
+        <em:version>0.4.2</em:version>
         <em:creator>Nicola Fiori (JD342)</em:creator>
         <em:homepageURL>https://github.com/JD342/arc-thunderbird-integration</em:homepageURL>
         <em:bootstrap>true</em:bootstrap>
