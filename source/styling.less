@@ -74,18 +74,24 @@
 
     &#messengerWindow[ait-frame-contents-preference="light"]
         svg:-moz-any([id|="ait-frame-toolset-button"], [id|="ait-tab-close"]),
+
     &#messengerWindow:-moz-any([ait-main-toolbox-preference="light"],
                                [ait-main-toolbox-preference="darker"])
         svg:-moz-any([id|="ait-selected-tab-close"],
                      [id|="ait-pane-toolset-button"]),
+
     &:-moz-any(#calendar-event-dialog,
                #calendar-task-dialog,
                #addressbookWindow)[ait-frame-contents-preference="light"]
         svg[id|="ait-toolset-button"],
+
     &#messengerWindow[ait-lightning-side-pane-preference="light"]
-        svg[id|="ait-lightning-side-pane"]
+        svg[id|="ait-lightning-side-pane"],
+
     &#messengerWindow[ait-lightning-main-view-preference="light"]
-        svg[id|="ait-lightning-main-view"] {
+        svg[id|="ait-lightning-main-view"]
+
+    {
 
         --ait-icon-color: var(--ait-light-text-color);
 
@@ -93,17 +99,23 @@
 
     &#messengerWindow[ait-frame-contents-preference="dark"]
         svg:-moz-any([id|="ait-frame-toolset-button"], [id|="ait-tab-close"]),
+
     &#messengerWindow[ait-main-toolbox-preference="dark"]
         svg:-moz-any([id|="ait-selected-tab-close"],
                      [id|="ait-pane-toolset-button"]),
+
     &:-moz-any(#calendar-event-dialog,
                #calendar-task-dialog,
                #addressbookWindow)[ait-frame-contents-preference="dark"]
         svg[id|="ait-toolset-button"],
+
     &#messengerWindow[ait-lightning-side-pane-preference="dark"]
         svg[id|="ait-lightning-side-pane"],
+
     &#messengerWindow[ait-lightning-main-view-preference="dark"]
-        svg[id|="ait-lightning-main-view"] {
+        svg[id|="ait-lightning-main-view"]
+
+    {
 
         --ait-icon-color: var(--ait-dark-text-color);
 
@@ -111,15 +123,21 @@
 
     &#messengerWindow[ait-lightning-main-view-preference="light"]
         svg[id|="ait-lightning-main-view-searhcbox"],
+
     &#messengerWindow[ait-frame-contents-preference="light"]
         svg[id|="ait-frame-toolset-searchbox"],
+
     &#messengerWindow:-moz-any([ait-main-toolbox-preference="light"],
                                [ait-main-toolbox-preference="darker"])
         svg[id|="ait-pane-toolset-searchbox"],
+
     &#messengerWindow[ait-mails-main-view-preference="light"]
         svg[id|="ait-mails-view-searchbox"],
+
     &#addressbookWindow[ait-frame-contents-preference="light"]
-        svg[id|="ait-toolset-searchbox"] {
+        svg[id|="ait-toolset-searchbox"]
+
+    {
 
         --ait-icon-color: var(--ait-light-text-input-icon-color);
 
@@ -127,14 +145,20 @@
 
     &#messengerWindow[ait-lightning-main-view-preference="dark"]
         svg[id|="ait-lightning-main-view-searhcbox"],
+
     &#messengerWindow[ait-frame-contents-preference="dark"]
         svg[id|="ait-frame-toolset-searchbox"],
+
     &#messengerWindow[ait-main-toolbox-preference="dark"]
         svg[id|="ait-pane-toolset-searchbox"],
+
     &#messengerWindow[ait-mails-main-view-preference="dark"]
         svg[id|="ait-mails-view-searchbox"],
+
     &#addressbookWindow[ait-frame-contents-preference="dark"]
-        svg[id|="ait-toolset-searchbox"] {
+        svg[id|="ait-toolset-searchbox"]
+
+    {
 
         --ait-icon-color: var(--ait-dark-text-input-icon-color);
 
@@ -183,15 +207,17 @@
 
     }
 
-
     &#addressbookWindow
         svg:-moz-any([id|="ait-toolset-active-button"],
                      [id|="ait-toolset-button"])[id$="write-icon"],
+
     &#messengerWindow svg:-moz-any(
         [id|="ait-toolset-active-button"],
         [id|="ait-frame-toolset-button"],
         [id|="ait-pane-toolset-button"]
-    ):-moz-any([id$="filter-icon"], [id$="write-icon"]) {
+    ):-moz-any([id$="filter-icon"], [id$="write-icon"])
+
+    {
 
         & path {
 
@@ -253,8 +279,11 @@ svg[id|="ait"] {
 
     &#messengerWindow[ait-lightning-side-pane-preference="light"]
         :-moz-any(#today-splitter, #today-pane-panel),
+
     &#messengerWindow[ait-lightning-main-view-preference="light"]
-        #calendarContent {
+        #calendarContent
+
+    {
 
         --ait-border-color: var(--ait-light-pane-border-color);
 
@@ -262,8 +291,11 @@ svg[id|="ait"] {
 
     &#messengerWindow[ait-lightning-side-pane-preference="dark"]
         :-moz-any(#today-splitter, #today-pane-panel),
+
     &#messengerWindow[ait-lightning-main-view-preference="dark"]
-        #calendarContent {
+        #calendarContent
+
+    {
 
         --ait-border-color: var(--ait-dark-pane-border-color);
 
@@ -271,12 +303,17 @@ svg[id|="ait"] {
 
     &#messengerWindow:not([ait-lightning-main-view-preference="none"])
         #calendarContent splitter,
+
     &#messengerWindow:not([ait-lightning-side-pane-preference="none"])
         #today-splitter,
+
     &#messengerWindow:not([ait-mails-main-view-preference="none"]) #messengerBox
         splitter,
+
     &#addressbookWindow:not([ait-dialogs-content-preference="none"]) #abContent
-        splitter {
+        splitter
+
+    {
 
         transition: border-color 300ms ease !important;
         border-color: var(--ait-border-color) !important;
@@ -293,10 +330,14 @@ svg[id|="ait"] {
 
     &#messengerWindow:not([ait-mails-main-view-preference="none"])
         :-moz-any(#quick-filter-bar, #folderTree, #messagepanebox),
+
     &#messengerWindow:not([ait-lightning-main-view-preference="none"])
         #ltnSidebar,
+
     &#messengerWindow:not([ait-lightning-side-pane-preference="none"])
-        #today-pane-panel {
+        #today-pane-panel
+
+    {
 
         border-bottom-color: var(--ait-border-color);
 
@@ -412,11 +453,15 @@ svg[id|="ait"] {
     &:-moz-any(#calendar-event-dialog,
                #calendar-task-dialog,
                #addressbookWindow)[ait-frame-contents-preference="light"],
+
     &#messengerWindow[ait-frame-contents-preference="light"]
         .toolbox-top .chromeclass-menubar,
+
     &#messengerWindow:-moz-any([ait-main-toolbox-preference="light"],
                                [ait-main-toolbox-preference="darker"])
-        .mail-toolbox {
+        .mail-toolbox
+
+    {
 
         --ait-toolbox-text-color: var(--ait-light-text-color);
         --ait-toolbox-button-active-border-color: var(--ait-blue);
@@ -434,9 +479,13 @@ svg[id|="ait"] {
     &:-moz-any(#calendar-event-dialog,
                #calendar-task-dialog,
                #addressbookWindow)[ait-frame-contents-preference="dark"],
+
     &#messengerWindow[ait-main-toolbox-preference="dark"] .mail-toolbox,
+
     &#messengerWindow[ait-frame-contents-preference="dark"]
-        .toolbox-top .chromeclass-menubar {
+        .toolbox-top .chromeclass-menubar
+
+    {
 
         --ait-toolbox-text-color: var(--ait-dark-text-color);
         --ait-toolbox-border-color: var(--ait-dark-pane-border-color);
@@ -454,12 +503,16 @@ svg[id|="ait"] {
     }
 
     &#messengerWindow:not([ait-main-toolbox-preference="none"]) .mail-toolbox,
+
     &#messengerWindow:not([ait-frame-contents-preference="none"])
         .toolbox-top .chromeclass-menubar,
+
     &:-moz-any(#calendar-event-dialog,
                #calendar-task-dialog,
                #addressbookWindow):not([ait-frame-contents-preference="none"])
-        .toolbox-top {
+        .toolbox-top
+
+    {
 
         & toolbarseparator {
 
@@ -629,9 +682,12 @@ svg[id|="ait"] {
                 }
 
                 &:not(:active) .toolbarbutton-menubutton-button:hover,
+
                 &:not([open="true"]):hover
                     .toolbarbutton-menubutton-button:not(:hover) +
-                        .toolbarbutton-menubutton-dropmarker {
+                        .toolbarbutton-menubutton-dropmarker
+
+                {
 
                     background:
                         var(--ait-toolbox-button-hover-background-color);
@@ -1241,17 +1297,21 @@ svg[id|="ait"] {
                       #button-privacy,
                       #button-status,
                       #button-url) .toolbarbutton-menubutton-button,
+
         &:-moz-any(#calendar-event-dialog,
                    #calendar-task-dialog) :-moz-any(#button-timezones,
                                                     #button-attendees,
                                                     #button-delete,
                                                     #button-save),
+
         &#addressbookWindow :-moz-any(#button-newmessage,
                                       #button-editcard,
                                       #button-abdelete,
                                       #button-newcard,
                                       #button-newlist,
-                                      #button-newim) {
+                                      #button-newim)
+
+        {
 
             & .toolbarbutton-icon {
 
@@ -1656,6 +1716,7 @@ svg[id|="ait"] {
                         #button-print)
                 .toolbarbutton-menubutton-button .toolbarbutton-icon,
             & .button-appmenu .toolbarbutton-icon[label="AppMenu"],
+
             & :-moz-any(
                 #calendar-goto-today-button, #lightning-button-calendar,
                 #calendar-synchronize-button, #task-synchronize-button,
@@ -1670,7 +1731,9 @@ svg[id|="ait"] {
                 #button-address,
                 #button-chat,
                 #button-tag
-            ) .toolbarbutton-icon {
+            ) .toolbarbutton-icon
+
+            {
 
                 list-style-image: none;
                 background-image: var(--ait-toolset-button-icon);
@@ -1991,14 +2054,20 @@ svg[id|="ait"] {
 :root {
 
     &#messengerWindow[ait-mails-main-view-preference="light"] #messengerBox,
-    &#addressbookWindow[ait-frame-contents-preference="light"],
-    &#messengerWindow[ait-lightning-side-pane-preference="light"]
-        #today-pane-panel,
-    &#messengerWindow[ait-lightning-main-view-preference="light"]
-        #calendarContent,
+
     &#messengerWindow:-moz-any([ait-main-toolbox-preference="light"],
                                [ait-main-toolbox-preference="darker"]),
-        .mail-toolbox {
+        .mail-toolbox,
+
+    &#messengerWindow[ait-lightning-side-pane-preference="light"]
+        #today-pane-panel,
+
+    &#messengerWindow[ait-lightning-main-view-preference="light"]
+        #calendarContent,
+
+    &#addressbookWindow[ait-frame-contents-preference="light"]
+
+    {
 
         --ait-input-border-color: var(--ait-light-input-border-color);
 
@@ -2020,12 +2089,18 @@ svg[id|="ait"] {
     }
 
     &#messengerWindow[ait-mails-main-view-preference="dark"] #messengerBox,
+
     &#messengerWindow[ait-main-toolbox-preference="dark"] .mail-toolbox,
-    &#addressbookWindow[ait-frame-contents-preference="dark"],
+
     &#messengerWindow[ait-lightning-side-pane-preference="dark"]
         #today-pane-panel,
+
     &#messengerWindow[ait-lightning-main-view-preference="dark"]
-        #calendarContent {
+        #calendarContent,
+
+    &#addressbookWindow[ait-frame-contents-preference="dark"],
+
+    {
 
         --ait-input-border-color: var(--ait-dark-input-border-color);
 
@@ -2090,14 +2165,21 @@ svg[id|="ait"] {
 
     }
 
-    &#addressbookWindow:not([ait-frame-contents-preference="none"]) .toolbox-top,
     &#messengerWindow:not([ait-main-toolbox-preference="none"]) .mail-toolbox,
+
     &#messengerWindow:not([ait-lightning-side-pane-preference="none"])
         #today-pane-panel,
+
     &#messengerWindow:not([ait-lightning-main-view-preference="none"])
         #calendarContent,
+
+    &#addressbookWindow:not([ait-frame-contents-preference="none"])
+        .toolbox-top,
+
     &#messengerWindow:not([ait-mails-main-view-preference="none"])
-        #messengerBox {
+        #messengerBox
+
+    {
 
         & textbox {
 
