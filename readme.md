@@ -42,7 +42,6 @@ As of version 0.4.0 the majority the integration is done, but it still needs mor
  - There should be a button with a gear icon on the left side of the "Search all add-ons" bar, click it;
  - Click "Install Add-on from file...";
  - Find and select the downloaded .xpi file and install it;
- - restart Thunderbird;
  - enjoy.
 
 ## License
