@@ -1353,16 +1353,32 @@ const IntegrationPrefsPanel = (() => {
 
                     input.type = 'radio';
                     input.name = inputName;
-                    input.checked = value === pref.value;
 
-                    input.addEventListener('change', onchange);
+                    input.addEventListener('change', () => {
+
+                        pref.value = value;
+
+                    });
 
                     label.appendChild(input);
                     label.appendChild(txt);
 
                     div.appendChild(label);
 
-                    function onchange() { pref.value = value; }
+                    pref.watch(onUpdate);
+                    onUpdate();
+
+                    unloadListeners.push(() => {
+
+                        pref.stopWatching(onUpdate);
+
+                    });
+
+                    function onUpdate() {
+
+                        input.checked = value === pref.value;
+
+                    }
 
                 });
 
