@@ -6,6 +6,10 @@
 
 > Stability in other versions is not guaranteed, but you can still try.
 
+_Because this project is still in alpha state, feedback is appreciated. Due to the lack of knowledge of how things work in Thunderbird, mess-ups may be very likely, therefore everyone is welcome to report any visual bug that might be found by opening an issue on GitHub._
+
+_You can also reach me on the [**#arc-thunderbird-integration** IRC channel on **chat.freenode.net**](https://webchat.freenode.net/?channels=arc-thunderbird-integration)._
+
 ## Features
 
  - Changes the appearance of the tabs and the toolbox to match the look found in the official [Arc Firefox Theme](https://github.com/horst3180/arc-firefox-theme);
@@ -14,8 +18,6 @@
  - every specific part of the integration can be configured and/or disabled through the preferences panel at Preferences > Display > Arc Integration.
 
 ## Notes
-
-_Because this project is still in alpha state, feedback is appreciated. Due to the lack of knowledge of how things work in Thunderbird, mess-ups may be very likely, therefore everyone is welcome to report any visual bug that might be found._
 
 A major addition in the 0.4.0 version is support for "Dark" and "Darker" theme variants.
 If you are using Arc Dark or Arc Darker as your OS theme, you should change the styling of the integration to match the theme variant.
