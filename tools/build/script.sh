@@ -68,8 +68,8 @@ run_build() {
     temp_dir=`mktemp -d`
     build_file=`realpath "$1"`
 
-    lessc -sm=on "$source_dir/styling.less" "$temp_dir/styling.css" || {
-        echo less compilation failed, aborting
+    sassc -t compact "$source_dir/styling.scss" "$temp_dir/styling.css" || {
+        echo scss compilation failed, aborting
         rm -rf "$temp_dir"
         exit $?
     }

@@ -10,7 +10,7 @@ The following table summarizes what external tools are used.
         <tr>
             <td>Name</td>
             <td>Description</td>
-            <td>How to install it (Debian)</td>
+            <td>How to install it (Debian 9)</td>
         </tr>
     </thead>
     <tbody>
@@ -23,33 +23,10 @@ The following table summarizes what external tools are used.
         </tr>
         <tr>
             <td>
-                <a href="https://nodejs.org">NodeJS (<code>nodejs</code>)</a> &
-                <a href="https://www.npmjs.com">Node Package Manager (<code>npm</code>)</a>
+                <a href="https://github.com/sass/sassc"><code>sassc</code></a>
             </td>
-            <td>
-                Runtime needed for the LESS compiler &
-                package manager used to install the LESS compiler
-            </td>
-            <td>
-                Both can be installed with<br>
-                <code># apt install nodejs</code><br>
-                <i style="font-size:0.8em">
-                    Debian repositories have ancient versions of NodeJS.
-                    <a href="https://github.com/nodesource/distributions#installation-instructions">
-                        Nodesource
-                    </a>
-                    repositories offer more recent versions.
-                </i>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="http://lesscss.org">
-                    LESS compiler (<code>lessc</code>)
-                </a>
-            </td>
-            <td>Used to compile .less style sheets</td>
-            <td><code># npm i -g less</code></td>
+            <td>SCSS compiler</td>
+            <td><code># apt install sassc</code></td>
         </tr>
         <tr>
             <td><a href="http://websocketd.com"><code>websocketd</code></a></td>

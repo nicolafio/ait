@@ -175,7 +175,7 @@ const INTEGRATION_PARAMETERS = {
                 {
                     content: 'chrome://ait/content/icons/search.svg',
                     variants: [
-                        'lightning-main-view-searchbox-search',
+                        'lightning-panel-searchbox-search',
                         'frame-toolset-searchbox-search',
                         'pane-toolset-searchbox-search',
                         'frame-toolset-button-search',
@@ -191,7 +191,7 @@ const INTEGRATION_PARAMETERS = {
                         'frame-toolset-button-down-arrow',
                         'lightning-minimonth-down-arrow',
                         'pane-toolset-button-down-arrow',
-                        'lightning-main-view-down-arrow',
+                        'lightning-panel-down-arrow',
                         'lightning-side-pane-down-arrow'
                     ]
                 },
@@ -212,7 +212,7 @@ const INTEGRATION_PARAMETERS = {
                         'toolset-active-button-new',
                         'frame-toolset-button-new',
                         'pane-toolset-button-new',
-                        'lightning-main-view-new'
+                        'lightning-panel-new'
                     ]
                 },
 
@@ -491,7 +491,13 @@ const INTEGRATION_PARAMETERS = {
                 presets: { light: 'light', dark: 'dark', none: 'none' }
             },
 
-            mailsMainView: {
+            mailsPanel: {
+                parentPref: 'mails',
+                options: ['light', 'dark', 'none'],
+                presets: { light: 'light', dark: 'dark', none: 'none' }
+            },
+
+            mailView: {
                 parentPref: 'mails',
                 options: ['light', 'dark', 'none'],
                 presets: { light: 'light', dark: 'dark', none: 'none' }
@@ -509,13 +515,7 @@ const INTEGRATION_PARAMETERS = {
                 presets: { light: 'light', dark: 'dark', none: 'none' }
             },
 
-            addressBook: {
-                parentPref: 'content',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
-            },
-
-            lightningMainView: {
+            lightningPanel: {
                 parentPref: 'lightningExtension',
                 options: ['light', 'dark', 'none'],
                 presets: { light: 'light', dark: 'dark', none: 'none' }
