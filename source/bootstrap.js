@@ -1278,7 +1278,9 @@ const IntegrationPrefsPanel = (() => {
         const unloadListeners = [() => { unloaded = true; }];
 
         unloadListenersCollections.set(win, unloadListeners);
-        doc.addEventListener('readystatechange', onreadystatechange);
+
+        if (doc.readyState === 'complete') onceDocumentLoads();
+        else doc.addEventListener('readystatechange', onreadystatechange);
 
         function onreadystatechange() {
 
@@ -1289,9 +1291,15 @@ const IntegrationPrefsPanel = (() => {
 
             if (doc.readyState === 'complete') {
                 doc.removeEventListener('readystatechange', onreadystatechange);
-                handleTabInitialization();
-                handleTabPanelInitialization();
+                onceDocumentLoads();
             }
+
+        }
+
+        function onceDocumentLoads() {
+
+            handleTabInitialization();
+            handleTabPanelInitialization();
 
         }
 
