@@ -1063,7 +1063,7 @@ svg[id|="ait"] {
 
             }
 
-            & .toolbarbutton-icon {
+            & #{ $btn-icon-selector } {
 
                 list-style-image: none;
                 background-image: var(--ait-toolset-button-icon);
