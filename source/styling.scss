@@ -1108,12 +1108,12 @@ svg[id|="ait"] {
 
     &#addressbookWindow {
 
-        @include btn-styling(btn, button-newlist,    book);
         @include btn-styling(btn, button-newmessage, write);
         @include btn-styling(btn, button-abdelete,   delete);
         @include btn-styling(btn, button-newim,      message);
-        @include btn-styling(btn, button-newcard,    contact);
         @include btn-styling(btn, button-editcard,   properties);
+        @include btn-styling(btn, button-newcard,    new-contact);
+        @include btn-styling(btn, button-newlist,    address-book);
 
     }
 
