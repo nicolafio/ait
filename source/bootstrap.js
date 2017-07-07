@@ -711,7 +711,11 @@ const IntegrationWindowManager = (() => {
         // in the documentation that can notify that the location interface has
         // been initialized properly. I therefore decided to write a sniffing
         // routine to detect this.
+
+        // In each iteration the delay will be incremented by 1ms. This is done
+        // to minimize the performance impact of the sniffing routine.
         let delay = 0;
+
         handleLocationAvailabilitySniffing();
 
         function handleLocationAvailabilitySniffing() {
@@ -1298,18 +1302,52 @@ const IntegrationPrefsPanel = (() => {
 
         function onceDocumentLoads() {
 
-            handleTabInitialization();
-            handleTabPanelInitialization();
+            // In each iteration the delay will be incremented by 1ms. This
+            // is done to minimize the performance impact of the sniffing
+            // routine.
+            var delay = 0;
+
+            (function sniffer() {
+
+                if (unloaded) return;
+
+                // Try to retrieve the necessary elements for initializing the
+                // preferences panel. If they don't yet exist, postpone
+                // initialization.
+
+                const tabsElem = doc.getElementById('displayPrefsTabs');
+
+                if (tabsElem === null) {
+                    // #displayPrefsTabs does not exist, try again later.
+                    win.setTimeout(sniffer, delay++);
+                    return;
+                }
+
+                const panelsElem = doc.getElementById('displayPrefsPanels');
+
+                if (panelsElem === null) {
+                    // #displayPrefsPanels does not exist, try again later.
+                    win.setTimeout(sniffer, delay++);
+                    return;
+                }
+
+                // #displayPrefsTabs and #displayPrefsPanels both exist, invoke
+                // initializers.
+
+                handleTabInitialization(tabsElem);
+                handleTabPanelInitialization(panelsElem);
+
+            })();
 
         }
 
-        function handleTabInitialization() {
+        function handleTabInitialization(tabsElem) {
 
             const tab = doc.createElement('tab');
 
             tab.setAttribute('id', 'aitTab');
             tab.setAttribute('label', 'Arc Integration');
-            win.document.getElementById('displayPrefsTabs').appendChild(tab);
+            tabsElem.appendChild(tab);
 
             win.requestAnimationFrame(() => {
 
@@ -1321,7 +1359,7 @@ const IntegrationPrefsPanel = (() => {
 
         }
 
-        function handleTabPanelInitialization() {
+        function handleTabPanelInitialization(panelsElem) {
 
             const tabpanel = doc.createElement('tabpanel');
             const form = doc.createElementNS(XHTMLNS, 'form');
@@ -1416,7 +1454,7 @@ const IntegrationPrefsPanel = (() => {
             });
 
             tabpanel.appendChild(form);
-            doc.getElementById('displayPrefsPanels').appendChild(tabpanel);
+            panelsElem.appendChild(tabpanel);
 
         }
 
