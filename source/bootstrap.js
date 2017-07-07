@@ -1283,24 +1283,60 @@ const IntegrationPrefsPanel = (() => {
 
         unloadListenersCollections.set(win, unloadListeners);
 
-        if (doc.readyState === 'complete') onceDocumentLoads();
-        else doc.addEventListener('readystatechange', onreadystatechange);
+        new Promise((onceDocumentLoads) => {
 
-        function onreadystatechange() {
+            if (doc.readyState === 'complete') onceDocumentLoads();
 
-            if (unloaded) {
-                doc.removeEventListener('readystatechange', onreadystatechange);
-                return;
-            }
+            else doc.addEventListener('readystatechange', function listenr() {
 
-            if (doc.readyState === 'complete') {
-                doc.removeEventListener('readystatechange', onreadystatechange);
-                onceDocumentLoads();
-            }
+                if (unloaded || doc.readyState === 'complete')
+                    doc.removeEventListener('readystatechange', listenr);
 
-        }
+                if (!unloaded && doc.readyState === 'complete')
+                    onceDocumentLoads();
 
-        function onceDocumentLoads() {
+            });
+
+        }).then(() => new Promise((onceDisplayPaneExists) => {
+
+            // In each iteration the delay will be incremented by 1ms. This
+            // is done to minimize the performance impact of the sniffing
+            // routine.
+            var delay = 0;
+
+            (function sniffer() {
+
+                if (unloaded) return;
+
+                const displayPane =
+                    doc.firstElementChild.preferencePanes &&
+                    doc.firstElementChild.preferencePanes.paneDisplay;
+
+                if (displayPane) onceDisplayPaneExists(displayPane);
+                else win.setTimeout(sniffer, delay++);
+
+            })();
+
+        })).then((displayPane) => new Promise((onceDisplayPaneLoads) => {
+
+            if (unloaded) return;
+
+            if (win.location.hash === '#aitTab')
+                doc.firstElementChild.showPane(displayPane);
+
+            if (displayPane.loaded) onceDisplayPaneLoads(displayPane);
+
+            else displayPane.addEventListener('paneload', function listener() {
+
+                displayPane.removeEventListener('paneload', listener);
+
+                if (unloaded) return;
+
+                onceDisplayPaneLoads(displayPane);
+
+            });
+
+        })).then(() => new Promise((onceNecessaryElemsExist) => {
 
             // In each iteration the delay will be incremented by 1ms. This
             // is done to minimize the performance impact of the sniffing
@@ -1331,15 +1367,19 @@ const IntegrationPrefsPanel = (() => {
                     return;
                 }
 
-                // #displayPrefsTabs and #displayPrefsPanels both exist, invoke
-                // initializers.
-
-                handleTabInitialization(tabsElem);
-                handleTabPanelInitialization(panelsElem);
+                // #displayPrefsTabs and #displayPrefsPanels both exist
+                onceNecessaryElemsExist([tabsElem, panelsElem]);
 
             })();
 
-        }
+        })).then(([tabsElem, panelsElem]) => {
+
+            if (unloaded) return;
+
+            handleTabInitialization(tabsElem);
+            handleTabPanelInitialization(panelsElem);
+
+        });
 
         function handleTabInitialization(tabsElem) {
 
