@@ -1374,7 +1374,7 @@ const IntegrationPrefsPanel = (() => {
                 height: '300px',
                 display: 'block',
                 overflowY: 'scroll',
-                border: '1px solid rgba(20,20,20,0.1)'
+                border: `${1 / win.devicePixelRatio}px solid rgba(20,20,20,0.1)`
             });
 
             const prefs = Array.from(IntegrationPrefs.getPreferences());
