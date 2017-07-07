@@ -1311,7 +1311,11 @@ const IntegrationPrefsPanel = (() => {
             tab.setAttribute('label', 'Arc Integration');
             win.document.getElementById('displayPrefsTabs').appendChild(tab);
 
-            if (win.location.hash === '#aitTab') tab.focus();
+            win.requestAnimationFrame(() => {
+
+                if (win.location.hash === '#aitTab') tab.click();
+
+            });
 
             unloadListeners.push(() => { tab.remove(); });
 

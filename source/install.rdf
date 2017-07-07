@@ -16,6 +16,7 @@
         <em:version>0.4.3</em:version>
         <em:creator>Nicola Fiori (JD342)</em:creator>
         <em:homepageURL>https://github.com/JD342/arc-thunderbird-integration</em:homepageURL>
+        <em:optionsURL>chrome://messenger/content/preferences/preferences.xul#aitTab</em:optionsURL>
         <em:bootstrap>true</em:bootstrap>
         <em:type>2</em:type>
         <em:targetApplication>
