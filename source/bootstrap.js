@@ -1432,8 +1432,12 @@ const IntegrationPrefsPanel = (() => {
                 const inputName = `${type}_${name}`;
 
                 span.textContent = `${toCapitalizedWords(name)}:`;
-                div.style.marginLeft = '20px';
                 div.appendChild(span);
+
+                Object.assign(div.style, {
+                    marginLeft: '1ch',
+                    transition: 'opacity 300ms ease'
+                });
 
                 pref.options.forEach((value) => {
 
@@ -1464,6 +1468,28 @@ const IntegrationPrefsPanel = (() => {
 
                     });
 
+                    if (IntegrationPrefs.isChildPreference(pref)) {
+
+                        const onChildPrefUpdate = () => {
+
+                            if (pref.configurable)
+                                input.removeAttribute('disabled');
+
+                            else input.setAttribute('disabled', '');
+
+                        };
+
+                        pref.watch(onChildPrefUpdate);
+                        onChildPrefUpdate();
+
+                        unloadListeners.push(() => {
+
+                            pref.stopWatching(onChildPrefUpdate);
+
+                        });
+
+                    }
+
                     function onUpdate() {
 
                         input.checked = value === pref.value;
@@ -1476,16 +1502,44 @@ const IntegrationPrefsPanel = (() => {
 
                     const onUpdate = () => {
 
-                        div.style.display = pref.configurable ? null : 'none';
+                        div.style.opacity = pref.configurable ? null : '0.7';
 
                     };
 
                     pref.watch(onUpdate);
-                    unloadListeners.push(() => { pref.stopWatching(onUpdate); });
+
+                    unloadListeners.push(() => {
+
+                        pref.stopWatching(onUpdate);
+
+                    });
 
                     onUpdate();
 
-                    divs.get(pref.parent).appendChild(div);
+                    const parent = pref.parent;
+
+                    if (IntegrationPrefs.isChildPreference(parent)) {
+
+                        const onParentUpdate = () => {
+
+                            div.style.display =
+                                parent.configurable ? null : 'none';
+
+                        };
+
+                        parent.watch(onParentUpdate);
+
+                        unloadListeners.push(() => {
+
+                            parent.stopWatching(onParentUpdate);
+
+                        });
+
+                        onParentUpdate();
+
+                    }
+
+                    divs.get(parent).appendChild(div);
 
                 }
 
