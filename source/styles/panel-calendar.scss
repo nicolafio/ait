@@ -1,0 +1,229 @@
+/*
+~  Copyright (c) 2017 Nicola Fiori (JD342)
+~
+~  This file is part of the Arc Integration for Thunderbird, licensed under
+~  the terms of the GNU General Public License 3.0.
+~
+*/
+
+#{ main-win(lightning-calendar-panel-content-styling enabled) } {
+
+    #calendar-view-box {
+        position: relative;
+        padding-bottom: calc(var(--ait-actions-box-height) - (1px / var(--ait-pixel-ratio)));
+    }
+
+    #view-tabbox {
+
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        height: var(--ait-actions-box-height);
+        background: var(--ait-panel-actions-box-background-color);
+        border-top: 1px solid var(--ait-panel-actions-box-border-color);
+        border-bottom: 1px solid var(--ait-panel-actions-box-border-color);
+
+        .navigation-bottombox {
+            display: none;
+        }
+
+    }
+
+    #calendar-nav-control {
+
+        border: none;
+        background: var(--ait-panel-content-background-color);
+
+        .navigation-inner-box {
+            border: none;
+        }
+
+        :-moz-any(.navigation-spacer-box, .navigation-bottombox) {
+            display: none;
+        }
+
+        label {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--ait-panel-text-color);
+        }
+
+    }
+
+    calendar-day-label {
+
+        display: block;
+        font-size: 0.9em;
+        text-align: left;
+        border-left: none;
+        text-transform: uppercase;
+        background: var(--ait-panel-content-background-color);
+
+        label {
+
+            margin-top: 6px;
+            margin-bottom: 6px;
+            color: var(--ait-panel-text-color);
+
+            &:not([hidden="true"]) {
+                display: inline-block;
+            }
+
+        }
+
+    }
+
+    :-moz-any(calendar-month-view, calendar-multiweek-view) [anonid="mainbox"] {
+        margin-right: 1px;
+    }
+
+    calendar-month-day-box {
+
+        display: flex;
+        flex-flow: column;
+
+        [anonid="monthday-labels"] {
+
+            order: 1;
+            padding: 6px;
+            display: flex;
+            flex-flow: row;
+
+            > * {
+                flex: 1;
+                display: block;
+                background: none;
+            }
+
+        }
+
+        .calendar-month-day-box-items-box {
+            flex: 1 100%;
+        }
+
+    }
+
+    :-moz-any(.calendar-color-box, calendar-event-box) {
+        margin-left: 1px;
+        text-align: center;
+        background-image: none;
+        border: none !important;
+    }
+
+    #intervalDescription {
+        color: var(--ait-blue) !important;
+    }
+
+    #calendarWeek {
+        opacity: 0.5;
+    }
+
+    #view-deck {
+
+        border: none;
+
+        > * {
+
+            padding: 0;
+
+            :-moz-any(.labeldaybox-container, .multiday-view-label-day-box) {
+                border-top: none;
+            }
+
+        }
+
+        * {
+            border-color: var(--ait-border-color) !important;
+            border-width: calc(1px / var(--ait-pixel-ratio)) !important;
+        }
+
+    }
+
+    #view-tabs {
+
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        margin: var(--ait-actions-box-input-margin);
+
+        &:before,
+        &:after {
+            content: "";
+            display: inline-block;
+            flex: 2;
+        }
+
+        > tab {
+
+            flex: 1;
+            margin: 0;
+            padding: 0;
+            border-radius: 0;
+            display: inline-block;
+            height: calc(var(--ait-input-height) - 2px);
+            background: var(--ait-panel-button-background-color);
+            transition: background 200ms ease-out, box-shadow 200ms ease-out;
+            border: 1px solid var(--ait-panel-input-borer-color);
+
+            &:not([first-tab="true"]) {
+                border-left: 0;
+                padding-left: 1px;
+            }
+
+            &[first-tab="true"] {
+                border-top-left-radius: var(--ait-input-border-radius);
+                border-bottom-left-radius: var(--ait-input-border-radius);
+            }
+
+            &:not([last-tab="true"]) {
+                border-right: 0;
+            }
+
+            &[last-tab="true"] {
+                border-top-right-radius: var(--ait-input-border-radius);
+                border-bottom-right-radius: var(--ait-input-border-radius);
+            }
+
+            &:hover {
+
+                background: var(--ait-panel-button-hover-background-color);
+
+                &:not([first-tab="true"]),
+                + tab {
+                    box-shadow: inset 1px 0 var(--ait-panel-input-borer-color);
+                }
+
+            }
+
+            &:-moz-any([selected="true"], :active) {
+
+                transition: none;
+                background: var(--ait-blue);
+                border-color: var(--ait-panel-button-active-border-color);
+
+                label {
+                    transition: none;
+                    color: var(--ait-button-active-text-color);
+                }
+
+                &:not([first-tab="true"]),
+                + tab {
+                    box-shadow: none !important;
+                }
+
+            }
+
+            label {
+                font-weight: normal;
+                margin: 0 1em !important;
+                transition: color 200ms ease-out;
+                color: var(--ait-panel-text-color);
+            }
+
+        }
+
+    }
+
+}
+

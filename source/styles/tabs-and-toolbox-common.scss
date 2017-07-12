@@ -1,0 +1,30 @@
+/*
+~  Copyright (c) 2017 Nicola Fiori (JD342)
+~
+~  This file is part of the Arc Integration for Thunderbird, licensed under
+~  the terms of the GNU General Public License 3.0.
+~
+*/
+
+#{ main-win(panel-toolbox-coloring light darker) } {
+    --ait-tab-and-toolbox-border-color: var(--ait-light-pane-border-color);
+    --ait-tab-and-toolbox-background-color: var(--ait-light-pane-background-color);
+}
+
+#{ main-win(panel-toolbox-coloring light) } {
+    --ait-tab-hover-background-opacity: 0.6;
+    --ait-tab-and-toolbox-upper-border-color: var(--ait-light-pane-border-color);
+}
+
+#{ main-win(panel-toolbox-coloring darker) } {
+    --ait-tab-hover-background-opacity: 0.25;
+    --ait-tab-and-toolbox-upper-border-color: var(--ait-dark-pane-border-color);
+}
+
+#{ main-win(panel-toolbox-coloring dark) } {
+    --ait-tab-hover-background-opacity: 0.6;
+    --ait-tab-and-toolbox-border-color: var(--ait-dark-pane-border-color);
+    --ait-tab-and-toolbox-upper-border-color: var(--ait-dark-pane-border-color);
+    --ait-tab-and-toolbox-background-color: var(--ait-dark-pane-background-color);
+    --ait-toolbox-button-background-hover-color: var(--ait-dark-button-hover-background-color);
+}

@@ -1,0 +1,75 @@
+/*
+~  Copyright (c) 2017 Nicola Fiori (JD342)
+~
+~  This file is part of the Arc Integration for Thunderbird, licensed under
+~  the terms of the GNU General Public License 3.0.
+~
+*/
+
+#{ main-win(panel-toolbox-box-styling enabled) } {
+
+    --ait-toolbox-height: 36px;
+    --ait-toolbox-items-margin: 5px;
+
+    #contentTabBrowser0 {
+        /* puts content windows (for ex. Add-ons Manager) on top to hide artifacts from the tab browser  */
+        z-index: 2;
+        position: relative;
+    }
+
+    .chromeTabInstance {
+
+        display: flex;
+        flex-flow: column;
+
+        > .contentTabToolbox {
+            flex: 0;
+        }
+
+        > * {
+            display: block;
+            width: 100%;
+            flex: 1;
+        }
+
+    }
+
+    :-moz-any(.contentTabToolbox, .mail-toolbox) {
+
+        display: flex;
+        flex-flow: column;
+        box-shadow: none !important;
+        background: var(--ait-tab-and-toolbox-background-color) !important;
+
+        &::after {
+            background-color: var(--ait-tab-and-toolbox-border-color) !important;
+        }
+
+        > toolbar {
+
+            display: flex;
+            flex-flow: row;
+            position: relative;
+            align-items: center;
+            -moz-appearance: none;
+            min-height: var(--ait-toolbox-height);
+            margin: 0 calc(var(--ait-toolbox-items-margin) / 2) !important;
+
+            > * {
+                flex-shrink: 0;
+            }
+
+            > spacer {
+                flex: 1;
+            }
+
+        }
+
+        :-moz-any(toolbarspring, toolbarpaletteitem[type="spring"]) {
+            flex: 1 1;
+            height: 100%;
+        }
+
+    }
+
+}

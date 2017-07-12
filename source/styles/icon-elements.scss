@@ -1,0 +1,90 @@
+/*
+~  Copyright (c) 2017 Nicola Fiori (JD342)
+~
+~  This file is part of the Arc Integration for Thunderbird, licensed under
+~  the terms of the GNU General Public License 3.0.
+~
+*/
+
+/* -- coloring ------------------------------------------------------------------------------------------------------ */
+
+@each $variant in light, dark {
+
+    #{ main-win(frame-coloring $variant) } svg:-moz-any([id|="ait-frame-toolset-button"], [id|="ait-tab-close"]),
+    #{ main-win(panel-content-coloring $variant) } svg[id|="ait-panel-content"],
+    #{ pref(frame-coloring $variant) }:-moz-any(#{ $addr-book-win }, #{ $event-dialog }, #{ $task-dialog })
+        svg[id|="ait-toolset-button"],
+    #{ main-win(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark)) }
+        svg:-moz-any([id|="ait-panel-toolset-button"], [id|="ait-selected-tab-close"]) {
+
+        --ait-icon-color: var(--ait-#{ $variant }-text-color);
+
+    }
+
+    #{ main-win(frame-coloring $variant) } svg[id|="ait-frame-toolset-searchbox"],
+    #{ addr-book-win(frame-coloring $variant) } svg[id|="ait-toolset-searchbox"],
+    #{ main-win(panel-content-coloring $variant) } svg[id|="ait-panel-content"],
+    #{ main-win(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark)) }
+        svg[id|="ait-panel-toolset-searchbox"] {
+
+        --ait-icon-color: var(--ait-#{ $variant }-text-input-icon-color);
+
+    }
+
+}
+
+#{ $main-win } svg {
+
+    &[id|="ait-tab-hover-button-close"] {
+        --ait-icon-color: var(--ait-red);
+    }
+
+    &[id|="ait-tab-active-button-close"] {
+        --ait-icon-color: var(--ait-blue);
+    }
+
+}
+
+:-moz-any(#{ $addr-book-win }, #{ $event-dialog }, #{ $task-dialog }, #{ $main-win })
+    svg[id|="ait-toolset-active-button"] {
+
+    --ait-icon-color: var(--ait-button-active-text-color) !important;
+
+}
+
+/* -- styling ------------------------------------------------------------------------------------------------------- */
+
+#{ $main-win } svg:-moz-any([id|="ait-toolset-active-button"],
+                            [id|="ait-frame-toolset-button"],
+                            [id|="ait-panel-toolset-button"]) {
+
+    &[id$="schedule-icon"] {
+        transform: translateY(-1px);
+    }
+
+    &[id$="filter-icon"] {
+        transform: scale(1.25, 1.25);
+    }
+
+}
+
+#{ $addr-book-win } svg:-moz-any([id|="ait-toolset-active-button"], [id|="ait-toolset-button"])[id$="write-icon"],
+#{ $main-win } svg:-moz-any([id|="ait-toolset-active-button"],
+                            [id|="ait-frame-toolset-button"],
+                            [id|="ait-panel-toolset-button"]):-moz-any([id$="filter-icon"], [id$="write-icon"]) {
+    path {
+        stroke: var(--ait-icon-color);
+        stroke-width: 0.8px;
+    }
+}
+
+svg[id|="ait"] {
+
+    width: 16px;
+    height: 16px;
+
+    :-moz-any(path, rect) {
+        fill: var(--ait-icon-color);
+    }
+
+}

@@ -1,0 +1,205 @@
+/*
+~  Copyright (c) 2017 Nicola Fiori (JD342)
+~
+~  This file is part of the Arc Integration for Thunderbird, licensed under
+~  the terms of the GNU General Public License 3.0.
+~
+*/
+
+/* -- coloring & dimensions ----------------------------------------------------------------------------------------- */
+
+@each $variant in light, dark {
+
+    #{ pref(frame-coloring $variant) }:-moz-any(#{ $event-dialog }, #{ $task-dialog }, #{ $addr-book-win }),
+    #{ main-win(frame-coloring $variant) } .toolbox-top .chromeclass-menubar,
+    #{ main-win(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark)) }
+        :-moz-any(.contentTabToolbox, .mail-toolbox) {
+
+        --ait-toolset-text-color: var(--ait-#{ $variant }-text-color);
+        --ait-toolset-border-color: var(--ait-#{ $variant }-pane-border-color);
+        --ait-toolset-button-border-color: var(--ait-#{ $variant }-input-border-color);
+        --ait-toolset-button-background-color: var(--ait-#{ $variant }-button-background-color);
+        --ait-toolset-button-active-border-color: var(--ait-#{ $variant }-button-active-border-color);
+        --ait-toolset-button-hover-background-color: var(--ait-#{ $variant }-button-hover-background-color);
+
+    }
+
+}
+
+:root {
+    --ait-toolset-items-margin: 5px;
+}
+
+/* -- styling ------------------------------------------------------------------------------------------------------- */
+
+#{ $main-win } {
+
+    .toolbox-top {
+        --ait-toolset-button-down-arrow-icon: -moz-element(#ait-frame-toolset-button-down-arrow-icon);
+    }
+
+    .mail-toolbox {
+        --ait-toolset-button-down-arrow-icon: -moz-element(#ait-panel-toolset-button-down-arrow-icon);
+    }
+
+}
+
+:-moz-any(#{ $event-dialog }, #{ $task-dialog }) {
+    --ait-toolset-button-down-arrow-icon: -moz-element(#ait-toolset-button-down-arrow-icon);
+}
+
+:-moz-any(#{ $event-dialog }, #{ $task-dialog }, #{ $main-win }) {
+    --ait-toolset-active-button-down-arrow-icon: -moz-element(#ait-toolset-active-button-down-arrow-icon);
+}
+
+#{ main-win(panel-toolbox-contents-styling enabled) } :-moz-any(.contentTabToolbox, .mail-toolbox),
+#{ main-win(main-window-frame-contents-styling enabled) } .toolbox-top .chromeclass-menubar,
+:-moz-any(#{ event-dialog(lightning-event-dialog-frame-contents-styling enabled) },
+          #{ task-dialog(lightning-task-dialog-frame-contents-styling enabled) },
+          #{ addr-book-win(address-book-window-frame-contents-styling enabled) }) .toolbox-top {
+
+    toolbarseparator {
+        min-width: 1px;
+        min-height: 100%;
+        -moz-appearance: none !important;
+        background: var(--ait-toolset-border-color);
+        margin: 0 calc(var(--ait-toolset-items-margin) / 2);
+    }
+
+    dropmarker {
+        -moz-appearance: none;
+    }
+
+    .dropmarker-icon {
+        margin: 0 4px;
+        background-size: 16px 16px;
+        background-image: var(--ait-toolset-button-down-arrow-icon) !important;
+    }
+
+    .toolbarbutton-text {
+        font-size: 0.96em;
+        margin: 0 2px !important;
+        transition: color 200ms ease-out;
+        color: var(--ait-toolset-text-color);
+    }
+
+    .toolbarbutton-icon {
+        margin: 2px;
+        width: 16px;
+        height: 16px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .toolbarbutton-1 {
+
+        background: none;
+        box-shadow: none !important;
+        min-height: var(--ait-input-height);
+        border-radius: var(--ait-input-border-radius);
+        margin: 0 calc(var(--ait-toolset-items-margin) / 2);
+        transition: background 200ms ease-out, border-color 200ms ease-out;
+
+        &[type="menu-button"],
+        &:not([disabled="true"]):hover {
+            background: var(--ait-toolset-button-background-color);
+        }
+
+        &[type="menu-button"] dropmarker,
+        &[type="menu"] {
+            &[open="true"] .dropmarker-icon {
+                background-image: var(--ait-toolset-active-button-down-arrow-icon) !important;
+            }
+        }
+
+        &:not([type="menu-button"]):not(.toolbarbutton-menubutton-button):not([disabled="true"]) {
+
+            &:hover {
+                border-color: var(--ait-toolset-button-border-color);
+                background: var(--ait-toolset-button-background-color);
+            }
+
+            &:-moz-any(:active, [open="true"], [checked="true"]) {
+
+                transition: none !important;
+                background: var(--ait-blue);
+                border-color: var(--ait-toolset-button-active-border-color);
+
+                .toolbarbutton-text {
+                    transition: none !important;
+                    color: var(--ait-button-active-text-color);
+                }
+
+            }
+
+        }
+
+        &[type="menu-button"] {
+
+            border: none;
+
+            &:hover .toolbarbutton-menubutton-dropmarker {
+                box-shadow: -1px 0 var(--ait-toolset-button-border-color) !important;
+            }
+
+            &:not(:active) .toolbarbutton-menubutton-button:hover,
+            &:not([open="true"]):hover .toolbarbutton-menubutton-button:not(:hover) +
+                .toolbarbutton-menubutton-dropmarker {
+
+                background: var(--ait-toolset-button-hover-background-color);
+
+            }
+
+            dropmarker::before {
+                display: none !important;
+            }
+
+            .toolbarbutton-menubutton-button:active .toolbarbutton-text {
+                color: var(--ait-button-active-text-color);
+            }
+
+            :-moz-any(.toolbarbutton-menubutton-button:active, .toolbarbutton-menubutton-dropmarker[open="true"]) {
+
+                transition: none !important;
+                background: var(--ait-blue) !important;
+                border-color: var(--ait-toolset-button-active-border-color) !important;
+
+                .toolbarbutton-text {
+                    transition: none !important;
+                }
+
+            }
+
+            :-moz-any(.toolbarbutton-menubutton-button, .toolbarbutton-menubutton-dropmarker) {
+                border: none;
+                background: rgba(0,0,0,0);
+                box-shadow: none !important;
+                border-top: 1px solid var(--ait-toolset-button-border-color);
+                border-bottom: 1px solid var(--ait-toolset-button-border-color);
+            }
+
+            .toolbarbutton-menubutton-button {
+                transition: background 300ms ease;
+                border-top-left-radius: var(--ait-input-border-radius);
+                border-bottom-left-radius: var(--ait-input-border-radius);
+                border-left: 1px solid var(--ait-toolset-button-border-color);
+                padding-right: calc(var(--ait-input-horizontal-padding) + 1px);
+            }
+
+            .toolbarbutton-menubutton-dropmarker {
+                z-index: 2;
+                padding: 0 2px;
+                position: relative;
+                background: none;
+                box-shadow: -1px 0 rgba(0,0,0,0) !important;
+                border-top-right-radius: var(--ait-input-border-radius);
+                border-bottom-right-radius: var(--ait-input-border-radius);
+                transition: background 300ms ease, box-shadow 300ms ease;
+                border-right: 1px solid var(--ait-toolset-button-border-color);
+            }
+
+        }
+
+    }
+
+}

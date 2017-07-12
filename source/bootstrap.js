@@ -6,552 +6,341 @@
  ~
  */
 
- /* -- parameters ----------------------------------------------------------- */
+/* -- parameters ------------------------------------------------------------ */
 
-const INTEGRATION_PARAMETERS = {
-
-    windowsToRestyle: {
-
-        // New/Edit Task/Event Dialogs
-        //
-        'chrome://calendar/content/calendar-event-dialog.xul': {
-
-            iconsToInclude: [
-
-                {
-                    content: 'chrome://ait/content/icons/down.svg',
-                    variants: [
-                        'toolset-active-button-down-arrow',
-                        'toolset-button-down-arrow'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/drive.svg',
-                    variants: [
-                        'toolset-button-save',
-                        'toolset-active-button-save'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/lock.svg',
-                    variants: [
-                        'toolset-button-lock',
-                        'toolset-active-button-lock'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/attachment.svg',
-                    variants: [
-                        'toolset-button-attachment',
-                        'toolset-active-button-attachment'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/delete.svg',
-                    variants: [
-                        'toolset-active-button-delete',
-                        'toolset-button-delete'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/important.svg',
-                    variants: [
-                        'toolset-active-button-important',
-                        'toolset-button-important'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/globe.svg',
-                    variants: [
-                        'toolset-active-button-globe',
-                        'toolset-button-globe'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/status.svg',
-                    variants: [
-                        'toolset-active-button-status',
-                        'toolset-button-status'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/avatar.svg',
-                    variants: [
-                        'toolset-active-button-avatar',
-                        'toolset-button-avatar'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/time.svg',
-                    variants: [
-                        'toolset-active-button-time',
-                        'toolset-button-time'
-                    ]
-                }
-
-            ]
-
-        },
-
-        // Address Book
-        //
-        'chrome://messenger/content/addressbook/addressbook.xul': {
-
-            iconsToInclude: [
-
-                {
-                    content: 'chrome://ait/content/icons/search.svg',
-                    variants: ['toolset-searchbox-search']
-                },
-
-                {
-                    content: 'chrome://messenger/skin/icons/mail-toolbar.svg',
-                    excludedElements: ':root > :not(#newmsg)',
-                    variants: [
-                        'toolset-active-button-write',
-                        'toolset-button-write'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/properties.svg',
-                    variants: [
-                        'toolset-active-button-properties',
-                        'toolset-button-properties'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/delete.svg',
-                    variants: [
-                        'toolset-active-button-delete',
-                        'toolset-button-delete'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/addressbook.svg',
-                    variants: [
-                        'toolset-active-button-address-book',
-                        'toolset-button-address-book'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/newcontact.svg',
-                    variants: [
-                        'toolset-active-button-new-contact',
-                        'toolset-button-new-contact'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/message.svg',
-                    variants: [
-                        'toolset-active-button-message',
-                        'toolset-button-message'
-                    ]
-                }
-
-            ]
-
-        },
-
-        // Main Window
-        //
-        'chrome://messenger/content/messenger.xul': {
-
-            iconsToInclude: [
-
-                {
-                    content: 'chrome://ait/content/icons/search.svg',
-                    variants: [
-                        'lightning-panel-searchbox-search',
-                        'frame-toolset-searchbox-search',
-                        'pane-toolset-searchbox-search',
-                        'frame-toolset-button-search',
-                        'mails-view-searchbox-search',
-                        'pane-toolset-button-search'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/down.svg',
-                    variants: [
-                        'toolset-active-button-down-arrow',
-                        'frame-toolset-button-down-arrow',
-                        'lightning-minimonth-down-arrow',
-                        'pane-toolset-button-down-arrow',
-                        'lightning-panel-down-arrow',
-                        'lightning-side-pane-down-arrow'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/schedule.svg',
-                    variants: [
-                        'toolset-active-button-schedule',
-                        'frame-toolset-button-schedule',
-                        'pane-toolset-button-schedule',
-                        'lightning-side-pane-schedule'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/new.svg',
-                    variants: [
-                        'toolset-active-button-new',
-                        'frame-toolset-button-new',
-                        'pane-toolset-button-new',
-                        'lightning-panel-new'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/close.svg',
-                    variants: [
-                        'selected-tab-close',
-                        'tab-active-button-close',
-                        'tab-hover-button-close',
-                        'tab-close',
-                    ]
-                },
-
-                {
-                    content: 'chrome://messenger/skin/icons/mail-toolbar.svg',
-                    excludedElements: ':root > :not(#newmsg)',
-                    variants: [
-                        'toolset-active-button-write',
-                        'frame-toolset-button-write',
-                        'pane-toolset-button-write'
-                    ]
-                },
-
-                {
-                    content: 'chrome://messenger/skin/icons/mail-toolbar.svg',
-                    excludedElements: ':root > :not(#filter)',
-                    variants: [
-                        'toolset-active-button-filter',
-                        'frame-toolset-button-filter',
-                        'pane-toolset-button-filter'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/save.svg',
-                    variants: [
-                        'toolset-active-button-inbox',
-                        'frame-toolset-button-inbox',
-                        'pane-toolset-button-inbox'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/delete.svg',
-                    variants: [
-                        'toolset-active-button-delete',
-                        'frame-toolset-button-delete',
-                        'pane-toolset-button-delete'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/addressbook.svg',
-                    variants: [
-                        'toolset-active-button-address-book',
-                        'frame-toolset-button-address-book',
-                        'pane-toolset-button-address-book'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/avatar.svg',
-                    variants: [
-                        'toolset-active-button-avatar',
-                        'frame-toolset-button-avatar',
-                        'pane-toolset-button-avatar'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/calendar.svg',
-                    variants: [
-                        'toolset-active-button-calendar',
-                        'frame-toolset-button-calendar',
-                        'pane-toolset-button-calendar'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/message.svg',
-                    variants: [
-                        'toolset-active-button-message',
-                        'frame-toolset-button-message',
-                        'pane-toolset-button-message'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/forward.svg',
-                    variants: [
-                        'toolset-active-button-forward',
-                        'frame-toolset-button-forward',
-                        'pane-toolset-button-forward'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/junk.svg',
-                    variants: [
-                        'toolset-active-button-junk',
-                        'frame-toolset-button-junk',
-                        'pane-toolset-button-junk'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/menu.svg',
-                    variants: [
-                        'toolset-active-button-menu',
-                        'frame-toolset-button-menu',
-                        'pane-toolset-button-menu'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/print.svg',
-                    variants: [
-                        'toolset-active-button-print',
-                        'frame-toolset-button-print',
-                        'pane-toolset-button-print'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/properties.svg',
-                    variants: [
-                        'toolset-active-button-properties',
-                        'frame-toolset-button-properties',
-                        'pane-toolset-button-properties'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/reply.svg',
-                    variants: [
-                        'toolset-active-button-reply',
-                        'frame-toolset-button-reply',
-                        'pane-toolset-button-reply'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/replyall.svg',
-                    variants: [
-                        'toolset-active-button-reply-all',
-                        'frame-toolset-button-reply-all',
-                        'pane-toolset-button-reply-all'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/sync.svg',
-                    variants: [
-                        'toolset-active-button-sync',
-                        'frame-toolset-button-sync',
-                        'pane-toolset-button-sync'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/tag.svg',
-                    variants: [
-                        'toolset-active-button-tag',
-                        'frame-toolset-button-tag',
-                        'pane-toolset-button-tag'
-                    ]
-                },
-
-                {
-                    content: 'chrome://ait/content/icons/task.svg',
-                    variants: [
-                        'toolset-active-button-task',
-                        'frame-toolset-button-task',
-                        'pane-toolset-button-task'
-                    ]
-                }
-
-            ]
-
-        }
-
-    },
-
-    preferences: {
-
-        // Generic preferences are not exposed in the style sheet, they serve
-        // the purpose of simplifying the configuration for the end user by
-        // grouping together more specific preferences.
-        // Generic preferences can group other generic preferences to create
-        // a tree-like structure.
-        //
-        generic: {
-
-            generalLook: {
-                options: ['light', 'dark', 'darker']
+// Windows to restyle
+//
+const WINDOWS = new Map();
+{
+    let toolsetButtonVariants;
+    toolsetButtonVariants = (name) => [
+        `toolset-active-button-${name}`,
+        `toolset-button-${name}`
+    ];
+    // New/Edit Task/Event Dialogs
+    WINDOWS.set('chrome://calendar/content/calendar-event-dialog.xul', {
+        iconsToInclude: [
+            {
+                graphics: 'chrome://ait/content/icons/down.svg',
+                variants: toolsetButtonVariants('down-arrow')
             },
-
-            frame: {
-                parentPref: 'generalLook',
-                options: ['light', 'dark', 'none'],
-                presets: {
-                    light: 'light',
-                    dark: 'dark',
-                    darker: 'dark'
-                }
+            {
+                graphics: 'chrome://ait/content/icons/drive.svg',
+                variants: toolsetButtonVariants('save')
             },
-
-            body: {
-                parentPref: 'generalLook',
-                options: ['light', 'dark', 'darker', 'none'],
-                presets: {
-                    light: 'light',
-                    dark: 'dark',
-                    darker: 'darker'
-                }
+            {
+                graphics: 'chrome://ait/content/icons/lock.svg',
+                variants: toolsetButtonVariants('lock')
             },
-
-            content: {
-                parentPref: 'body',
-                options: ['light', 'dark', 'none'],
-                presets: {
-                    light: 'light',
-                    dark: 'dark',
-                    darker: 'light',
-                    none: 'none'
-                }
+            {
+                graphics: 'chrome://ait/content/icons/attachment.svg',
+                variants: toolsetButtonVariants('attachment')
             },
-
-            mails: {
-                parentPref: 'content',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
+            {
+                graphics: 'chrome://ait/content/icons/delete.svg',
+                variants: toolsetButtonVariants('delete')
             },
-
-            lightningExtension: {
-                parentPref: 'content',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
+            {
+                graphics: 'chrome://ait/content/icons/important.svg',
+                variants: toolsetButtonVariants('important')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/globe.svg',
+                variants: toolsetButtonVariants('globe')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/status.svg',
+                variants: toolsetButtonVariants('status')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/avatar.svg',
+                variants: toolsetButtonVariants('avatar')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/time.svg',
+                variants: toolsetButtonVariants('time')
             }
-
-        },
-
-        // Only specific preferences are exposed and used in the style sheet.
-        // They describe everything that can be tweaked.
-        // Specific preferences cannot be "parent" preferences of other
-        // preferences, only the generic ones can.
-        //
-        specific: {
-
-            mainToolbox: {
-                parentPref: 'body',
-                options: ['light', 'dark', 'darker', 'none'],
-                presets: {
-                    light: 'light',
-                    dark: 'dark',
-                    darker: 'darker',
-                    none: 'none'
-                }
+        ]
+    });
+    // Address Book
+    WINDOWS.set('chrome://messenger/content/addressbook/addressbook.xul', {
+        iconsToInclude: [
+            {
+                graphics: 'chrome://ait/content/icons/search.svg',
+                variants: ['toolset-searchbox-search']
             },
-
-            frameBackground: {
-                parentPref: 'frame',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
+            {
+                graphics: 'chrome://messenger/skin/icons/mail-toolbar.svg',
+                excludedElements: ':root > :not(#newmsg)',
+                variants: toolsetButtonVariants('write')
             },
-
-            frameContents: {
-                parentPref: 'frame',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
+            {
+                graphics: 'chrome://ait/content/icons/properties.svg',
+                variants: toolsetButtonVariants('properties')
             },
-
-            chat: {
-                parentPref: 'content',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
+            {
+                graphics: 'chrome://ait/content/icons/delete.svg',
+                variants: toolsetButtonVariants('delete')
             },
-
-            mailsPanel: {
-                parentPref: 'mails',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
+            {
+                graphics: 'chrome://ait/content/icons/addressbook.svg',
+                variants: toolsetButtonVariants('address-book')
             },
-
-            mailView: {
-                parentPref: 'mails',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
+            {
+                graphics: 'chrome://ait/content/icons/newcontact.svg',
+                variants: toolsetButtonVariants('new-contact')
             },
-
-            mailsAccountManager: {
-                parentPref: 'mails',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
-            },
-
-            extensionsManager: {
-                parentPref: 'content',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
-            },
-
-            lightningPanel: {
-                parentPref: 'lightningExtension',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
-            },
-
-            lightningSidePane: {
-                parentPref: 'lightningExtension',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
-            },
-
-            lightningMinimonth: {
-                parentPref: 'lightningExtension',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
-            },
-
-            lightningStatusBarTodayPaneButton: {
-                parentPref: 'lightningExtension',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
-            },
-
-            dialogsContent: {
-                parentPref: 'content',
-                options: ['light', 'dark', 'none'],
-                presets: { light: 'light', dark: 'dark', none: 'none' }
+            {
+                graphics: 'chrome://ait/content/icons/message.svg',
+                variants: toolsetButtonVariants('message')
             }
+        ]
+    });
+    toolsetButtonVariants = (name) => [
+        `toolset-active-button-${name}`,
+        `frame-toolset-button-${name}`,
+        `panel-toolset-button-${name}`
+    ];
+    // Main Window
+    WINDOWS.set('chrome://messenger/content/messenger.xul', {
+        iconsToInclude: [
+            {
+                graphics: 'chrome://ait/content/icons/search.svg',
+                variants: [
+                    ...toolsetButtonVariants('search'),
+                    'frame-toolset-searchbox-search',
+                    'panel-toolset-searchbox-search',
+                    'panel-content-searchbox-search'
+                ]
+            },
+            {
+                graphics: 'chrome://ait/content/icons/down.svg',
+                variants: [
+                    ...toolsetButtonVariants('down-arrow'),
+                    'panel-content-down-arrow'
+                ]
+            },
+            {
+                graphics: 'chrome://ait/content/icons/schedule.svg',
+                variants: [
+                    ...toolsetButtonVariants('schedule'),
+                    'panel-content-schedule'
+                ]
+            },
+            {
+                graphics: 'chrome://ait/content/icons/new.svg',
+                variants: [
+                    ...toolsetButtonVariants('new'),
+                    'panel-content-new'
+                ]
+            },
+            {
+                graphics: 'chrome://ait/content/icons/close.svg',
+                variants: [
+                    'selected-tab-close',
+                    'tab-active-button-close',
+                    'tab-hover-button-close',
+                    'tab-close',
+                ]
+            },
+            {
+                graphics: 'chrome://messenger/skin/icons/mail-toolbar.svg',
+                excludedElements: ':root > :not(#newmsg)',
+                variants: toolsetButtonVariants('write')
+            },
+            {
+                graphics: 'chrome://messenger/skin/icons/mail-toolbar.svg',
+                excludedElements: ':root > :not(#filter)',
+                variants: toolsetButtonVariants('filter')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/save.svg',
+                variants: toolsetButtonVariants('inbox')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/delete.svg',
+                variants: toolsetButtonVariants('delete')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/addressbook.svg',
+                variants: toolsetButtonVariants('address-book')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/avatar.svg',
+                variants: toolsetButtonVariants('avatar')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/calendar.svg',
+                variants: toolsetButtonVariants('calendar')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/message.svg',
+                variants: toolsetButtonVariants('message')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/forward.svg',
+                variants: toolsetButtonVariants('forward')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/junk.svg',
+                variants: toolsetButtonVariants('junk')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/menu.svg',
+                variants: toolsetButtonVariants('menu')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/print.svg',
+                variants: toolsetButtonVariants('print')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/properties.svg',
+                variants: toolsetButtonVariants('properties')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/reply.svg',
+                variants: toolsetButtonVariants('reply')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/replyall.svg',
+                variants: toolsetButtonVariants('reply-all')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/sync.svg',
+                variants: toolsetButtonVariants('sync')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/tag.svg',
+                variants: toolsetButtonVariants('tag')
+            },
+            {
+                graphics: 'chrome://ait/content/icons/task.svg',
+                variants: toolsetButtonVariants('task')
+            }
+        ]
+    });
+}
 
+// Generic preferences are not exposed in the style sheet, they serve the
+// purpose of simplifying the configuration for the end user by grouping
+// together more specific preferences.
+// Generic preferences can group other generic preferences to create a tree-like
+// structure.
+//
+const GENERIC_PREFS = new Map();
+GENERIC_PREFS.set('general-look', { options: ['light', 'dark', 'darker'] });
+GENERIC_PREFS.set('panel', {
+    parentPref: 'general-look',
+    options: ['light', 'dark', 'darker', 'none'],
+    presets: { light: 'light', dark: 'dark', darker: 'darker' }
+});
+GENERIC_PREFS.set('frame', {
+    parentPref: 'general-look',
+    options: ['light', 'dark', 'none'],
+    presets: { light: 'light', dark: 'dark', darker: 'dark' }
+});
+GENERIC_PREFS.set('panel-content', {
+    parentPref: 'panel',
+    options: ['light', 'dark', 'none'],
+    presets: { light: 'light', dark: 'dark', darker: 'light', none: 'none' }
+});
+GENERIC_PREFS.set('panel-toolbox', {
+    parentPref: 'panel',
+    options: ['light', 'dark', 'darker', 'none'],
+    presets: { light: 'light', dark: 'dark', darker: 'darker', none: 'none' }
+});
+for (let part of ['background', 'contents', 'icons']) {
+    GENERIC_PREFS.set(`frame-${part}-styling`, {
+        parentPref: 'frame',
+        options: ['enabled', 'disabled'],
+        presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
+    });
+    GENERIC_PREFS.set(`lightning-extension-dialogs-frame-${part}-styling`, {
+        parentPref: `frame-${part}-styling`,
+        options: ['enabled', 'disabled'],
+        presets: { enabled: 'enabled', disabled: 'disabled' }
+    });
+}
+for (let part of ['mails-panel', 'lightning-panels'])
+    GENERIC_PREFS.set(`${part}-content-styling`, {
+        parentPref: 'panel-content',
+        options: ['enabled', 'disabled'],
+        presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
+    });
+
+// Only specific preferences are exposed and used in the style sheet. They
+// describe everything that can be tweaked.
+// Specific preferences cannot be "parent" preferences of other preferences,
+// only the generic ones can.
+//
+const SPECIFIC_PREFS = new Map();
+for (let part of ['background', 'contents', 'icons']) {
+    for (let win of ['main', 'message-writing', 'address-book'])
+        SPECIFIC_PREFS.set(`${win}-window-frame-${part}-styling`, {
+            parentPref: `frame-${part}-styling`,
+            options: ['enabled', 'disabled'],
+            presets: { enabled: 'enabled', disabled: 'disabled' }
+        });
+    for (let dialog of ['task', 'event'])
+        SPECIFIC_PREFS.set(`lightning-${dialog}-dialog-frame-${part}-styling`, {
+            parentPref: `lightning-extension-dialogs-frame-${part}-styling`,
+            options: ['enabled', 'disabled'],
+            presets: { enabled: 'enabled', disabled: 'disabled' }
+        });
+}
+for (let part of ['box', 'contents', 'icons'])
+    SPECIFIC_PREFS.set(`panel-toolbox-${part}-styling`, {
+        parentPref: 'panel-toolbox',
+        options: ['enabled', 'disabled'],
+        presets: {
+            light: 'enabled',
+            dark: 'enabled',
+            darker: 'enabled',
+            none: 'disabled'
         }
+    });
+for (let panel of [
+    'address-book',
+    'message-writing',
+    'filter',
+    'extensions-manager',
+    'chat',
+    'preferences-window'
+])
+    SPECIFIC_PREFS.set(`${panel}-panel-content-styling`, {
+        parentPref: 'panel-content',
+        options: ['enabled', 'disabled'],
+        presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
+    });
+for (let panel of ['calendar', 'tasks', 'side', 'task-window', 'event-window'])
+    SPECIFIC_PREFS.set(`lightning-${panel}-panel-content-styling`, {
+        parentPref: 'lightning-panels-content-styling',
+        options: ['enabled', 'disabled'],
+        presets: { enabled: 'enabled', disabled: 'disabled' }
+    });
+for (let view of ['main', 'mail', 'account-manager'])
+    SPECIFIC_PREFS.set(`mails-${view}-view-content-styling`, {
+        parentPref: 'mails-panel-content-styling',
+        options: ['enabled', 'disabled'],
+        presets: { enabled: 'enabled', disabled: 'disabled' }
+    });
+SPECIFIC_PREFS.set('frame-coloring', {
+    parentPref: 'frame',
+    options: ['light', 'dark'],
+    presets: { light: 'light', dark: 'dark', none: 'light' }
+});
+SPECIFIC_PREFS.set('panel-toolbox-coloring', {
+    parentPref: 'panel-toolbox',
+    options: ['light', 'dark', 'darker'],
+    presets: { light: 'light', dark: 'dark', darker: 'darker', none: 'light' }
+});
+SPECIFIC_PREFS.set('panel-content-coloring', {
+    parentPref: 'panel-content',
+    options: ['light', 'dark'],
+    presets: { light: 'light', dark: 'dark', none: 'light' }
+});
 
-    }
-
-};
-
- /* -- globals -------------------------------------------------------------- */
+/* -- globals --------------------------------------------------------------- */
 
 const XHTMLNS = 'http://www.w3.org/1999/xhtml';
 const AIT_PREFS_DOMAIN = 'extensions.net.jd342.ait';
@@ -564,12 +353,14 @@ const Cc = Components.classes;
 
 Components.utils.importGlobalProperties(['fetch']);
 
-const { nsIWindowMediator,
-        nsIInterfaceRequestor,
-        nsIDOMWindow,
-        nsIPrefService,
-        nsIPrefBranch,
-        nsIDOMParser } = Components.interfaces;
+const {
+    nsIWindowMediator,
+    nsIInterfaceRequestor,
+    nsIDOMWindow,
+    nsIPrefService,
+    nsIPrefBranch,
+    nsIDOMParser
+} = Components.interfaces;
 
 const wm =
     Cc['@mozilla.org/appshell/window-mediator;1']
@@ -586,8 +377,8 @@ function initialize(win) {
 
     const url = win.location.href.split('#')[0];
 
-    if (url in INTEGRATION_PARAMETERS.windowsToRestyle) {
-        const info = INTEGRATION_PARAMETERS.windowsToRestyle[url];
+    if (WINDOWS.has(url)) {
+        const info = WINDOWS.get(url);
         StyleIntegration.load(win, info);
     }
 
@@ -599,9 +390,7 @@ function teardown(win) {
 
     const url = win.location.href.split('#')[0];
 
-    if (url in INTEGRATION_PARAMETERS.windowsToRestyle)
-        StyleIntegration.unload(win);
-
+    if (WINDOWS.has(url)) StyleIntegration.unload(win);
     if (url === PREFERENECES_DIALOG_LOCATION) IntegrationPrefsPanel.unload(win);
 
 }
@@ -887,28 +676,26 @@ const StyleIntegration = (() => {
             root.appendChild(icons);
             unloadListeners.push(() => { icons.remove(); });
 
-            iconsToInclude.forEach(({ content,
-                                      excludedElements,
-                                      variants }) => {
+            iconsToInclude.forEach((info) => {
 
-                retrieveIconSample(content, excludedElements).then((svgDoc) => {
+                const { graphics, excludedElements, variants } = info;
 
-                    if (unloaded) return;
+                retrieveIconSample(graphics, excludedElements)
+                    .then((svgDoc) => {
 
-                    const variantsFrangment = new win.DocumentFragment();
+                        if (unloaded) return;
 
-                    for (let variantName of variants) {
+                        const variantsFrangment = new win.DocumentFragment();
 
-                        const icon = svgDoc.firstElementChild.cloneNode(true);
+                        for (let variantName of variants) {
+                            const icon = svgDoc.firstElementChild.cloneNode(true);
+                            icon.id = `ait-${variantName}-icon`;
+                            variantsFrangment.appendChild(icon);
+                        }
 
-                        icon.id = `ait-${variantName}-icon`;
-                        variantsFrangment.appendChild(icon);
+                        icons.appendChild(variantsFrangment);
 
-                    }
-
-                    icons.appendChild(variantsFrangment);
-
-                });
+                    });
 
             });
 
@@ -1123,7 +910,7 @@ const IntegrationPrefs = (() => {
             super[_init](type, name, descriptor);
 
             const parent = this[_parent] =
-                preferences.generic[descriptor.parentPref];
+                genericPreferences.get(descriptor.parentPref);
 
             parent.watch(() => {
 
@@ -1154,72 +941,59 @@ const IntegrationPrefs = (() => {
         isChildPreference
     };
 
-    var preferences;
+    var genericPreferences;
+    var specificPreferences;
 
     function main() {
 
-        preferences = {};
-        initializePreferences();
+        genericPreferences = new Map();
+        specificPreferences = new Map();
+
+        for (let [type, instances, descriptors] of [
+            ['generic', genericPreferences, GENERIC_PREFS],
+            ['specific', specificPreferences, SPECIFIC_PREFS]
+        ])
+            for (let [name, descr] of descriptors) {
+                const isChildPref = 'parentPref' in descr;
+                const prefProto = isChildPref ? ChildPreference : Preference;
+                const pref = Object.create(prefProto)[_init](type, name, descr);
+                instances.set(name, pref);
+            }
 
     }
 
     function end() {
 
-        preferences = null;
+        genericPreferences = null;
+        specificPreferences = null;
 
     }
 
     function setup() {
 
-        for (let type in INTEGRATION_PARAMETERS.preferences) {
-
-            const prefDescriptors = INTEGRATION_PARAMETERS.preferences[type];
-
-            for (let name in prefDescriptors) {
-                const defaultOption = prefDescriptors[name].options[0];
+        for (let [type, descriptors] of [
+            ['generic', GENERIC_PREFS],
+            ['specific', SPECIFIC_PREFS]
+        ])
+            for (let [name, descr] of descriptors) {
+                const defaultOption = descr.options[0];
                 const domain = getPreferenceDomain(type, name);
                 prefs.setCharPref(domain, defaultOption);
             }
-
-        }
 
     }
 
     function clean() { prefs.deleteBranch(AIT_PREFS_DOMAIN); }
 
-    function initializePreferences() {
-
-        for (let type in INTEGRATION_PARAMETERS.preferences) {
-
-            const prefInstances = preferences[type] = {};
-            const prefDescriptors = INTEGRATION_PARAMETERS.preferences[type];
-
-            for (let name in prefDescriptors) {
-
-                const descr = prefDescriptors[name];
-
-                const preference =
-                    'parentPref' in descr ?
-                    Object.create(ChildPreference)[_init](type, name, descr) :
-                    Object.create(Preference)[_init](type, name, descr);
-
-                prefInstances[name] = preference;
-
-            }
-
-        }
-
-    }
-
     function* getSpecificPreferences() {
 
-        yield* getPreferencesFrom(preferences.specific);
+        yield* specificPreferences.values();
 
     }
 
     function* getGenericPreferences() {
 
-        yield* getPreferencesFrom(preferences.generic);
+        yield* genericPreferences.values();
 
     }
 
@@ -1236,18 +1010,13 @@ const IntegrationPrefs = (() => {
 
     }
 
-    function* getPreferencesFrom(instances) {
-
-        for (let name in instances) yield instances[name];
-
-    }
-
     /**
      * @param {string} type
      * @param {string} name
      */
     function getPreferenceDomain(type, name) {
-        return `${AIT_PREFS_DOMAIN}.${type}.${name}`;
+        const camelCasedName = name.replace(/-[a-z]/g, m => m.toUpperCase());
+        return `${AIT_PREFS_DOMAIN}.${type}.${camelCasedName}`;
     }
 
 })();
@@ -1434,6 +1203,13 @@ const IntegrationPrefsPanel = (() => {
                 span.textContent = `${toCapitalizedWords(name)}:`;
                 div.appendChild(span);
 
+                Object.assign(span.style, {
+                    display: 'block',
+                    overflow: 'hidden',
+                    transition: 'opacity 300ms ease, height 300ms ease',
+                    lineHeight: '1.3em'
+                });
+
                 Object.assign(div.style, {
                     marginLeft: '1ch',
                     transition: 'opacity 300ms ease'
@@ -1457,7 +1233,7 @@ const IntegrationPrefsPanel = (() => {
                     label.appendChild(input);
                     label.appendChild(txt);
 
-                    div.appendChild(label);
+                    span.appendChild(label);
 
                     pref.watch(onUpdate);
                     onUpdate();
@@ -1502,7 +1278,8 @@ const IntegrationPrefsPanel = (() => {
 
                     const onUpdate = () => {
 
-                        div.style.opacity = pref.configurable ? null : '0.7';
+                        div.style.opacity =
+                            pref.configurable ? null : '0.3';
 
                     };
 
@@ -1520,22 +1297,25 @@ const IntegrationPrefsPanel = (() => {
 
                     if (IntegrationPrefs.isChildPreference(parent)) {
 
-                        const onParentUpdate = () => {
+                        const onUpdate = () => {
 
-                            div.style.display =
-                                parent.configurable ? null : 'none';
+                            span.style.height =
+                                parent.configurable ? '1.3em' : '0';
+
+                            span.style.opacity =
+                                parent.configurable ? null : '0';
 
                         };
 
-                        parent.watch(onParentUpdate);
+                        parent.watch(onUpdate);
 
                         unloadListeners.push(() => {
 
-                            parent.stopWatching(onParentUpdate);
+                            parent.stopWatching(onUpdate);
 
                         });
 
-                        onParentUpdate();
+                        onUpdate();
 
                     }
 
@@ -1561,13 +1341,16 @@ const IntegrationPrefsPanel = (() => {
     }
 
     /**
-     * @param   {string} camelCasedWords
+     * @param   {string} dashCasedWords
      * @returns {string}
+     *
+     * toCapitalizedWords('foo-bar-baz') -> 'Foo Bar Baz'
      */
-    function toCapitalizedWords(camelCasedWords) {
+    function toCapitalizedWords(dashCasedWords) {
 
-        return camelCasedWords[0].toUpperCase() +
-               camelCasedWords.substr(1).replace(/[A-Z]/g, m => ` ${m}`);
+        return dashCasedWords[0].toUpperCase() +
+               dashCasedWords.substr(1)
+                   .replace(/-[a-z]/g, m => ` ${m[1].toUpperCase()}`);
 
     }
 

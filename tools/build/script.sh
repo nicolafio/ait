@@ -68,7 +68,7 @@ run_build() {
     temp_dir=`mktemp -d`
     build_file=`realpath "$1"`
 
-    sassc -t compact "$source_dir/styling.scss" "$temp_dir/styling.css" || {
+    sassc -t compressed "$source_dir/styling.scss" "$temp_dir/styling.css" || {
         echo scss compilation failed, aborting
         rm -rf "$temp_dir"
         exit $?
@@ -77,11 +77,9 @@ run_build() {
     rm -f "$build_file"
 
     cd "$temp_dir"
-    zip "$build_file" styling.css
-
+    zip "$build_file" *
     cd "$source_dir"
-    zip "$build_file" `find . -not -path ./styling.less`
-
+    zip "$build_file" `find . -not -path ./styling.scss -not -path "./styles*"`
     cd ..
     zip "$build_file" license
 

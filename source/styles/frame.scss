@@ -1,0 +1,38 @@
+/*
+~  Copyright (c) 2017 Nicola Fiori (JD342)
+~
+~  This file is part of the Arc Integration for Thunderbird, licensed under
+~  the terms of the GNU General Public License 3.0.
+~
+*/
+
+/* -- coloring ------------------------------------------------------------------------------------------------------ */
+
+@each $variant in light, dark {
+
+    :root#{ pref(frame-coloring $variant) } {
+        --ait-frame-background-color: var(--ait-#{ $variant }-window-frame-background-color);
+        --ait-frame-lower-border-color: var(--ait-#{ $variant }-pane-border-color);
+    }
+
+}
+
+/* -- styling ------------------------------------------------------------------------------------------------------- */
+
+:-moz-any(#{ event-dialog(lightning-event-dialog-frame-background-styling enabled) },
+          #{ addr-book-win(address-book-window-frame-background-styling enabled) },
+          #{ task-dialog(lightning-task-dialog-frame-background-styling enabled)},
+          #{ main-win(main-window-frame-background-styling enabled) }) .toolbox-top > * {
+    -moz-appearance: none !important;
+    background: var(--ait-frame-background-color) !important;
+}
+
+:-moz-any(#{ event-dialog(lightning-event-dialog-frame-background-styling enabled) },
+          #{ task-dialog(lightning-task-dialog-frame-background-styling enabled)},
+          #{ addr-book-win(address-book-window-frame-background-styling enabled) }) .toolbox-top::after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    display: block;
+    background: var(--ait-frame-lower-border-color);
+}
