@@ -10,6 +10,7 @@
     #{ main-win(panel-content-coloring $variant) } {
         --ait-panel-text-color: var(--ait-#{ $variant }-text-color);
         --ait-panel-input-borer-color: var(--ait-#{ $variant }-input-border-color);
+        --ait-panel-background-color: var(--ait-#{ $variant }-pane-background-color);
         --ait-panel-actions-box-border-color: var(--ait-#{ $variant }-pane-border-color);
         --ait-panel-button-background-color: var(--ait-#{ $variant }-button-background-color);
         --ait-panel-content-background-color: var(--ait-#{ $variant }-content-background-color);

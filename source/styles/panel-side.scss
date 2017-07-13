@@ -10,7 +10,7 @@
 
     #today-pane-panel sidebarheader,
     #today-pane-panel {
-        background: var(--ait-lightning-side-pane-background-color);
+        background: var(--ait-panel-background-color);
     }
 
     #today-pane-panel {
@@ -58,7 +58,7 @@
         height: 16px;
         list-style-image: none;
         transform: rotate(90deg);
-        background-image: -moz-element(#ait-lightning-side-pane-down-arrow-icon);
+        background-image: -moz-element(#ait-panel-content-down-arrow-icon);
     }
 
     #folderview-cycler-next .toolbarbutton-icon {
@@ -66,7 +66,7 @@
         height: 16px;
         list-style-image: none;
         transform: rotate(-90deg);
-        background-image: -moz-element(#ait-lightning-side-pane-down-arrow-icon);
+        background-image: -moz-element(#ait-panel-content-down-arrow-icon);
     }
 
 }
