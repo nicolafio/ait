@@ -1,0 +1,99 @@
+/*
+~  Copyright (c) 2017 Nicola Fiori (JD342)
+~
+~  This file is part of the Arc Integration for Thunderbird, licensed under
+~  the terms of the GNU General Public License 3.0.
+~
+*/
+
+// This file contains commonly used variables, shorthand mixins & functions.
+// This file should not contain any concrete styling.
+
+$blue-color:            #5294e2;
+$red-color:             #f37076;
+$btn-active-text-color: white;
+
+$frame-bg-color-variants:          (light: #e7e8eb, dark: #2f343f);
+$win-frame-bg-color-variants:      (light: #e7e8eb, dark: #2f343f);
+$panel-bg-color-variants:          (light: #f5f6f7, dark: #383c4a);
+$panel-border-color-variants:      (light: #d2d3d8, dark: #252a33);
+$side-panel-bg-color-variants:     (light: #fbfbfc, dark: #3c4150);
+$content-bg-color-variants:        (light: #ffffff, dark: #404552);
+$content-border-color-variants:    (light: #dcdfe3, dark: #2b2e39);
+$input-border-color-variants:      (light: #cfd6e6, dark: #2b2e39);
+$input-placeholder-color-variants: (light: #a7aab0, dark: #2b2e39);
+$btn-active-border-color-variants: (light: #5294e2, dark: #8e95a0);
+$text-input-icon-color-variants:   (light: #7d8189, dark: #b6bcc6);
+$btn-bg-color-variants:            (light: #fbfbfc, dark: #444a58);
+$btn-hover-bg-color-variants:      (light: #ffffff, dark: #505666);
+$text-color-variants:              (light: #5c616c, dark: #d3dae3);
+$actions-box-bg-color-variants:    (light: #edeef0, dark: #313541);
+
+$main-win: ':root#messengerWindow';
+$addr-book-win: ':root#addressbookWindow';
+$event-dialog: ':root#calendar-event-dialog';
+$task-dialog: ':root#calendar-task-dialog';
+
+$main-win-calendar-panel: '#{ $main-win }  #calendar-toolbox-container:not([collapsed="true"]) ~ #calendarContent';
+$main-win-tasks-panel: '#{ $main-win }  #task-toolbox-container:not([collapsed="true"]) ~ #calendarContent';
+$main-win-side-panel: '#{ $main-win } #today-pane-panel';
+$main-win-mails-panel: '#{ $main-win } #messengerBox';
+
+@function pref($args...) {
+    // pref(foo light)      -> [ait-foo-preference="light"]
+    // pref(foo a, baz b)   -> [ait-foo-preference="a"][ait-baz-preference="b"]
+    // pref(foo dark light) -> :-moz-any([ait-foo-preference="dark"], [ait-foo-preference="light"])
+    // pref(foo a, baz b c) -> [ait-foo-preference="a"]:-moz-any([ait-baz-preference="b"], [ait-baz-preference="c"])
+    $result: '';
+    @each $arg in $args {
+        @if length($arg) < 2 {
+            @error 'not enough items in param "#{ $arg }" (args: #{ $args })';
+        }
+        $name: nth($arg, 1);
+        $list: ();
+        @for $i from 2 through length($arg) {
+            $value: nth($arg, $i);
+            $list: append($list, '[ait-#{ $name }-preference="#{ $value }"]');
+        }
+        $result: $result + if(length($list) == 1, nth($list, 1), ':-moz-any(#{ zip($list) })');
+    }
+    @return $result;
+}
+
+@function main-win($args...)                { @return pref($args...) + $main-win; }
+@function task-dialog($args...)             { @return pref($args...) + $task-dialog; }
+@function event-dialog($args...)            { @return pref($args...) + $event-dialog; }
+@function addr-book-win($args...)           { @return pref($args...) + $addr-book-win; }
+@function main-win-side-panel($args...)     { @return pref($args...) + $main-win-side-panel; }
+@function main-win-mails-panel($args...)    { @return pref($args...) + $main-win-mails-panel; }
+@function main-win-tasks-panel($args...)    { @return pref($args...) + $main-win-tasks-panel; }
+@function main-win-calendar-panel($args...) { @return pref($args...) + $main-win-calendar-panel; }
+
+@mixin toolset-icon-styling {
+
+    // Coloring
+
+    :root {
+
+        @-moz-document regexp(".*#active") {
+            --icon-color: $btn-active-text-color;
+        }
+
+        @-moz-document regexp(".*#dark") {
+            --icon-color: map_get($text-color-variants, dark);
+        }
+
+        @-moz-document regexp(".*#light") {
+            --icon-color: map_get($text-color-variants, light);
+        }
+
+    }
+
+    // Styling
+
+    path,
+    rect {
+        fill: var(--icon-color);
+    }
+
+}

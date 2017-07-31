@@ -49,7 +49,7 @@ run_client_addon_build() {
     rm -f "$build_file"
     wd=`pwd`
     cd "$script_dir/client-addon"
-    zip -r "$build_file" .
+    zip -r "$build_file" `find . -not -path "./readme.md"`;
     cd "$wd"
 
     echo done building

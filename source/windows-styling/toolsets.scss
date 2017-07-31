@@ -1,0 +1,308 @@
+/*
+~  Copyright (c) 2017 Nicola Fiori (JD342)
+~
+~  This file is part of the Arc Integration for Thunderbird, licensed under
+~  the terms of the GNU General Public License 3.0.
+~
+*/
+
+/* -- coloring, icons, dimensions ----------------------------------------------------------------------------------- */
+
+:root {
+    --ait-toolset-items-margin: 5px;
+}
+
+@each $variant in light, dark {
+
+    #{ pref(frame-coloring $variant) }:-moz-any(#{ $event-dialog }, #{ $task-dialog }, #{ $addr-book-win }),
+    #{ main-win(frame-coloring $variant) } .toolbox-top .chromeclass-menubar,
+    #{ main-win(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark)) }
+        :-moz-any(.contentTabToolbox, .mail-toolbox) {
+
+        --ait-toolset-text-color: map_get($text-color-variants, $variant);
+        --ait-toolset-btn-bg-color: map_get($btn-bg-color-variants, $variant);
+        --ait-toolset-border-color: map_get($panel-border-color-variants, $variant);
+        --ait-toolset-btn-border-color: map_get($input-border-color-variants, $variant);
+        --ait-toolset-btn-hover-bg-color: map_get($btn-hover-bg-color-variants, $variant);
+        --ait-toolset-btn-active-border-color: map_get($btn-active-border-color-variants, $variant);
+        --ait-toolset-dropdown-btn-icon: url("chrome://ait/content/icons.svg?toolset-btn-#{ $variant }#down");
+
+    }
+
+}
+
+/* -- common styling ------------------------------------------------------------------------------------------------ */
+
+@mixin toolset-icons-styling {
+
+    .toolbarbutton-1 {
+        &[type="menu-button"] dropmarker,
+        &[type="menu"] {
+            &[open="true"] .dropmarker-icon {
+                background-image: url("chrome://ait/content/icons.svg?toolset-btn-active#down") !important;
+            }
+        }
+    }
+
+}
+
+@mixin toolset-contents-styling {
+
+    toolbarseparator {
+        min-width: 1px;
+        min-height: 100%;
+        -moz-appearance: none !important;
+        background: var(--ait-toolset-border-color);
+        margin: 0 calc(var(--ait-toolset-items-margin) / 2);
+    }
+
+    dropmarker {
+        -moz-appearance: none;
+    }
+
+    .dropmarker-icon {
+        margin: 0 4px;
+        background-size: 16px 16px;
+        background-image: var(--ait-toolset-dropdown-btn-icon) !important;
+    }
+
+    .toolbarbutton-text {
+        font-size: $input-font-size;
+        margin: 0 2px !important;
+        transition: color 200ms ease-out;
+        color: var(--ait-toolset-text-color);
+    }
+
+    .toolbarbutton-icon {
+        margin: 2px;
+        width: 16px;
+        height: 16px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .toolbarbutton-1 {
+
+        background: none;
+        box-shadow: none !important;
+        min-height: $input-height;
+        border-radius: $input-border-radius;
+        margin: 0 calc(var(--ait-toolset-items-margin) / 2);
+        transition: background 200ms ease-out, border-color 200ms ease-out;
+
+        &[type="menu-button"],
+        &:not([disabled="true"]):hover {
+            background: var(--ait-toolset-btn-bg-color);
+        }
+
+        &:not([type="menu-button"]):not(.toolbarbutton-menubutton-button):not([disabled="true"]) {
+
+            &:hover {
+                border-color: var(--ait-toolset-btn-border-color);
+                background: var(--ait-toolset-btn-bg-color);
+            }
+
+            &:-moz-any(:active, [open="true"], [checked="true"]) {
+
+                transition: none !important;
+                background: $blue-color;
+                border-color: var(--ait-toolset-btn-active-border-color);
+
+                .toolbarbutton-text {
+                    transition: none !important;
+                    color: $btn-active-text-color;
+                }
+
+            }
+
+        }
+
+        &[type="menu-button"] {
+
+            border: none;
+
+            &:hover .toolbarbutton-menubutton-dropmarker {
+                box-shadow: -1px 0 var(--ait-toolset-btn-border-color) !important;
+            }
+
+            &:not(:active) .toolbarbutton-menubutton-button:hover,
+            &:not([open="true"]):hover .toolbarbutton-menubutton-button:not(:hover) +
+                .toolbarbutton-menubutton-dropmarker {
+
+                background: var(--ait-toolset-btn-hover-bg-color);
+
+            }
+
+            dropmarker::before {
+                display: none !important;
+            }
+
+            .toolbarbutton-menubutton-button:active .toolbarbutton-text {
+                color: $btn-active-text-color;
+            }
+
+            :-moz-any(.toolbarbutton-menubutton-button:active, .toolbarbutton-menubutton-dropmarker[open="true"]) {
+
+                transition: none !important;
+                background: $blue-color !important;
+                border-color: var(--ait-toolset-btn-active-border-color) !important;
+
+                .toolbarbutton-text {
+                    transition: none !important;
+                }
+
+            }
+
+            :-moz-any(.toolbarbutton-menubutton-button, .toolbarbutton-menubutton-dropmarker) {
+                border: none;
+                background: rgba(0,0,0,0);
+                box-shadow: none !important;
+                border-top: 1px solid var(--ait-toolset-btn-border-color);
+                border-bottom: 1px solid var(--ait-toolset-btn-border-color);
+            }
+
+            .toolbarbutton-menubutton-button {
+                transition: background 300ms ease;
+                border-top-left-radius: $input-border-radius;
+                border-bottom-left-radius: $input-border-radius;
+                border-left: 1px solid var(--ait-toolset-btn-border-color);
+                padding-right: calc($input-horizontal-padding + 1px);
+            }
+
+            .toolbarbutton-menubutton-dropmarker {
+                z-index: 2;
+                padding: 0 2px;
+                position: relative;
+                background: none;
+                box-shadow: -1px 0 rgba(0,0,0,0) !important;
+                border-top-right-radius: $input-border-radius;
+                transition: background 300ms ease, box-shadow 300ms ease;
+                border-bottom-right-radius: $input-border-radius;
+                border-right: 1px solid var(--ait-toolset-btn-border-color);
+            }
+
+        }
+
+    }
+
+}
+
+@each $part in icons, contents {
+    #{ main-win(panel-toolbox-#{ $part }-styling enabled) } :-moz-any(.contentTabToolbox, .mail-toolbox),
+    #{ main-win(main-window-frame-#{ $part }-styling enabled) } .toolbox-top .chromeclass-menubar,
+    :-moz-any(#{ event-dialog(lightning-event-dialog-frame-#{ $part }-styling enabled) },
+              #{ task-dialog(lightning-task-dialog-frame-#{ $part }-styling enabled) },
+              #{ addr-book-win(address-book-window-frame-#{ $part }-styling enabled) }) .toolbox-top {
+        @if $part == icons { @include toolset-icons-styling; }
+        @if $part == contents { @include toolset-contents-styling; }
+    }
+}
+
+/* -- toolset button icons styling ---------------------------------------------------------------------------------- */
+
+@mixin toolset-btn-icon-styling($btn-type, $btn-id, $icon-name, $icon-variant) {
+
+    $btn-selector: map_get((
+        btn:         '##{ $btn-id }',
+        menubtn-btn: '##{ $btn-id } .toolbarbutton-menubutton-button',
+        check-btn:   '##{ $btn-id }',
+        toggle-btn:  '##{ $btn-id }',
+        appmenu-btn: '##{ $btn-id }'
+    ), $btn-type);
+
+    $btn-icon-selector: map_get((
+        btn:         '.toolbarbutton-icon',
+        menubtn-btn: '.toolbarbutton-icon',
+        check-btn:   '.toolbarbutton-icon',
+        toggle-btn:  '.toolbarbutton-icon',
+        appmenu-btn: '.toolbarbutton-icon[label="AppMenu"]'
+    ), $btn-type);
+
+    $active-selector: map_get((
+        btn:         ':active',
+        menubtn-btn: ':active',
+        check-btn:   ':-moz-any(:active, [checked="true"])',
+        toggle-btn:  ':-moz-any(:active, [open="true"])',
+        appmenu-btn: ':-moz-any(:active, [open="true"])'
+    ), $btn-type);
+
+    #{ $btn-selector } {
+
+        --ait-toolset-btn-icon: url("chrome://ait/content/icons.svg?toolset-btn-#{ $icon-variant }##{ $icon-name }");
+
+        &#{ $active-selector } {
+            --ait-toolset-btn-icon: url("chrome://ait/content/icons.svg?toolset-btn-active##{ $icon-name }");
+        }
+
+        #{ $btn-icon-selector } {
+            list-style-image: none;
+            background-image: var(--ait-toolset-btn-icon);
+        }
+
+    }
+
+}
+
+@each $variant in light, dark {
+
+    // Address book window toolset icons
+
+    #{ addr-book-win(frame-coloring $variant, address-book-window-frame-icons-styling enabled) } {
+        @include toolset-btn-icon-styling(btn, button-newim,      message,     $variant);
+        @include toolset-btn-icon-styling(btn, button-abdelete,   delete,      $variant);
+        @include toolset-btn-icon-styling(btn, button-newmessage, write,       $variant);
+        @include toolset-btn-icon-styling(btn, button-editcard,   properties,  $variant);
+        @include toolset-btn-icon-styling(btn, button-newcard,    newcontact,  $variant);
+        @include toolset-btn-icon-styling(btn, button-newlist,    addressbook, $variant);
+    }
+
+    // Event and task dialogs toolset icons
+
+    :-moz-any(#{ event-dialog(frame-coloring $variant, lightning-event-dialog-frame-icons-styling enabled) },
+              #{ task-dialog(frame-coloring $variant, lightning-task-dialog-frame-icons-styling enabled) }) {
+        @include toolset-btn-icon-styling(btn,         button-save,      save,       $variant);
+        @include toolset-btn-icon-styling(btn,         button-delete,    delete,     $variant);
+        @include toolset-btn-icon-styling(btn,         button-attendees, avatar,     $variant);
+        @include toolset-btn-icon-styling(menubtn-btn, button-privacy,   lock,       $variant);
+        @include toolset-btn-icon-styling(menubtn-btn, button-freebusy,  time,       $variant);
+        @include toolset-btn-icon-styling(check-btn,   button-timezones, globe,      $variant);
+        @include toolset-btn-icon-styling(menubtn-btn, button-status,    status,     $variant);
+        @include toolset-btn-icon-styling(menubtn-btn, button-url,       attachment, $variant);
+        @include toolset-btn-icon-styling(menubtn-btn, button-priority,  important,  $variant);
+    }
+
+    // Main window toolset icons
+
+    #{ main-win(frame-coloring $variant, main-window-frame-icons-styling enabled) } .toolbox-top,
+    #{ main-win(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark),
+                panel-toolbox-icons-styling enabled) } .mail-toolbox {
+        @include toolset-btn-icon-styling(appmenu-btn, button-appmenu,              menu,        $variant);
+        @include toolset-btn-icon-styling(appmenu-btn, task-appmenu-button,         menu,        $variant);
+        @include toolset-btn-icon-styling(appmenu-btn, calendar-appmenu-button,     menu,        $variant);
+        @include toolset-btn-icon-styling(menubtn-btn, button-print,                print,       $variant);
+        @include toolset-btn-icon-styling(menubtn-btn, button-getmsg,               inbox,       $variant);
+        @include toolset-btn-icon-styling(menubtn-btn, button-newmsg,               write,       $variant);
+        @include toolset-btn-icon-styling(menubtn-btn, extractTaskButton,           new,         $variant);
+        @include toolset-btn-icon-styling(menubtn-btn, extractEventButton,          schedule,    $variant);
+        @include toolset-btn-icon-styling(toggle-btn,  button-tag,                  tag,         $variant);
+        @include toolset-btn-icon-styling(check-btn,   qfb-show-filter-bar,         search,      $variant);
+        @include toolset-btn-icon-styling(btn,         button-chat,                 message,     $variant);
+        @include toolset-btn-icon-styling(btn,         task-print-button,           print,       $variant);
+        @include toolset-btn-icon-styling(btn,         task-newtask-button,         new,         $variant);
+        @include toolset-btn-icon-styling(btn,         task-delete-button,          delete,      $variant);
+        @include toolset-btn-icon-styling(btn,         button-address,              addressbook, $variant);
+        @include toolset-btn-icon-styling(btn,         lightning-button-tasks,      task,        $variant);
+        @include toolset-btn-icon-styling(btn,         calendar-newtask-button,     new,         $variant);
+        @include toolset-btn-icon-styling(btn,         calendar-print-button,       print,       $variant);
+        @include toolset-btn-icon-styling(btn,         task-edit-button,            properties,  $variant);
+        @include toolset-btn-icon-styling(btn,         task-synchronize-button,     sync,        $variant);
+        @include toolset-btn-icon-styling(btn,         calendar-delete-button,      delete,      $variant);
+        @include toolset-btn-icon-styling(btn,         task-newevent-button,        schedule,    $variant);
+        @include toolset-btn-icon-styling(btn,         calendar-edit-button,        properties,  $variant);
+        @include toolset-btn-icon-styling(btn,         calendar-newevent-button,    schedule,    $variant);
+        @include toolset-btn-icon-styling(btn,         calendar-synchronize-button, sync,        $variant);
+        @include toolset-btn-icon-styling(btn,         lightning-button-calendar,   calendar,    $variant);
+        @include toolset-btn-icon-styling(btn,         calendar-goto-today-button,  calendar,    $variant);
+    }
+
+}

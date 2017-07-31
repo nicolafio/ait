@@ -1,0 +1,38 @@
+ /*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@import '../shared-styling/globals';
+
+$actions-box-height: 34px;
+$input-border-radius: 3px;
+$input-height: 28px;
+$input-font-size: 14.37px;
+$input-horizontal-padding: 6px;
+$actions-box-input-margin: ($actions-box-height - $input-height) / 2;
+
+:root {
+
+    --ait-pixel-ratio: 1;
+    @media (min-resolution: 2dppx) { --ait-pixel-ratio: 2; }
+    @media (min-resolution: 3dppx) { --ait-pixel-ratio: 3; }
+    @media (min-resolution: 4dppx) { --ait-pixel-ratio: 4; }
+
+}
+
+@import 'borders';
+@import 'frame';
+@import 'tabs-and-toolbox-common';
+@import 'tabs';
+@import 'toolbox-box';
+@import 'toolsets';
+@import 'textboxes';
+@import 'panels-common';
+@import 'panel-mails';
+@import 'panel-calendar';
+@import 'panel-tasks';
+@import 'panel-side';

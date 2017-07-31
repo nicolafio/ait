@@ -64,28 +64,63 @@ run_build() {
 
     echo building at $1
 
-    source_dir=`realpath "$(dirname "$0")/../../source"`
-    temp_dir=`mktemp -d`
+    src_dir=`realpath "$(dirname "$0")/../../source"`
     build_file=`realpath "$1"`
 
-    sassc -t compressed "$source_dir/styling.scss" "$temp_dir/styling.css" || {
-        echo scss compilation failed, aborting
-        rm -rf "$temp_dir"
-        exit $?
-    }
+    # Creates a temporary folder
+    tmp_dir=`mktemp -d`
 
+    # Generates styling.css
+    echo compiling windows\' styling and generating styling.css
+    sassc --style compressed \
+          "$src_dir/windows-styling/main.scss" "$tmp_dir/styling.css" \
+    || abort_build "$tmp_dir" "windows' styling compilation failed"
+
+    # Generates icons.svg
+    icons_css=`sassc --style compressed "$src_dir/icons/styling.scss"`
+    (( $? )) && abort_build "$tmp_dir" "icons' styling compilation failed"
+    icons_css_base64=`echo "$icons_css" | base64 -w 0`
+    icons_css_import_rule="@import url(data:text/css;base64,$icons_css_base64)"
+    cat "$src_dir/icons/set.svg" \
+    | xmlstarlet edit -N ns=http://www.w3.org/2000/svg \
+                      --subnode /ns:svg \
+                                --type elem \
+                                --name style \
+                                --value "$icons_css_import_rule" \
+    >> "$tmp_dir/icons.svg" \
+    || abort_build "$tmp_dir" "svg file generation failed"
+
+    # Removes previous .xpi file.
     rm -f "$build_file"
 
-    cd "$temp_dir"
-    zip "$build_file" *
-    cd "$source_dir"
-    zip "$build_file" `find . -not -path ./styling.scss -not -path "./styles*"`
-    cd ..
+    # Includes all contents from the temporary folder into the new .xpi file.
+    cd "$tmp_dir"
+    zip -r "$build_file" .
+
+    # Includes all sources that do not need to be processed into the new .xpi
+    # file.
+    cd "$src_dir/xpi-content"
+    zip "$build_file" `find . -not -path "./readme.md"`
+
+    # Includes the license file into the new .xpi file.
+    cd ../..
     zip "$build_file" license
 
-    rm -rf "$temp_dir"
+    # Removes the temporary directory
+    rm -rf "$tmp_dir"
 
     echo done building
+
+}
+
+abort_build() {
+
+    tmp_dir=$1
+    msg=$2
+    >&2 echo $msg
+    >&2 echo aborting
+    rm -rf "$tmp_dir"
+    exit -1
 
 }
 

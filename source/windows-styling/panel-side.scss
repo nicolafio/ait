@@ -1,0 +1,72 @@
+/*
+~  Copyright (c) 2017 Nicola Fiori (JD342)
+~
+~  This file is part of the Arc Integration for Thunderbird, licensed under
+~  the terms of the GNU General Public License 3.0.
+~
+*/
+
+#{ main-win(lightning-side-panel-content-styling enabled) } {
+
+    #today-pane-panel sidebarheader,
+    #today-pane-panel {
+        background: var(--ait-panel-bg-color);
+    }
+
+    #today-pane-panel {
+
+        position: relative;
+
+        sidebarheader {
+            font-weight: bold;
+            margin: 0.5em 0.5em 0.5em 0;
+        }
+
+    }
+
+    #calendar-task-tree-detail {
+        margin: 3px;
+        display: flex;
+        overflow: hidden;
+        flex-flow: column;
+        border: 1px solid var(--ait-border-color);
+        background: var(--ait-actions-box-bg-color);
+        border-radius: $input-border-radius;
+    }
+
+    #unifinder-todo-tree {
+
+        flex: 1;
+
+        tree {
+            width: 100%;
+            height: 100%;
+        }
+
+        .calendar-task-tree {
+            border-bottom: 1px solid var(--ait-border-color);
+        }
+
+    }
+
+    #unifinder-task-edit-field {
+        margin: $actions-box-input-margin;
+    }
+
+    #folderview-cycler-prev .toolbarbutton-icon {
+        width: 16px;
+        height: 16px;
+        list-style-image: none;
+        transform: rotate(90deg);
+        background-image: -moz-element(#ait-panel-content-down-arrow-icon);
+    }
+
+    #folderview-cycler-next .toolbarbutton-icon {
+        width: 16px;
+        height: 16px;
+        list-style-image: none;
+        transform: rotate(-90deg);
+        background-image: -moz-element(#ait-panel-content-down-arrow-icon);
+    }
+
+}

@@ -29,6 +29,13 @@ The following table summarizes what external tools are used.
             <td><code># apt install sassc</code></td>
         </tr>
         <tr>
+            <td>
+                <a href="http://xmlstar.sourceforge.net/"><code>xmlstarlet</code></a>
+            </td>
+            <td>XML manipulator</td>
+            <td><code># apt install xmlstarlet</code></td>
+        </tr>
+        <tr>
             <td><a href="http://websocketd.com"><code>websocketd</code></a></td>
             <td>
                 Used by the live-reloader as a means of communication between

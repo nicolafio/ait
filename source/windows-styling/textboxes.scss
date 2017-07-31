@@ -1,0 +1,134 @@
+/*
+~  Copyright (c) 2017 Nicola Fiori (JD342)
+~
+~  This file is part of the Arc Integration for Thunderbird, licensed under
+~  the terms of the GNU General Public License 3.0.
+~
+*/
+
+/* -- coloring & variant based styling ------------------------------------------------------------------------------ */
+
+@each $variant in light, dark {
+
+    #{ main-win-tasks-panel(panel-content-coloring $variant, lightning-tasks-panel-content-styling enabled) },
+    #{ main-win-side-panel(panel-content-coloring $variant, lightning-side-panel-content-styling enabled) },
+    #{ main-win-mails-panel(panel-content-coloring $variant, mails-main-view-content-styling enabled) },
+    #{ addr-book-win(frame-coloring $variant, address-book-window-frame-contents-styling enabled) },
+    #{ main-win(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark),
+                panel-toolbox-contents-styling enabled) } :-moz-any(.mail-toolbox, .contentTabToolbox) {
+
+        --ait-input-bg-color: map_get($content-bg-color-variants, $variant);
+        --ait-input-border-color: map_get($input-border-color-variants, $variant);
+
+        textbox {
+
+            @if $variant == light {
+                transition: border-color 100ms linear;
+            }
+            @else {
+                transition: box-shadow 100ms linear;
+                box-shadow: inset 0 0 0 1px transparent;
+            }
+
+            &[focused="true"] {
+                @if $variant == light {
+                    border-color: $blue-color !important;
+                }
+                @else {
+                    box-shadow: inset 0 0 0 1px $blue-color;
+                }
+            }
+
+        }
+
+    }
+
+}
+
+/* -- textbox & searchbox styling ----------------------------------------------------------------------------------- */
+
+#{ main-win(panel-toolbox-contents-styling enabled) } :-moz-any(.mail-toolbox, .contentTabToolbox),
+#{ main-win-tasks-panel(lightning-tasks-panel-content-styling enabled) },
+#{ main-win-side-panel(lightning-side-panel-content-styling enabled) },
+#{ addr-book-win(address-book-window-frame-contents-styling enabled) },
+#{ main-win-mails-panel(mails-main-view-content-styling enabled) } {
+
+    textbox {
+
+        -moz-appearance: none;
+        height: $input-height;
+        background: var(--ait-input-bg-color);
+        border: 1px solid var(--ait-input-border-color);
+        border-radius: $input-border-radius !important;
+
+        &:not(.searchBox):not([focused="true"]) input {
+            opacity: 0.5
+        }
+
+    }
+
+    .searchBox {
+        position: relative;
+        border-radius: 1em !important;
+        padding: 0 $input-horizontal-padding;
+    }
+
+}
+
+/* -- textbox icons styling ----------------------------------------------------------------------------------------- */
+
+#{ main-win(panel-toolbox-icons-styling enabled) } :-moz-any(.mail-toolbox, .contentTabToolbox) {
+
+    --ait-searchbox-search-icon: -moz-element(#ait-panel-toolset-searchbox-search-icon);
+
+    .gloda-search-icon {
+        margin: 3px;
+        width: 16px;
+        height: 16px;
+        list-style-image: none;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-image: var(--ait-searchbox-search-icon);
+    }
+
+}
+
+#{ $main-win } :-moz-any(#messengerBox, #calendarContent, #today-pane-panel) {
+    --ait-searchbox-search-icon: -moz-element(#ait-panel-content-searchbox-search-icon);
+}
+
+#{ $addr-book-win } {
+    --ait-searchbox-search-icon: -moz-element(#ait-toolset-searchbox-search-icon);
+}
+
+#{ main-win(panel-toolbox-icons-styling enabled) } :-moz-any(.mail-toolbox, .contentTabToolbox),
+#{ main-win-tasks-panel(lightning-tasks-panel-content-styling enabled) },
+#{ main-win-side-panel(lightning-side-panel-content-styling enabled) },
+#{ addr-book-win(address-book-window-frame-icons-styling enabled) },
+#{ main-win-mails-panel(mails-main-view-content-styling enabled) } {
+
+    .searchBox {
+
+        padding-left: calc($input-horizontal-padding * 2 + 16px);
+
+        &::before {
+            top: 50%;
+            content: "";
+            width: 16px;
+            height: 16px;
+            display: block;
+            position: absolute;
+            transform: translateY(-50%);
+            left: $input-horizontal-padding;
+            margin-right: $input-horizontal-padding;
+            background-image: var(--ait-searchbox-search-icon);
+        }
+
+        .textbox-search-icons,
+        > hbox:last-child {
+            display: none;
+        }
+
+    }
+
+}
