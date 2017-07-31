@@ -19,6 +19,7 @@
 
         --ait-input-bg-color: map_get($content-bg-color-variants, $variant);
         --ait-input-border-color: map_get($input-border-color-variants, $variant);
+        --ait-searchbox-search-icon: url("chrome://ait/content/icons.svg?toolset-btn-#{ $variant }#search");
 
         textbox {
 
@@ -77,28 +78,14 @@
 
 /* -- textbox icons styling ----------------------------------------------------------------------------------------- */
 
-#{ main-win(panel-toolbox-icons-styling enabled) } :-moz-any(.mail-toolbox, .contentTabToolbox) {
-
-    --ait-searchbox-search-icon: -moz-element(#ait-panel-toolset-searchbox-search-icon);
-
-    .gloda-search-icon {
-        margin: 3px;
-        width: 16px;
-        height: 16px;
-        list-style-image: none;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-image: var(--ait-searchbox-search-icon);
-    }
-
-}
-
-#{ $main-win } :-moz-any(#messengerBox, #calendarContent, #today-pane-panel) {
-    --ait-searchbox-search-icon: -moz-element(#ait-panel-content-searchbox-search-icon);
-}
-
-#{ $addr-book-win } {
-    --ait-searchbox-search-icon: -moz-element(#ait-toolset-searchbox-search-icon);
+#{ main-win(panel-toolbox-icons-styling enabled) } :-moz-any(.mail-toolbox, .contentTabToolbox) .gloda-search-icon {
+    margin: 3px;
+    width: 16px;
+    height: 16px;
+    list-style-image: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: var(--ait-searchbox-search-icon);
 }
 
 #{ main-win(panel-toolbox-icons-styling enabled) } :-moz-any(.mail-toolbox, .contentTabToolbox),
@@ -109,7 +96,7 @@
 
     .searchBox {
 
-        padding-left: calc($input-horizontal-padding * 2 + 16px);
+        padding-left: calc(#{ $input-horizontal-padding * 2 } + 16px);
 
         &::before {
             top: 50%;

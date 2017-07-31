@@ -252,7 +252,7 @@
         @include toolset-btn-icon-styling(btn, button-abdelete,   delete,      $variant);
         @include toolset-btn-icon-styling(btn, button-newmessage, write,       $variant);
         @include toolset-btn-icon-styling(btn, button-editcard,   properties,  $variant);
-        @include toolset-btn-icon-styling(btn, button-newcard,    newcontact,  $variant);
+        @include toolset-btn-icon-styling(btn, button-newcard,    register,    $variant);
         @include toolset-btn-icon-styling(btn, button-newlist,    addressbook, $variant);
     }
 
