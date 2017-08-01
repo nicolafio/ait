@@ -12,6 +12,8 @@
     --ait-task-tab-icon: url("chrome://ait/content/icons.svg?toolset-btn-light#task");
     --ait-inactive-tab-close-icon: url("chrome://ait/content/icons.svg?tab-btn-light#close");
     --ait-calendar-tab-icon: url("chrome://ait/content/icons.svg?toolset-btn-light#calendar");
+    --ait-frame-toolbox-down-arrow-icon: url("chrome://ait/content/icons.svg?toolset-btn-light#down");
+    --ait-frame-toolbox-left-arrow-icon: url("chrome://ait/content/icons.svg?toolset-btn-light#left");
 }
 
 #{ main-win(panel-toolbox-coloring light darker) } {
@@ -29,6 +31,8 @@
     --ait-task-tab-icon: url("chrome://ait/content/icons.svg?toolset-btn-dark#task");
     --ait-inactive-tab-close-icon: url("chrome://ait/content/icons.svg?tab-btn-dark#close");
     --ait-calendar-tab-icon: url("chrome://ait/content/icons.svg?toolset-btn-dark#calendar");
+    --ait-frame-toolbox-down-arrow-icon: url("chrome://ait/content/icons.svg?toolset-btn-dark#down");
+    --ait-frame-toolbox-left-arrow-icon: url("chrome://ait/content/icons.svg?toolset-btn-dark#left");
 }
 
 #{ main-win(panel-toolbox-coloring dark) } {
