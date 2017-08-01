@@ -68,32 +68,3 @@ $main-win-mails-panel: '#{ $main-win } #messengerBox';
 @function main-win-mails-panel($args...)    { @return pref($args...) + $main-win-mails-panel; }
 @function main-win-tasks-panel($args...)    { @return pref($args...) + $main-win-tasks-panel; }
 @function main-win-calendar-panel($args...) { @return pref($args...) + $main-win-calendar-panel; }
-
-@mixin toolset-icon-styling {
-
-    // Coloring
-
-    :root {
-
-        @-moz-document regexp(".*#active") {
-            --icon-color: $btn-active-text-color;
-        }
-
-        @-moz-document regexp(".*#dark") {
-            --icon-color: map_get($text-color-variants, dark);
-        }
-
-        @-moz-document regexp(".*#light") {
-            --icon-color: map_get($text-color-variants, light);
-        }
-
-    }
-
-    // Styling
-
-    path,
-    rect {
-        fill: var(--icon-color);
-    }
-
-}
