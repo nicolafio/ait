@@ -19,7 +19,7 @@
 
         --ait-input-bg-color: map_get($content-bg-color-variants, $variant);
         --ait-input-border-color: map_get($input-border-color-variants, $variant);
-        --ait-searchbox-search-icon: url("chrome://ait/content/icons.svg?toolset-btn-#{ $variant }#search");
+        --ait-searchbox-search-icon: url("chrome://ait/content/icons.svg?textbox-btn-#{ $variant }#search");
 
         textbox {
 

@@ -14,6 +14,9 @@
                        regexp(".*\?tab-btn-#{ $variant }.*") {
             --icon-color: map_get($text-color-variants, $variant);
         }
+        @-moz-document regexp(".*\?textbox-btn-#{ $variant }.*") {
+            --icon-color: map_get($text-input-icon-color-variants, $variant);
+        }
     }
     @-moz-document regexp(".*\?toolset-btn-active.*") {
         --icon-color: $btn-active-text-color;
@@ -27,6 +30,7 @@
 }
 
 @-moz-document regexp(".*\?toolset-btn.*"),
+               regexp(".*\?textbox-btn.*"),
                regexp(".*\?tab-btn.*") {
 
     :root > :not(:target) {
