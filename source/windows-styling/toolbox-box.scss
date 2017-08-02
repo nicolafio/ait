@@ -39,7 +39,7 @@
         display: flex;
         flex-flow: column;
         box-shadow: none !important;
-        background: var(--ait-tab-and-toolbox-background-color) !important;
+        background: var(--ait-tab-and-toolbox-bg-color) !important;
 
         &::after {
             background-color: var(--ait-tab-and-toolbox-border-color) !important;
