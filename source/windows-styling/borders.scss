@@ -27,11 +27,11 @@
 
 /* -- styling ------------------------------------------------------------------------------------------------------- */
 
-#{ addr-book-win(address-book-panel-content-styling enabled) } #abContent splitter,
-#{ main-win-calendar-panel(lightning-calendar-panel-content-styling enabled) } splitter,
-#{ main-win-tasks-panel(lightning-tasks-panel-content-styling enabled) } splitter,
-#{ main-win-mails-panel(mails-main-view-content-styling enabled) }  splitter,
-#{ main-win(lightning-side-panel-content-styling enabled) } #today-splitter {
+#{ pref(address-book-panel-content-styling enabled) + $addr-book-win } #abContent splitter,
+#{ pref(lightning-calendar-panel-content-styling enabled) + $main-win-calendar-panel } splitter,
+#{ pref(lightning-tasks-panel-content-styling enabled) + $main-win-tasks-panel } splitter,
+#{ pref(mails-main-view-content-styling enabled) + $main-win-mails-panel }  splitter,
+#{ pref(lightning-side-panel-content-styling enabled) + $main-win } #today-splitter {
 
     transition: border-color 300ms ease !important;
     border-color: var(--ait-border-color) !important;
@@ -44,13 +44,13 @@
 
 }
 
-#{ addr-book-win(address-book-panel-content-styling enabled) } :-moz-any(#CardViewOuterBox, #dirTree),
-#{ main-win-calendar-panel(lightning-calendar-panel-content-styling enabled) } #ltnSidebar,
-#{ main-win-tasks-panel(lightning-tasks-panel-content-styling enabled) } #ltnSidebar,
-#{ main-win-side-panel(lightning-side-panel-content-styling enabled) },
-#{ main-win(mails-main-view-content-styling enabled) } :-moz-any(#quick-filter-bar,
-                                                                  #messagepanebox,
-                                                                  #folderTree,
-                                                                  #threadTree) {
+#{ pref(address-book-panel-content-styling enabled) + $addr-book-win } :-moz-any(#CardViewOuterBox, #dirTree),
+#{ pref(lightning-calendar-panel-content-styling enabled) + $main-win-calendar-panel } #ltnSidebar,
+#{ pref(lightning-tasks-panel-content-styling enabled) + $main-win-tasks-panel } #ltnSidebar,
+#{ pref(lightning-side-panel-content-styling enabled) + $main-win-side-panel },
+#{ pref(mails-main-view-content-styling enabled) + $main-win } :-moz-any(#quick-filter-bar,
+                                                                         #messagepanebox,
+                                                                         #folderTree,
+                                                                         #threadTree) {
     border-bottom-color: var(--ait-border-color);
 }

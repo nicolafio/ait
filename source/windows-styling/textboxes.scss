@@ -10,12 +10,12 @@
 
 @each $variant in light, dark {
 
-    #{ main-win-tasks-panel(panel-content-coloring $variant, lightning-tasks-panel-content-styling enabled) },
-    #{ main-win-side-panel(panel-content-coloring $variant, lightning-side-panel-content-styling enabled) },
-    #{ main-win-mails-panel(panel-content-coloring $variant, mails-main-view-content-styling enabled) },
-    #{ addr-book-win(frame-coloring $variant, address-book-window-frame-contents-styling enabled) },
-    #{ main-win(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark),
-                panel-toolbox-contents-styling enabled) } :-moz-any(.mail-toolbox, .contentTabToolbox) {
+    #{ pref(panel-content-coloring $variant, lightning-tasks-panel-content-styling enabled) + $main-win-tasks-panel },
+    #{ pref(panel-content-coloring $variant, lightning-side-panel-content-styling enabled) + $main-win-side-panel },
+    #{ pref(panel-content-coloring $variant, mails-main-view-content-styling enabled) + $main-win-mails-panel },
+    #{ pref(frame-coloring $variant, address-book-window-frame-contents-styling enabled) + $addr-book-win },
+    #{ pref(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark),
+            panel-toolbox-contents-styling enabled) + $main-win-panel-toolbox } {
 
         --ait-input-bg-color: map_get($content-bg-color-variants, $variant);
         --ait-input-border-color: map_get($input-border-color-variants, $variant);
@@ -48,11 +48,11 @@
 
 /* -- textbox & searchbox styling ----------------------------------------------------------------------------------- */
 
-#{ main-win(panel-toolbox-contents-styling enabled) } :-moz-any(.mail-toolbox, .contentTabToolbox),
-#{ main-win-tasks-panel(lightning-tasks-panel-content-styling enabled) },
-#{ main-win-side-panel(lightning-side-panel-content-styling enabled) },
-#{ addr-book-win(address-book-window-frame-contents-styling enabled) },
-#{ main-win-mails-panel(mails-main-view-content-styling enabled) } {
+#{ pref(lightning-tasks-panel-content-styling enabled) + $main-win-tasks-panel },
+#{ pref(lightning-side-panel-content-styling enabled) + $main-win-side-panel },
+#{ pref(address-book-window-frame-contents-styling enabled) + $addr-book-win },
+#{ pref(panel-toolbox-contents-styling enabled) + $main-win-panel-toolbox },
+#{ pref(mails-main-view-content-styling enabled) + $main-win-mails-panel } {
 
     textbox {
 
@@ -78,7 +78,7 @@
 
 /* -- textbox icons styling ----------------------------------------------------------------------------------------- */
 
-#{ main-win(panel-toolbox-icons-styling enabled) } :-moz-any(.mail-toolbox, .contentTabToolbox) .gloda-search-icon {
+#{ pref(panel-toolbox-icons-styling enabled) + $main-win-panel-toolbox } .gloda-search-icon {
     margin: 3px;
     width: 16px;
     height: 16px;
@@ -88,11 +88,11 @@
     background-image: var(--ait-searchbox-search-icon);
 }
 
-#{ main-win(panel-toolbox-icons-styling enabled) } :-moz-any(.mail-toolbox, .contentTabToolbox),
-#{ main-win-tasks-panel(lightning-tasks-panel-content-styling enabled) },
-#{ main-win-side-panel(lightning-side-panel-content-styling enabled) },
-#{ addr-book-win(address-book-window-frame-icons-styling enabled) },
-#{ main-win-mails-panel(mails-main-view-content-styling enabled) } {
+#{ pref(lightning-tasks-panel-content-styling enabled) + $main-win-tasks-panel },
+#{ pref(lightning-side-panel-content-styling enabled) + $main-win-side-panel },
+#{ pref(address-book-window-frame-icons-styling enabled) + $addr-book-win },
+#{ pref(mails-main-view-content-styling enabled) + $main-win-mails-panel },
+#{ pref(panel-toolbox-icons-styling enabled) + $main-win-panel-toolbox } {
 
     .searchBox {
 

@@ -6,7 +6,7 @@
 ~
 */
 
-#{ main-win(panel-toolbox-coloring light) } {
+#{ pref(panel-toolbox-coloring light) + $main-win } {
     --ait-tab-hover-bg-opacity: 0.6;
     --ait-tab-and-toolbox-upper-border-color: map_get($panel-border-color-variants, light);
     --ait-task-tab-icon: url("chrome://ait/content/icons.svg?toolset-btn-light#task");
@@ -16,17 +16,17 @@
     --ait-frame-toolbox-left-arrow-icon: url("chrome://ait/content/icons.svg?toolset-btn-light#left");
 }
 
-#{ main-win(panel-toolbox-coloring light darker) } {
+#{ pref(panel-toolbox-coloring light darker) + $main-win } {
     --ait-tab-and-toolbox-bg-color: map_get($panel-bg-color-variants, light);
     --ait-tab-and-toolbox-border-color: map_get($panel-border-color-variants, light);
     --ait-active-tab-close-icon: url("chrome://ait/content/icons.svg?tab-btn-light#close");
 }
 
-#{ main-win(panel-toolbox-coloring darker) } {
+#{ pref(panel-toolbox-coloring darker) + $main-win } {
     --ait-tab-hover-bg-opacity: 0.25;
 }
 
-#{ main-win(panel-toolbox-coloring darker dark) } {
+#{ pref(panel-toolbox-coloring darker dark) + $main-win } {
     --ait-tab-and-toolbox-upper-border-color: map_get($panel-border-color-variants, dark);
     --ait-task-tab-icon: url("chrome://ait/content/icons.svg?toolset-btn-dark#task");
     --ait-inactive-tab-close-icon: url("chrome://ait/content/icons.svg?tab-btn-dark#close");
@@ -35,7 +35,7 @@
     --ait-frame-toolbox-left-arrow-icon: url("chrome://ait/content/icons.svg?toolset-btn-dark#left");
 }
 
-#{ main-win(panel-toolbox-coloring dark) } {
+#{ pref(panel-toolbox-coloring dark) + $main-win } {
     --ait-tab-hover-bg-opacity: 0.6;
     --ait-tab-and-toolbox-bg-color: map_get($panel-bg-color-variants, dark);
     --ait-tab-and-toolbox-border-color: map_get($panel-border-color-variants, dark);

@@ -14,10 +14,12 @@
 
 @each $variant in light, dark {
 
-    #{ pref(frame-coloring $variant) }:-moz-any(#{ $event-dialog }, #{ $task-dialog }, #{ $addr-book-win }),
-    #{ main-win(frame-coloring $variant) } .toolbox-top .chromeclass-menubar,
-    #{ main-win(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark)) }
-        :-moz-any(.contentTabToolbox, .mail-toolbox) {
+    #{ pref(frame-coloring $variant) + $addr-book-win-frame-toolbox },
+    #{ pref(frame-coloring $variant) + $event-dialog-frame-toolbox },
+    #{ pref(frame-coloring $variant) + $task-dialog-frame-toolbox },
+    #{ pref(frame-coloring $variant) + $main-win-frame-toolbox },
+    #{ pref(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark))
+        + $main-win-panel-toolbox } {
 
         --ait-toolset-text-color: map_get($text-color-variants, $variant);
         --ait-toolset-btn-bg-color: map_get($btn-bg-color-variants, $variant);
@@ -188,11 +190,11 @@
 }
 
 @each $part in icons, contents {
-    #{ main-win(panel-toolbox-#{ $part }-styling enabled) } :-moz-any(.contentTabToolbox, .mail-toolbox),
-    #{ main-win(main-window-frame-#{ $part }-styling enabled) } .toolbox-top .chromeclass-menubar,
-    :-moz-any(#{ event-dialog(lightning-event-dialog-frame-#{ $part }-styling enabled) },
-              #{ task-dialog(lightning-task-dialog-frame-#{ $part }-styling enabled) },
-              #{ addr-book-win(address-book-window-frame-#{ $part }-styling enabled) }) .toolbox-top {
+    #{ pref(lightning-event-dialog-frame-#{ $part }-styling enabled) + $event-dialog-frame-toolbox },
+    #{ pref(lightning-task-dialog-frame-#{ $part }-styling enabled) + $task-dialog-frame-toolbox },
+    #{ pref(address-book-window-frame-#{ $part }-styling enabled) + $addr-book-win-frame-toolbox },
+    #{ pref(main-window-frame-#{ $part }-styling enabled) + $main-win-frame-toolbox },
+    #{ pref(panel-toolbox-#{ $part }-styling enabled) + $main-win-panel-toolbox } {
         @if $part == icons { @include toolset-icons-styling; }
         @if $part == contents { @include toolset-contents-styling; }
     }
@@ -247,7 +249,7 @@
 
     // Address book window toolset icons
 
-    #{ addr-book-win(frame-coloring $variant, address-book-window-frame-icons-styling enabled) } {
+    #{ pref(frame-coloring $variant, address-book-window-frame-icons-styling enabled) + $addr-book-win } {
         @include toolset-btn-icon-styling(btn, button-newim,      message,     $variant);
         @include toolset-btn-icon-styling(btn, button-abdelete,   delete,      $variant);
         @include toolset-btn-icon-styling(btn, button-newmessage, write,       $variant);
@@ -258,8 +260,8 @@
 
     // Event and task dialogs toolset icons
 
-    :-moz-any(#{ event-dialog(frame-coloring $variant, lightning-event-dialog-frame-icons-styling enabled) },
-              #{ task-dialog(frame-coloring $variant, lightning-task-dialog-frame-icons-styling enabled) }) {
+    #{ pref(frame-coloring $variant, lightning-event-dialog-frame-icons-styling enabled) + $event-dialog },
+    #{ pref(frame-coloring $variant, lightning-task-dialog-frame-icons-styling enabled) + $task-dialog }) {
         @include toolset-btn-icon-styling(btn,         button-save,      save,       $variant);
         @include toolset-btn-icon-styling(btn,         button-delete,    delete,     $variant);
         @include toolset-btn-icon-styling(btn,         button-attendees, avatar,     $variant);
@@ -273,9 +275,9 @@
 
     // Main window toolset icons
 
-    #{ main-win(frame-coloring $variant, main-window-frame-icons-styling enabled) } .toolbox-top,
-    #{ main-win(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark),
-                panel-toolbox-icons-styling enabled) } .mail-toolbox {
+    #{ pref(frame-coloring $variant, main-window-frame-icons-styling enabled) + $main-win-frame-toolbox },
+    #{ pref(if($variant == light, panel-toolbox-coloring light darker, panel-toolbox-coloring dark),
+            panel-toolbox-icons-styling enabled) + $main-win-panel-toolbox } {
         @include toolset-btn-icon-styling(appmenu-btn, button-appmenu,              menu,        $variant);
         @include toolset-btn-icon-styling(appmenu-btn, task-appmenu-button,         menu,        $variant);
         @include toolset-btn-icon-styling(appmenu-btn, calendar-appmenu-button,     menu,        $variant);

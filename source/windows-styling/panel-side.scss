@@ -6,7 +6,7 @@
 ~
 */
 
-#{ main-win(lightning-side-panel-content-styling enabled) } {
+#{ pref(lightning-side-panel-content-styling enabled) + $main-win } {
 
     #today-pane-panel sidebarheader,
     #today-pane-panel {

@@ -6,7 +6,7 @@
 ~
 */
 
-#{ main-win(lightning-calendar-panel-content-styling enabled) } {
+#{ pref(lightning-calendar-panel-content-styling enabled) + $main-win } {
 
     #calendar-view-box {
         position: relative;

@@ -8,7 +8,7 @@
 
 /* -- tab icons styling --------------------------------------------------------------------------------------------- */
 
-#{ main-win(main-window-frame-icons-styling enabled) } {
+#{ pref(main-window-frame-icons-styling enabled) + $main-win } {
 
     #tabcontainer .tabmail-arrowscrollbox :-moz-any(.scrollbutton-up, .scrollbutton-down) .toolbarbutton-icon,
     :-moz-any(#calendar-tab-button, #task-tab-button) .toolbarbutton-icon,
@@ -43,7 +43,7 @@
 
 }
 
-#{ main-win(panel-toolbox-icons-styling enabled) } #tabs-toolbar .tabmail-tab {
+#{ pref(panel-toolbox-icons-styling enabled) + $main-win } #tabs-toolbar .tabmail-tab {
 
     &[selected="true"] .tab-close-button {
         background-image: var(--ait-active-tab-close-icon) !important;
@@ -84,7 +84,7 @@
 
 /* -- tabs styling -------------------------------------------------------------------------------------------------- */
 
-#{ main-win(panel-toolbox-box-styling enabled) } {
+#{ pref(panel-toolbox-box-styling enabled) + $main-win } {
 
     --ait-tab-border-radius: 1.1px;
 

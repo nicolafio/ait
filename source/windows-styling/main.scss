@@ -34,6 +34,12 @@ $main-win-tasks-panel: '#{ $main-win }  #task-toolbox-container:not([collapsed="
 $main-win-side-panel: '#{ $main-win } #today-pane-panel';
 $main-win-mails-panel: '#{ $main-win } #messengerBox';
 
+$main-win-frame-toolbox: '#{ $main-win } .toolbox-top .chromeclass-menubar';
+$main-win-panel-toolbox: '#{ $main-win } :-moz-any(.contentTabToolbox, .mail-toolbox)';
+$task-dialog-frame-toolbox: '#{ $task-dialog } .mail-toolbox';
+$event-dialog-frame-toolbox: '#{ $event-dialog } .mail-toolbox';
+$addr-book-win-frame-toolbox: '#{ $addr-book-win } .toolbox-top';
+
 @function pref($args...) {
     // pref(foo light)      -> [ait-foo-preference="light"]
     // pref(foo a, baz b)   -> [ait-foo-preference="a"][ait-baz-preference="b"]
@@ -54,15 +60,6 @@ $main-win-mails-panel: '#{ $main-win } #messengerBox';
     }
     @return $result;
 }
-
-@function main-win($args...)                { @return pref($args...) + $main-win; }
-@function task-dialog($args...)             { @return pref($args...) + $task-dialog; }
-@function event-dialog($args...)            { @return pref($args...) + $event-dialog; }
-@function addr-book-win($args...)           { @return pref($args...) + $addr-book-win; }
-@function main-win-side-panel($args...)     { @return pref($args...) + $main-win-side-panel; }
-@function main-win-mails-panel($args...)    { @return pref($args...) + $main-win-mails-panel; }
-@function main-win-tasks-panel($args...)    { @return pref($args...) + $main-win-tasks-panel; }
-@function main-win-calendar-panel($args...) { @return pref($args...) + $main-win-calendar-panel; }
 
 @import 'borders';
 @import 'frame';

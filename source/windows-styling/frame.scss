@@ -19,20 +19,24 @@
 
 /* -- styling ------------------------------------------------------------------------------------------------------- */
 
-:-moz-any(#{ event-dialog(lightning-event-dialog-frame-background-styling enabled) },
-          #{ addr-book-win(address-book-window-frame-background-styling enabled) },
-          #{ task-dialog(lightning-task-dialog-frame-background-styling enabled) },
-          #{ main-win(main-window-frame-background-styling enabled) }) .toolbox-top > * {
-    -moz-appearance: none !important;
-    background: var(--ait-frame-bg-color) !important;
+#{ pref(lightning-event-dialog-frame-background-styling enabled) + $event-dialog },
+#{ pref(address-book-window-frame-background-styling enabled) + $addr-book-win },
+#{ pref(lightning-task-dialog-frame-background-styling enabled) + $task-dialog },
+#{ pref(main-window-frame-background-styling enabled) + $main-win } {
+    .toolbox-top > * {
+        -moz-appearance: none !important;
+        background: var(--ait-frame-bg-color) !important;
+    }
 }
 
-:-moz-any(#{ event-dialog(lightning-event-dialog-frame-background-styling enabled) },
-          #{ task-dialog(lightning-task-dialog-frame-background-styling enabled) },
-          #{ addr-book-win(address-book-window-frame-background-styling enabled) }) .toolbox-top::after {
-    content: "";
-    height: 1px;
-    width: 100%;
-    display: block;
-    background: var(--ait-frame-lower-border-color);
+#{ pref(lightning-event-dialog-frame-background-styling enabled) + $event-dialog },
+#{ pref(lightning-task-dialog-frame-background-styling enabled) + $task-dialog },
+#{ pref(address-book-window-frame-background-styling enabled) + $addr-book-win }) {
+    .toolbox-top::after {
+        content: "";
+        height: 1px;
+        width: 100%;
+        display: block;
+        background: var(--ait-frame-lower-border-color);
+    }
 }

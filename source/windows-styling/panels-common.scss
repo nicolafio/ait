@@ -7,7 +7,7 @@
 */
 
 @each $variant in light, dark {
-    #{ main-win(panel-content-coloring $variant) } {
+    #{ pref(panel-content-coloring $variant) + $main-win } {
         --ait-panel-text-color: map_get($text-color-variants, $variant);
         --ait-panel-bg-color: map_get($panel-bg-color-variants, $variant);
         --ait-panel-btn-bg-color: map_get($btn-bg-color-variants, $variant);

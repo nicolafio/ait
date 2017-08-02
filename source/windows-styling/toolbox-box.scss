@@ -6,7 +6,7 @@
 ~
 */
 
-#{ main-win(panel-toolbox-box-styling enabled) } {
+#{ pref(panel-toolbox-box-styling enabled) + $main-win } {
 
     --ait-toolbox-height: 36px;
     --ait-toolbox-items-margin: 5px;
