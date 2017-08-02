@@ -6,35 +6,39 @@
 ~
 */
 
-#{ pref(panel-toolbox-box-styling enabled) + $main-win } {
+#{ pref(panel-toolbox-box-styling enabled) } {
 
-    --ait-toolbox-height: 36px;
-    --ait-toolbox-items-margin: 5px;
+    &#{ $main-win } {
 
-    #contentTabBrowser0 {
-        /* puts content windows (for ex. Add-ons Manager) on top to hide artifacts from the tab browser  */
-        z-index: 2;
-        position: relative;
-    }
+        --ait-toolbox-height: 36px;
+        --ait-toolbox-items-margin: 5px;
 
-    .chromeTabInstance {
-
-        display: flex;
-        flex-flow: column;
-
-        > .contentTabToolbox {
-            flex: 0;
+        #contentTabBrowser0 {
+            /* puts content windows (for ex. Add-ons Manager) on top to hide artifacts from the tab browser */
+            z-index: 2;
+            position: relative;
         }
 
-        > * {
-            display: block;
-            width: 100%;
-            flex: 1;
+        .chromeTabInstance {
+
+            display: flex;
+            flex-flow: column;
+
+            > .contentTabToolbox {
+                flex: 0;
+            }
+
+            > * {
+                display: block;
+                width: 100%;
+                flex: 1;
+            }
+
         }
 
     }
 
-    :-moz-any(.contentTabToolbox, .mail-toolbox) {
+    &#{ $main-win-panel-toolbox } {
 
         display: flex;
         flex-flow: column;
