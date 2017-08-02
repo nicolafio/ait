@@ -33,6 +33,22 @@
 
 }
 
+/* -- window-specific styling --------------------------------------------------------------------------------------- */
+
+#{ pref(panel-toolbox-contents-styling enabled) + $main-win } {
+
+    #gloda-search {
+
+        transition: flex 200ms ease;
+
+        &:focus-within {
+            flex: 1.5;
+        }
+
+    }
+
+}
+
 /* -- common styling ------------------------------------------------------------------------------------------------ */
 
 @mixin toolset-icons-styling {
