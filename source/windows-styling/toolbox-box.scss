@@ -63,8 +63,12 @@
                 flex-shrink: 0;
             }
 
-            > spacer {
-                flex: 1;
+            .searchBox {
+                width: calc(100% - var(--ait-toolbox-items-margin));
+            }
+
+            > *[flex="1"] {
+                flex: 1 1;
             }
 
         }
