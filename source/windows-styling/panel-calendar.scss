@@ -163,7 +163,7 @@
             display: inline-block;
             background: var(--ait-panel-btn-bg-color);
             height: calc(#{ $input-height } - 2px);
-            border: 1px solid var(--ait-panel-input-borer-color);
+            border: 1px solid var(--ait-panel-input-border-color);
             transition: background 200ms ease-out, box-shadow 200ms ease-out;
 
             &:not([first-tab="true"]) {
@@ -191,7 +191,7 @@
 
                 &:not([first-tab="true"]),
                 + tab {
-                    box-shadow: inset 1px 0 var(--ait-panel-input-borer-color);
+                    box-shadow: inset 1px 0 var(--ait-panel-input-border-color);
                 }
 
             }
