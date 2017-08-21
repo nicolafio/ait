@@ -1,0 +1,59 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+$toolset-btn-icon-names: inbox, write, gear, task, close, addressbook, attachment, avatar, calendar, centeralign, check,
+                         copy, crossed, cut, delete, document, down, download, drive, folder, forward, frame, globe,
+                         important, indent, italic, junk, lock, mail, menu, message, new, register, paste, printer,
+                         properties, reply, replyall, rightalign, schedule, starred, status, sync, tag, time, trash,
+                         underline, unindent, unjunk, unstarred, search, left, right, letter, unreadletter;
+$toolset-btn-icon-types: btn, menubtn-btn, check-btn, toggle-btn, appmenu-btn;
+@each $variant in light, dark {
+    %toolset-btn-icon-coloring-#{ $variant } {
+        @each $name in $toolset-btn-icon-names {
+            --ait-inactive-toolset-btn-#{ $name }-icon: icon('toolset-btn-#{ $variant }', $name);
+        }
+    }
+}
+@each $btn-type in $toolset-btn-icon-types {
+    %toolset-#{ $btn-type }-icon-abstract-styling {
+        #{ map_get((menubtn-btn: '.toolbarbutton-menubutton-button',
+                    appmenu-btn: '&',
+                    toggle-btn: '&',
+                    check-btn: '&',
+                    btn: '&'), $btn-type) } {
+            --ait-toolset-btn-icon: var(--ait-inactive-btn-icon);
+            #{ map_get((check-btn: '&:active, &[checked="true"]',
+                        appmenu-btn: '&:active, &[open="true"]',
+                        toggle-btn: '&:active, &[open="true"]',
+                        menubtn-btn: '&:active',
+                        btn: '&:active'), $btn-type) } {
+                --ait-toolset-btn-icon: var(--ait-active-btn-icon);
+            }
+            #{ map_get((appmenu-btn: '.toolbarbutton-icon[label="AppMenu"]',
+                        menubtn-btn: '.toolbarbutton-icon',
+                        toggle-btn: '.toolbarbutton-icon',
+                        check-btn: '.toolbarbutton-icon',
+                        btn: '.toolbarbutton-icon'), $btn-type) } {
+                list-style-image: none;
+                background-image: var(--ait-toolset-btn-icon);
+            }
+        }
+    }
+}
+@each $name in $toolset-btn-icon-names {
+    %toolset-btn-#{ $name }-icon-abstract-styling {
+        --ait-active-btn-icon: icon(toolset-btn-active, $name);
+        --ait-inactive-btn-icon: var(--ait-inactive-toolset-btn-#{ $name }-icon);
+    }
+    @each $btn-type in $toolset-btn-icon-types {
+        %toolset-#{ $btn-type }-#{ $name }-icon-styling {
+            @extend %toolset-btn-#{ $name }-icon-abstract-styling;
+            @extend %toolset-#{ $btn-type }-icon-abstract-styling;
+        }
+    }
+}

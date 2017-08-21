@@ -71,9 +71,8 @@ run_build() {
     tmp_dir=`mktemp -d`
 
     # Generates styling.css
-    echo compiling windows\' styling and generating styling.css
     sassc --style compressed \
-          "$src_dir/windows-styling/main.scss" "$tmp_dir/styling.css" \
+          "$src_dir/windows-styling/index.scss" "$tmp_dir/styling.css" \
     || abort_build "$tmp_dir" "windows' styling compilation failed"
 
     # Generates icons.svg

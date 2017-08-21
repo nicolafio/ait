@@ -1,6 +1,6 @@
 # Arc Theme integration for Thunderbird (alpha v0.4.3)
 
-![alt tag](preview.png)
+![alt tag](doc-data/preview.png)
 
 > Tested in Thunderbird 45.8.0, GNOME 3.22.3, Debian GNU/Linux 9, Surface Pro 4, Arc Theme 20161119-1.
 
@@ -25,7 +25,7 @@ You can switch to those variants by going to **Preferences > Display > Arc Integ
 
 Similarly to [Arc Firefox Theme](https://github.com/horst3180/arc-firefox-theme), this integration is meant to be used along with the official [Arc Theme](https://github.com/horst3180/arc-theme), you can however also use it with other operating systems and themes. If the integration is used with other OS theming, it is possible that some parts will look broken. It is possible to tweak or disable certain styling through the preferences panel.
 
-<img height=300 src="variants.png"/>
+<img height=300 src="doc-data/variants.png"/>
 
 > From up to down: Light, Dark and Darker theme variants
 

@@ -1,0 +1,25 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    %splitter-coloring-#{ $variant }-panel {
+        --ait-splitter-color: map_get($panel-border-color-variants, $variant);
+    }
+    %splitter-coloring-#{ $variant }-content {
+        --ait-splitter-color: map_get($content-border-color-variants, $variant);
+    }
+}
+%splitter-styling {
+    transition: border-color 300ms ease;
+    border-color: var(--ait-splitter-color);
+    border-inline-end-color: var(--ait-splitter-color);
+    border-inline-start-color: var(--ait-splitter-color);
+    &:hover {
+        --ait-splitter-color: $blue-color;
+    }
+}

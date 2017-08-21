@@ -1,0 +1,26 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    #{ $main-win + coloring(panel-content, $variant) } {
+        #task-text-filter-field {
+            @extend %searchbox-coloring-#{ $variant };
+        }
+        #view-task-edit-field {
+            @extend %textbox-coloring-#{ $variant };
+        }
+    }
+}
+#{ $main-win + styling(lightning-extension-tasks-panel-content) } {
+    #task-text-filter-field {
+        @extend %searchbox-styling;
+    }
+    #view-task-edit-field {
+        @extend %textbox-styling;
+    }
+}

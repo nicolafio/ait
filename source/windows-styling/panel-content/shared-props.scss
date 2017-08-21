@@ -1,0 +1,23 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    #{ coloring(panel-content, $variant) } {
+        --ait-panel-content-text-color: map_get($text-color-variants, $variant);
+        --ait-panel-content-bg-color: map_get($panel-bg-color-variants, $variant);
+        --ait-panel-content-content-bg-color: map_get($content-bg-color-variants, $variant);
+        --ait-panel-content-input-border-color: map_get($input-border-color-variants, $variant);
+        --ait-panel-content-panel-border-color: map_get($panel-border-color-variants, $variant);
+        --ait-panel-content-side-panel-bg-color: map_get($side-panel-bg-color-variants, $variant);
+        --ait-panel-content-actions-box-bg-color: map_get($actions-box-bg-color-variants, $variant);
+        --ait-panel-content-btn-bg-color: map_get($btn-bg-color-variants, $variant);
+        --ait-panel-content-btn-hover-bg-color: map_get($btn-hover-bg-color-variants, $variant);
+        --ait-panel-content-btn-active-border-color: map_get($btn-active-border-color-variants, $variant);
+        --ait-panel-content-btn-right-arrow-icon: icon(toolset-btn-#{ $variant }, right);
+    }
+}

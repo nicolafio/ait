@@ -1,0 +1,83 @@
+@each $variant in light, dark {
+    %main-win-toolset-coloring-#{ $variant } {
+        @extend %toolset-coloring-#{ $variant };
+    }
+}
+%main-win-toolset-styling {
+    @extend %toolset-styling;
+    .button-appmenu {
+        @extend %toolset-appmenu-btn-menu-icon-styling;
+    }
+    #button-print {
+        @extend %toolset-menubtn-btn-printer-icon-styling;
+    }
+    #button-getmsg {
+        @extend %toolset-menubtn-btn-inbox-icon-styling;
+    }
+    #button-newmsg {
+        @extend %toolset-menubtn-btn-write-icon-styling;
+    }
+    #extractTaskButton {
+        @extend %toolset-menubtn-btn-new-icon-styling;
+    }
+    #extractEventButton {
+        @extend %toolset-menubtn-btn-schedule-icon-styling;
+    }
+    #button-tag {
+        @extend %toolset-toggle-btn-tag-icon-styling;
+    }
+    #qfb-show-filter-bar {
+        @extend %toolset-check-btn-search-icon-styling;
+    }
+    #button-chat {
+        @extend %toolset-btn-message-icon-styling;
+    }
+    #task-print-button {
+        @extend %toolset-btn-printer-icon-styling;
+    }
+    #task-newtask-button {
+        @extend %toolset-btn-new-icon-styling;
+    }
+    #task-delete-button {
+        @extend %toolset-btn-delete-icon-styling;
+    }
+    #button-address {
+        @extend %toolset-btn-addressbook-icon-styling;
+    }
+    #lightning-button-tasks {
+        @extend %toolset-btn-task-icon-styling;
+    }
+    #calendar-newtask-button {
+        @extend %toolset-btn-new-icon-styling;
+    }
+    #calendar-print-button {
+        @extend %toolset-btn-printer-icon-styling;
+    }
+    #task-edit-button {
+        @extend %toolset-btn-properties-icon-styling;
+    }
+    #task-synchronize-button {
+        @extend %toolset-btn-sync-icon-styling;
+    }
+    #calendar-delete-button {
+        @extend %toolset-btn-delete-icon-styling;
+    }
+    #task-newevent-button {
+        @extend %toolset-btn-schedule-icon-styling;
+    }
+    #calendar-edit-button {
+        @extend %toolset-btn-properties-icon-styling;
+    }
+    #calendar-newevent-button {
+        @extend %toolset-btn-schedule-icon-styling;
+    }
+    #calendar-synchronize-button {
+        @extend %toolset-btn-sync-icon-styling;
+    }
+    #lightning-button-calendar {
+        @extend %toolset-btn-calendar-icon-styling;
+    }
+    #calendar-goto-today-button {
+        @extend %toolset-btn-calendar-icon-styling;
+    }
+}

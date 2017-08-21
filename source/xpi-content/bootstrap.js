@@ -46,20 +46,13 @@ GENERIC_PREFS.set('panel-toolbox', {
     options: ['light', 'dark', 'darker', 'none'],
     presets: { light: 'light', dark: 'dark', darker: 'darker', none: 'none' }
 });
-for (let part of ['background', 'contents', 'icons']) {
-    GENERIC_PREFS.set(`frame-${part}-styling`, {
-        parentPref: 'frame',
-        options: ['enabled', 'disabled'],
-        presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
-    });
-    GENERIC_PREFS.set(`lightning-extension-dialogs-frame-${part}-styling`, {
-        parentPref: `frame-${part}-styling`,
-        options: ['enabled', 'disabled'],
-        presets: { enabled: 'enabled', disabled: 'disabled' }
-    });
-}
-for (let part of ['mails-panel', 'lightning-panels'])
-    GENERIC_PREFS.set(`${part}-content-styling`, {
+GENERIC_PREFS.set('lightning-extension-dialogs-frame-styling', {
+    parentPref: 'frame',
+    options: ['enabled', 'disabled'],
+    presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
+});
+for (let part of ['mails', 'lightning'])
+    GENERIC_PREFS.set(`${part}-panel-content-styling`, {
         parentPref: 'panel-content',
         options: ['enabled', 'disabled'],
         presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
@@ -71,35 +64,31 @@ for (let part of ['mails-panel', 'lightning-panels'])
 // only the generic ones can.
 //
 const SPECIFIC_PREFS = new Map();
-for (let part of ['background', 'contents', 'icons']) {
-    for (let win of ['main', 'message-writing', 'address-book'])
-        SPECIFIC_PREFS.set(`${win}-window-frame-${part}-styling`, {
-            parentPref: `frame-${part}-styling`,
-            options: ['enabled', 'disabled'],
-            presets: { enabled: 'enabled', disabled: 'disabled' }
-        });
-    for (let dialog of ['task', 'event'])
-        SPECIFIC_PREFS.set(`lightning-${dialog}-dialog-frame-${part}-styling`, {
-            parentPref: `lightning-extension-dialogs-frame-${part}-styling`,
-            options: ['enabled', 'disabled'],
-            presets: { enabled: 'enabled', disabled: 'disabled' }
-        });
-}
-for (let part of ['box', 'contents', 'icons'])
-    SPECIFIC_PREFS.set(`panel-toolbox-${part}-styling`, {
-        parentPref: 'panel-toolbox',
+for (let win of ['main', 'message-writing', 'address-book'])
+    SPECIFIC_PREFS.set(`${win}-window-frame-styling`, {
+        parentPref: 'frame',
         options: ['enabled', 'disabled'],
-        presets: {
-            light: 'enabled',
-            dark: 'enabled',
-            darker: 'enabled',
-            none: 'disabled'
-        }
+        presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
     });
+for (let dialog of ['task', 'event'])
+    SPECIFIC_PREFS.set(`lightning-extension-${dialog}-dialog-frame-styling`, {
+        parentPref: 'lightning-extension-dialogs-frame-styling',
+        options: ['enabled', 'disabled'],
+        presets: { enabled: 'enabled', disabled: 'disabled' }
+    });
+SPECIFIC_PREFS.set('panel-toolbox-styling', {
+    parentPref: 'panel-toolbox',
+    options: ['enabled', 'disabled'],
+    presets: {
+        light: 'enabled',
+        dark: 'enabled',
+        darker: 'enabled',
+        none: 'disabled'
+    }
+});
 for (let panel of [
     'address-book',
     'message-writing',
-    'filter',
     'extensions-manager',
     'chat',
     'preferences-window'
@@ -110,8 +99,8 @@ for (let panel of [
         presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
     });
 for (let panel of ['calendar', 'tasks', 'side', 'task-window', 'event-window'])
-    SPECIFIC_PREFS.set(`lightning-${panel}-panel-content-styling`, {
-        parentPref: 'lightning-panels-content-styling',
+    SPECIFIC_PREFS.set(`lightning-extension-${panel}-panel-content-styling`, {
+        parentPref: 'lightning-panel-content-styling',
         options: ['enabled', 'disabled'],
         presets: { enabled: 'enabled', disabled: 'disabled' }
     });

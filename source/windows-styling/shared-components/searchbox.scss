@@ -1,0 +1,37 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    %searchbox-coloring-#{ $variant } {
+        @extend %textbox-coloring-#{ $variant };
+        --ait-searchbox-search-icon: url("chrome://ait/content/icons.svg?textbox-btn-#{ $variant }#search");
+    }
+}
+%searchbox-styling {
+    @extend %textbox-styling;
+    position: relative;
+    border-radius: 1em;
+    padding: 0 $input-horizontal-padding;
+    padding-left: calc(#{ $input-horizontal-padding * 2 } + 16px);
+    &::before {
+        top: 50%;
+        content: "";
+        width: 16px;
+        height: 16px;
+        display: block;
+        position: absolute;
+        transform: translateY(-50%);
+        left: $input-horizontal-padding;
+        margin-right: $input-horizontal-padding;
+        background-image: var(--ait-searchbox-search-icon);
+    }
+    .textbox-search-icons,
+    > hbox:last-child {
+        display: none;
+    }
+}

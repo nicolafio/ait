@@ -1,0 +1,138 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    %toolset-coloring-#{ $variant } {
+        @extend %toolset-btn-icon-coloring-#{ $variant };
+        --ait-toolset-text-color: map_get($text-color-variants, $variant);
+        --ait-toolset-btn-bg-color: map_get($btn-bg-color-variants, $variant);
+        --ait-toolset-border-color: map_get($panel-border-color-variants, $variant);
+        --ait-toolset-btn-border-color: map_get($input-border-color-variants, $variant);
+        --ait-toolset-btn-hover-bg-color: map_get($btn-hover-bg-color-variants, $variant);
+        --ait-toolset-btn-active-border-color: map_get($btn-active-border-color-variants, $variant);
+        --ait-toolset-dropdown-btn-icon: url("chrome://ait/content/icons.svg?toolset-btn-#{ $variant }#down");
+        .searchBox {
+            @extend %searchbox-coloring-#{ $variant };
+        }
+    }
+}
+%toolset-styling {
+    --ait-toolset-items-margin: 5px;
+    .searchBox {
+        @extend %searchbox-styling;
+    }
+    dropmarker {
+        -moz-appearance: none;
+    }
+    .toolbarbutton-menubutton-button:active .toolbarbutton-text {
+        color: $btn-active-text-color;
+    }
+    .dropmarker-icon {
+        margin: 0 4px;
+        background-size: 16px 16px;
+        background-image: var(--ait-toolset-dropdown-btn-icon);
+    }
+    .toolbarbutton-text {
+        margin: 0 2px !important;
+        font-size: $input-font-size;
+        transition: color 200ms ease-out;
+        color: var(--ait-toolset-text-color);
+    }
+    toolbarseparator {
+        min-width: 1px;
+        min-height: 100%;
+        -moz-appearance: none;
+        background: var(--ait-toolset-border-color);
+        margin: 0 calc(var(--ait-toolset-items-margin) / 2);
+    }
+    .toolbarbutton-icon {
+        margin: 2px;
+        width: 16px;
+        height: 16px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .toolbarbutton-menubutton-dropmarker[open="true"], .toolbarbutton-menubutton-button:active {
+        transition: none;
+        background: $blue-color;
+        border-color: var(--ait-toolset-btn-active-border-color);
+        .toolbarbutton-text {
+            transition: none;
+        }
+    }
+    .toolbarbutton-menubutton-dropmarker, .toolbarbutton-menubutton-button {
+        border: none;
+        background: rgba(0,0,0,0);
+        box-shadow: none !important;
+        border-top: 1px solid var(--ait-toolset-btn-border-color);
+        border-bottom: 1px solid var(--ait-toolset-btn-border-color);
+    }
+    .toolbarbutton-menubutton-button {
+        transition: background 300ms ease;
+        border-top-left-radius: $input-border-radius;
+        padding-right: $input-horizontal-padding + 1px;
+        border-bottom-left-radius: $input-border-radius;
+        border-left: 1px solid var(--ait-toolset-btn-border-color);
+    }
+    .toolbarbutton-menubutton-dropmarker {
+        z-index: 2;
+        padding: 0 2px;
+        background: none;
+        position: relative;
+        box-shadow: -1px 0 rgba(0,0,0,0) !important;
+        border-top-right-radius: $input-border-radius;
+        border-bottom-right-radius: $input-border-radius;
+        transition: background 300ms ease, box-shadow 300ms ease;
+        border-right: 1px solid var(--ait-toolset-btn-border-color);
+    }
+    .toolbarbutton-1 {
+        background: none;
+        box-shadow: none;
+        min-height: $input-height;
+        border-radius: $input-border-radius;
+        margin: 0 calc(var(--ait-toolset-items-margin) / 2);
+        transition: background 200ms ease-out, border-color 200ms ease-out;
+        &:not([disabled="true"]):hover, &[type="menu-button"] {
+            background: var(--ait-toolset-btn-bg-color);
+        }
+        &[type="menu-button"] dropmarker, &[type="menu"] {
+            &[open="true"] .dropmarker-icon {
+                background-image: url("chrome://ait/content/icons.svg?toolset-btn-active#down");
+            }
+        }
+        &:not([type="menu-button"]):not(.toolbarbutton-menubutton-button):not([disabled="true"]) {
+            &:hover {
+                background: var(--ait-toolset-btn-bg-color);
+                border-color: var(--ait-toolset-btn-border-color);
+            }
+            &[checked="true"], &[open="true"], &:active {
+                transition: none;
+                background: $blue-color;
+                border-color: var(--ait-toolset-btn-active-border-color);
+                .toolbarbutton-text {
+                    transition: none;
+                    color: $btn-active-text-color;
+                }
+            }
+        }
+        &[type="menu-button"] {
+            border: none;
+            dropmarker::before {
+                display: none;
+            }
+            &:hover .toolbarbutton-menubutton-dropmarker {
+                box-shadow: -1px 0 var(--ait-toolset-btn-border-color) !important;
+            }
+            &:not(:active) .toolbarbutton-menubutton-button:hover,
+            &:not([open="true"]):hover .toolbarbutton-menubutton-button:not(:hover) +
+                .toolbarbutton-menubutton-dropmarker {
+                background: var(--ait-toolset-btn-hover-bg-color);
+            }
+        }
+    }
+}
