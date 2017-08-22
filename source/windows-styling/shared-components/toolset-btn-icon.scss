@@ -19,41 +19,31 @@ $toolset-btn-icon-types: btn, menubtn-btn, check-btn, toggle-btn, appmenu-btn;
         }
     }
 }
-@each $btn-type in $toolset-btn-icon-types {
-    %toolset-#{ $btn-type }-icon-abstract-styling {
-        #{ map_get((menubtn-btn: '.toolbarbutton-menubutton-button',
-                    appmenu-btn: '&',
-                    toggle-btn: '&',
-                    check-btn: '&',
-                    btn: '&'), $btn-type) } {
-            --ait-toolset-btn-icon: var(--ait-inactive-btn-icon);
-            #{ map_get((check-btn: '&:active, &[checked="true"]',
-                        appmenu-btn: '&:active, &[open="true"]',
-                        toggle-btn: '&:active, &[open="true"]',
-                        menubtn-btn: '&:active',
-                        btn: '&:active'), $btn-type) } {
-                --ait-toolset-btn-icon: var(--ait-active-btn-icon);
-            }
-            #{ map_get((appmenu-btn: '.toolbarbutton-icon[label="AppMenu"]',
-                        menubtn-btn: '.toolbarbutton-icon',
-                        toggle-btn: '.toolbarbutton-icon',
-                        check-btn: '.toolbarbutton-icon',
-                        btn: '.toolbarbutton-icon'), $btn-type) } {
-                list-style-image: none;
-                background-image: var(--ait-toolset-btn-icon);
-            }
-        }
-    }
-}
 @each $name in $toolset-btn-icon-names {
-    %toolset-btn-#{ $name }-icon-abstract-styling {
-        --ait-active-btn-icon: icon(toolset-btn-active, $name);
-        --ait-inactive-btn-icon: var(--ait-inactive-toolset-btn-#{ $name }-icon);
-    }
     @each $btn-type in $toolset-btn-icon-types {
         %toolset-#{ $btn-type }-#{ $name }-icon-styling {
-            @extend %toolset-btn-#{ $name }-icon-abstract-styling;
-            @extend %toolset-#{ $btn-type }-icon-abstract-styling;
+            #{ map_get((menubtn-btn: '.toolbarbutton-menubutton-button',
+                        appmenu-btn: '&',
+                        toggle-btn: '&',
+                        check-btn: '&',
+                        btn: '&'), $btn-type) } {
+                $icon-selector: map_get((appmenu-btn: '.toolbarbutton-icon[label="AppMenu"]',
+                                         menubtn-btn: '.toolbarbutton-icon',
+                                         toggle-btn: '.toolbarbutton-icon',
+                                         check-btn: '.toolbarbutton-icon',
+                                         btn: '.toolbarbutton-icon'), $btn-type);
+                #{ $icon-selector } {
+                    list-style-image: none;
+                    background-image: var(--ait-inactive-toolset-btn-#{ $name }-icon);
+                }
+                #{ map_get((check-btn: '&:active, &[checked="true"]',
+                            appmenu-btn: '&:active, &[open="true"]',
+                            toggle-btn: '&:active, &[open="true"]',
+                            menubtn-btn: '&:active',
+                            btn: '&:active'), $btn-type) } #{ $icon-selector } {
+                    background-image: icon(toolset-btn-active, $name);
+                }
+            }
         }
     }
 }
