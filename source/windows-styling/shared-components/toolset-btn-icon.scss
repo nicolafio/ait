@@ -40,8 +40,10 @@ $toolset-btn-icon-types: btn, menubtn-btn, check-btn, toggle-btn, appmenu-btn;
                             appmenu-btn: '&:active, &[open="true"]',
                             toggle-btn: '&:active, &[open="true"]',
                             menubtn-btn: '&:active',
-                            btn: '&:active'), $btn-type) } #{ $icon-selector } {
-                    background-image: icon(toolset-btn-active, $name);
+                            btn: '&:active'), $btn-type) } {
+                    #{ $icon-selector } {
+                        background-image: icon(toolset-btn-active, $name);
+                    }
                 }
             }
         }

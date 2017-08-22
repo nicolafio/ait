@@ -22,7 +22,6 @@
     }
 }
 %toolset-styling {
-    --ait-toolset-items-margin: 5px;
     .searchBox {
         @extend %searchbox-styling;
     }
@@ -48,7 +47,7 @@
         min-height: 100%;
         -moz-appearance: none;
         background: var(--ait-toolset-border-color);
-        margin: 0 calc(var(--ait-toolset-items-margin) / 2);
+        margin: 0 $toolset-items-margin / 2;
     }
     .toolbarbutton-icon {
         margin: 2px;
@@ -95,7 +94,7 @@
         box-shadow: none;
         min-height: $input-height;
         border-radius: $input-border-radius;
-        margin: 0 calc(var(--ait-toolset-items-margin) / 2);
+        margin: 0 $toolset-items-margin / 2;
         transition: background 200ms ease-out, border-color 200ms ease-out;
         &:not([disabled="true"]):hover, &[type="menu-button"] {
             background: var(--ait-toolset-btn-bg-color);
