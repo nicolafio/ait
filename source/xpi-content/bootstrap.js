@@ -247,8 +247,9 @@ AIT.WindowManager = (() => {
     }
 
     function handleWindowInitialization(win) {
-        if (!initializedWindows.has(win) && !toreDownWindows.has(win)) {
+        if (!initializedWindows.has(win)) {
             initializedWindows.add(win);
+            toreDownWindows.delete(win);
             const unloadListener = () => { handleWindowTearDown(win); };
             unloadListeners.set(win, unloadListener);
             win.addEventListener('unload', unloadListener);
@@ -257,8 +258,9 @@ AIT.WindowManager = (() => {
     }
 
     function handleWindowTearDown(win) {
-        if (!toreDownWindows.has(win)) {
+        if (initializedWindows.has(win) && !toreDownWindows.has(win)) {
             toreDownWindows.add(win);
+            initializedWindows.delete(win);
             win.removeEventListener('unload', unloadListeners.get(win));
             unloadListeners.delete(win);
             teardown(win);
@@ -318,33 +320,35 @@ AIT.Styling = (() => {
     }
 
     function load(win) {
-        var unloaded = false;
         var root;
         const doc = win.document;
-        const unloadListeners = [() => { unloaded = true; }];
-        unloadListenersCollections.set(win, unloadListeners);
-        new Promise((onceDocumentIsInteractive) => {
-            if (doc.readyState === 'interactive' ||
-                doc.readyState === 'complete') onceDocumentIsInteractive();
-            else doc.addEventListener('readystatechange', function listener() {
-                if (unloaded ||
-                    doc.readyState === 'interactive' ||
-                    doc.readyState === 'complete')
-                    doc.removeEventListener('readystatechange', listener);
-                if ((doc.readyState === 'interactive' ||
-                     doc.readyState === 'complete') && !unloaded)
+        const unloadListeners = new Set();
+        if (doc.readyState === 'interactive' || doc.readyState === 'complete')
+            onceDocumentIsInteractive();
+        else {
+            const rsChangeListener = () => {
+                const state = doc.readyState;
+                if (state === 'interactive' || state === 'complete') {
+                    unloadListeners.delete(unloadListener);
+                    doc.removeEventListener('readystatechange', rsChangeListener);
                     onceDocumentIsInteractive();
-            });
-        }).then(() => {
-            if (unloaded) return;
+                }
+            };
+            const unloadListener = () => {
+                doc.removeEventListener('readystatechange', rsChangeListener);
+            };
+            unloadListeners.add(unloadListener);
+            doc.addEventListener('readystatechange', rsChangeListener);
+        }
+        function onceDocumentIsInteractive() {
             root = doc.firstElementChild;
             handlePreferenceAttributes();
             handleStyling();
-        });
+        }
         function handlePreferenceAttributes() {
             preferenceAttributeDescriptors.forEach(({ name, preference }) => {
                 preference.watch(onUpdate);
-                unloadListeners.push(onUnload);
+                unloadListeners.add(onUnload);
                 onUpdate();
                 function onUnload() {
                     preference.stopWatching(onUpdate);
@@ -359,7 +363,7 @@ AIT.Styling = (() => {
             style.textContent =
                 '@import url("chrome://ait/content/styling.css");';
             root.appendChild(style);
-            unloadListeners.push(() => { style.remove(); });
+            unloadListeners.add(() => { style.remove(); });
         }
     }
 
