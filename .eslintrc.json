@@ -1,11 +1,10 @@
 {
 
-    "parserOptions": { "ecmaVersion": 6 },
-    "env": { "es6": true, "browser": true },
+    "parserOptions": { "ecmaVersion": 8 },
+    "env": { "es6": true },
 
     "rules": {
 
-        "no-bitwise": "warn",
         "eqeqeq": "error",
         "no-use-before-define": ["error", {
             "functions": false,

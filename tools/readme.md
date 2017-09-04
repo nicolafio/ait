@@ -60,5 +60,21 @@ The following table summarizes what external tools are used.
             </td>
             <td><code># apt install inotify-tools</code></td>
         </tr>
+        <tr>
+            <td>
+                <a href="https://nodejs.org">NodeJS (<code>nodejs</code>)</a>
+            </td>
+            <td>Runtime needed for the parameters verifier</td>
+            <td>
+                <code># apt install nodejs</code><br>
+                <i style="font-size:0.8em">
+                    Debian repositories have ancient versions of NodeJS.
+                    <a href="https://github.com/nodesource/distributions#installation-instructions">
+                        Nodesource
+                    </a>
+                    repositories offer more recent versions.
+                </i>
+            </td>
+        </tr>
     </tbody>
 </table>

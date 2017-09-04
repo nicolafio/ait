@@ -6,125 +6,7 @@
  ~
  */
 
-/* -- parameters ------------------------------------------------------------ */
-
-// Windows to restyle
-//
-const WINDOWS = new Set();
-// New/Edit Task/Event Dialogs
-WINDOWS.add('chrome://calendar/content/calendar-event-dialog.xul');
-// Address Book
-WINDOWS.add('chrome://messenger/content/addressbook/addressbook.xul');
-// Main Window
-WINDOWS.add('chrome://messenger/content/messenger.xul');
-
-// Generic preferences are not exposed in the style sheet, they serve the
-// purpose of simplifying the configuration for the end user by grouping
-// together more specific preferences.
-// Generic preferences can group other generic preferences to create a tree-like
-// structure.
-//
-const GENERIC_PREFS = new Map();
-GENERIC_PREFS.set('general-look', { options: ['light', 'dark', 'darker'] });
-GENERIC_PREFS.set('panel', {
-    parentPref: 'general-look',
-    options: ['light', 'dark', 'darker', 'none'],
-    presets: { light: 'light', dark: 'dark', darker: 'darker' }
-});
-GENERIC_PREFS.set('frame', {
-    parentPref: 'general-look',
-    options: ['light', 'dark', 'none'],
-    presets: { light: 'light', dark: 'dark', darker: 'dark' }
-});
-GENERIC_PREFS.set('panel-content', {
-    parentPref: 'panel',
-    options: ['light', 'dark', 'none'],
-    presets: { light: 'light', dark: 'dark', darker: 'light', none: 'none' }
-});
-GENERIC_PREFS.set('panel-toolbox', {
-    parentPref: 'panel',
-    options: ['light', 'dark', 'darker', 'none'],
-    presets: { light: 'light', dark: 'dark', darker: 'darker', none: 'none' }
-});
-GENERIC_PREFS.set('lightning-extension-dialogs-frame-styling', {
-    parentPref: 'frame',
-    options: ['enabled', 'disabled'],
-    presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
-});
-for (let part of ['mails', 'lightning'])
-    GENERIC_PREFS.set(`${part}-panel-content-styling`, {
-        parentPref: 'panel-content',
-        options: ['enabled', 'disabled'],
-        presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
-    });
-
-// Only specific preferences are exposed and used in the style sheet. They
-// describe everything that can be tweaked.
-// Specific preferences cannot be "parent" preferences of other preferences,
-// only the generic ones can.
-//
-const SPECIFIC_PREFS = new Map();
-for (let win of ['main', 'message-writing', 'address-book'])
-    SPECIFIC_PREFS.set(`${win}-window-frame-styling`, {
-        parentPref: 'frame',
-        options: ['enabled', 'disabled'],
-        presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
-    });
-for (let dialog of ['task', 'event'])
-    SPECIFIC_PREFS.set(`lightning-extension-${dialog}-dialog-frame-styling`, {
-        parentPref: 'lightning-extension-dialogs-frame-styling',
-        options: ['enabled', 'disabled'],
-        presets: { enabled: 'enabled', disabled: 'disabled' }
-    });
-SPECIFIC_PREFS.set('panel-toolbox-styling', {
-    parentPref: 'panel-toolbox',
-    options: ['enabled', 'disabled'],
-    presets: {
-        light: 'enabled',
-        dark: 'enabled',
-        darker: 'enabled',
-        none: 'disabled'
-    }
-});
-for (let panel of [
-    'address-book',
-    'message-writing',
-    'extensions-manager',
-    'chat',
-    'preferences-window'
-])
-    SPECIFIC_PREFS.set(`${panel}-panel-content-styling`, {
-        parentPref: 'panel-content',
-        options: ['enabled', 'disabled'],
-        presets: { light: 'enabled', dark: 'enabled', none: 'disabled' }
-    });
-for (let panel of ['calendar', 'tasks', 'side', 'task-window', 'event-window'])
-    SPECIFIC_PREFS.set(`lightning-extension-${panel}-panel-content-styling`, {
-        parentPref: 'lightning-panel-content-styling',
-        options: ['enabled', 'disabled'],
-        presets: { enabled: 'enabled', disabled: 'disabled' }
-    });
-for (let view of ['main', 'mail', 'account-manager'])
-    SPECIFIC_PREFS.set(`mails-${view}-view-content-styling`, {
-        parentPref: 'mails-panel-content-styling',
-        options: ['enabled', 'disabled'],
-        presets: { enabled: 'enabled', disabled: 'disabled' }
-    });
-SPECIFIC_PREFS.set('frame-coloring', {
-    parentPref: 'frame',
-    options: ['light', 'dark'],
-    presets: { light: 'light', dark: 'dark', none: 'light' }
-});
-SPECIFIC_PREFS.set('panel-toolbox-coloring', {
-    parentPref: 'panel-toolbox',
-    options: ['light', 'dark', 'darker'],
-    presets: { light: 'light', dark: 'dark', darker: 'darker', none: 'light' }
-});
-SPECIFIC_PREFS.set('panel-content-coloring', {
-    parentPref: 'panel-content',
-    options: ['light', 'dark'],
-    presets: { light: 'light', dark: 'dark', none: 'light' }
-});
+/* eslint-env browser */
 
 /* -- globals --------------------------------------------------------------- */
 
@@ -134,17 +16,25 @@ const AIT_PREFS_DOMAIN = 'extensions.net.jd342.ait';
 const PREFERENECES_DIALOG_LOCATION =
     'chrome://messenger/content/preferences/preferences.xul';
 
-/* global Components */
-const Cc = Components.classes;
+const PARAMS_LOCATION = 'chrome://ait/content/params.json';
 
-Components.utils.importGlobalProperties(['fetch']);
+/* global Components */
+const { classes: Cc, utils: Cu } = Components;
+
+Cu.importGlobalProperties(['fetch']);
+
+/* global XPCOMUtils */
+Cu.import('resource://gre/modules/XPCOMUtils.jsm');
 
 const {
     nsIWindowMediator,
     nsIInterfaceRequestor,
     nsIDOMWindow,
     nsIPrefService,
-    nsIPrefBranch
+    nsIPrefBranch,
+    nsISupportsWeakReference,
+    nsIWebProgress,
+    nsIWebProgressListener
 } = Components.interfaces;
 
 const wm =
@@ -156,55 +46,120 @@ const prefs =
         .getService(nsIPrefService)
         .QueryInterface(nsIPrefBranch);
 
+const AIT = {};
+
 /* -- root logic ------------------------------------------------------------ */
 
 function initialize(win) {
-
     const url = win.location.href.split('#')[0];
-
-    if (WINDOWS.has(url)) StyleIntegration.load(win);
-    if (url === PREFERENECES_DIALOG_LOCATION) IntegrationPrefsPanel.load(win);
-
+    if (AIT.Parameters.isWindowToRestyle(url)) AIT.Styling.load(win);
+    if (url === PREFERENECES_DIALOG_LOCATION) AIT.PreferencesPanel.load(win);
 }
 
 function teardown(win) {
-
     const url = win.location.href.split('#')[0];
-
-    if (WINDOWS.has(url)) StyleIntegration.unload(win);
-    if (url === PREFERENECES_DIALOG_LOCATION) IntegrationPrefsPanel.unload(win);
-
+    if (AIT.Parameters.isWindowToRestyle(url)) AIT.Styling.unload(win);
+    if (url === PREFERENECES_DIALOG_LOCATION) AIT.PreferencesPanel.unload(win);
 }
 
 function startup() { // eslint-disable-line no-unused-vars
-
-    IntegrationPrefs.main();
-    StyleIntegration.main();
-    IntegrationPrefsPanel.main();
-    IntegrationWindowManager.main();
-
+    AIT.fullyInitialized = false;
+    AIT.Parameters.main();
+    AIT.Parameters.retrievalConclusion.then(() => {
+        AIT.Preferences.main();
+        AIT.Styling.main();
+        AIT.PreferencesPanel.main();
+        AIT.WindowManager.main();
+        AIT.fullyInitialized = true;
+    });
 }
 
 function shutdown() { // eslint-disable-line no-unused-vars
-
-    IntegrationWindowManager.end();
-    IntegrationPrefsPanel.end();
-    StyleIntegration.end();
-    IntegrationPrefs.end();
-
+    if (AIT.fullyInitialized) {
+        AIT.WindowManager.end();
+        AIT.PreferencesPanel.end();
+        AIT.Styling.end();
+        AIT.Preferences.end();
+    }
+    AIT.Parameters.end();
 }
 
 function install(data, reason) { // eslint-disable-line no-unused-vars
-
-    IntegrationPrefs.setup();
-
 }
 
 function uninstall(data, reason) { // eslint-disable-line no-unused-vars
-
-    IntegrationPrefs.clean();
-
 }
+
+/* -- parameters retrieval module ------------------------------------------- */
+
+// The integration parameters retrieval module has the job to retrieve and
+// parse the `params.json` file when its `main` function is invoked.
+
+AIT.Parameters = (() => {
+
+    const _conclPr = Symbol('ParamsRetrieval Conclusion Promise');
+    const _aborted = Symbol('ParamsRetrieval Abortion Handle');
+    const _abort = Symbol('ParamsRetrieval Abort Function');
+    const _retrievedObj = Symbol('ParamsRetrieval Retrieved Object');
+
+    const ParamsRetrieval = {
+
+        get conclusion() { return this[_conclPr]; },
+
+        get retrievedObject() { return this[_retrievedObj]; },
+
+        init() {
+            this.init = null;
+            this[_aborted] = false;
+            this[_retrievedObj] = null;
+            this[_conclPr] = new Promise((res) => {
+                fetch(PARAMS_LOCATION).then(r => r.json()).then((obj) => {
+                    if (this[_aborted]) return;
+                    this[_retrievedObj] = obj;
+                    res();
+                });
+                this[_abort] = () => { this[_aborted] = true; };
+            });
+            return this;
+        },
+
+        abort() { this[_abort](); }
+
+    };
+
+    return {
+        main,
+        end,
+        isWindowToRestyle,
+        get retrievalConclusion() { return retrieval.conclusion; },
+        get preferences() { return preferences; }
+    };
+
+    var retrieval;
+    var windowsToRestyleSet;
+    var preferences;
+
+    function main() {
+        retrieval = Object.create(ParamsRetrieval).init();
+        retrieval.conclusion.then(() => {
+            const { retrievedObject } = retrieval;
+            windowsToRestyleSet = new Set(retrievedObject.windowsToRestyle);
+            preferences = retrievedObject.preferences;
+        });
+    }
+
+    function end() {
+        if (!retrieval.concluded) retrieval.abort();
+        retrieval = null;
+        windowsToRestyleSet = null;
+        preferences = null;
+    }
+
+    function isWindowToRestyle(winURL) {
+        return windowsToRestyleSet.has(winURL);
+    }
+
+})();
 
 /* -- window manager module ------------------------------------------------- */
 
@@ -213,155 +168,135 @@ function uninstall(data, reason) { // eslint-disable-line no-unused-vars
 // invoke the `teardown` function afterwards when either the window closes or
 // the integration window manager is shut down by calling its `end` function.
 
-const IntegrationWindowManager = (() => {
+AIT.WindowManager = (() => {
 
     return { main, end };
 
     var windowListener;
+    var documentListener;
     var initializedWindows;
     var toreDownWindows;
+    var unloadListeners;
 
     function main() {
-
         initializedWindows = new WeakSet();
         toreDownWindows = new WeakSet();
-
-        windowListener = {
-
-            onOpenWindow(w) {
-
-                handleWindowInitialization(
-                    w.QueryInterface(nsIInterfaceRequestor)
-                        .getInterface(nsIDOMWindow)
-                );
-
+        unloadListeners = new WeakMap();
+        documentListener = {
+            QueryInterface:
+                XPCOMUtils.generateQI([
+                    nsIWebProgressListener,
+                    nsISupportsWeakReference
+                ]),
+            onStateChange(progress, request, flags) {
+                if (flags & nsIWebProgressListener.STATE_IS_DOCUMENT) {
+                    const win = progress.DOMWindow;
+                    if (win.location.href !== 'about:blank')
+                        handleWindowInitialization(win);
+                }
             },
-
-            onCloseWindow(w) {
-
-                handleWindowTearDown(
-                    w.QueryInterface(nsIInterfaceRequestor)
-                        .getInterface(nsIDOMWindow)
-                );
-
-            },
-
-            onWindowTitleChange() {}
-
+            onLocationChange() {},
+            onProgressChange() {},
+            onStatusChange() {},
+            onSecurityChange() {}
         };
-
-        for (let win of getCurrentWindows()) handleWindowInitialization(win);
+        windowListener = {
+            onOpenWindow(obj) {
+                handleTopWindowInitialization(
+                    obj.QueryInterface(nsIInterfaceRequestor)
+                        .getInterface(nsIDOMWindow)
+                );
+            },
+            onCloseWindow(obj) {
+                handleTopWindowTeardown(
+                    obj.QueryInterface(nsIInterfaceRequestor)
+                        .getInterface(nsIDOMWindow)
+                );
+            },
+            onWindowTitleChange() {}
+        };
+        for (let win of getTopWindows()) handleTopWindowInitialization(win);
         wm.addListener(windowListener);
-
     }
 
     function end() {
-
         wm.removeListener(windowListener);
-        for (let win of getCurrentWindows()) handleWindowTearDown(win);
-
+        for (let win of getTopWindows()) handleTopWindowTeardown(win);
+        documentListener = null;
         windowListener = null;
         initializedWindows = null;
         toreDownWindows = null;
-
     }
 
-    // Invokes the window initializer (`initialize` function in the root logic)
-    // once the Location interface has meaningful information.
-    //
+    function handleTopWindowInitialization(win) {
+        win.document.docShell.QueryInterface(nsIInterfaceRequestor)
+            .getInterface(nsIWebProgress)
+            .addProgressListener(documentListener, nsIWebProgress.NOTIFY_ALL);
+        for (let w of [win, ...getSubWindows(win)])
+            if (w.location.href !== 'about:blank')
+                handleWindowInitialization(w);
+    }
+
+    function handleTopWindowTeardown(win) {
+        win.document.docShell.QueryInterface(nsIInterfaceRequestor)
+            .getInterface(nsIWebProgress)
+            .removeProgressListener(documentListener);
+        for (let w of [win, ...getSubWindows(win)])
+            if (w.location.href !== 'about:blank')
+                handleWindowTearDown(w);
+    }
+
     function handleWindowInitialization(win) {
-
-        // Keep a reference to the current set of tore down windows, as it is
-        // possible that `handleLocationAvailabilitySniffing` could be invoked
-        // after IntegrationWindowManager.end is invoked and thus reset the
-        // `toreDownWindows` variable.
-        const currentToreDownWindowsSet = toreDownWindows;
-
-        // At the time of writing (May '17), I did not find any meaningful event
-        // in the documentation that can notify that the location interface has
-        // been initialized properly. I therefore decided to write a sniffing
-        // routine to detect this.
-
-        // In each iteration the delay will be incremented by 1ms. This is done
-        // to minimize the performance impact of the sniffing routine.
-        let delay = 0;
-
-        handleLocationAvailabilitySniffing();
-
-        function handleLocationAvailabilitySniffing() {
-
-            // Check if the window has been tore down. If yes, then stop
-            // sniffing.
-            if (currentToreDownWindowsSet.has(win)) return;
-
-            // Location information is deemed available when the URL it is not
-            // 'about:blank'.
-            // It is assumed that the window location is initially set to
-            // 'about:blank', and afterwards an initialization routine assigns
-            // the real path of the window to the location interface.
-            if (win.location.href !== 'about:blank')
-                onceLocationIsAvailable();
-
-            // Even though it is unlikely, it is possible that some routine
-            // purposefully opens an 'about:blank' window, in that case the
-            // sniffing loop will stop when the document finishes loading.
-            else if (win.document.readyState !== 'complete')
-                win.setTimeout(handleLocationAvailabilitySniffing, delay++);
-
-        }
-
-        function onceLocationIsAvailable() {
-
+        if (!initializedWindows.has(win) && !toreDownWindows.has(win)) {
             initializedWindows.add(win);
+            const unloadListener = () => { handleWindowTearDown(win); };
+            unloadListeners.set(win, unloadListener);
+            win.addEventListener('unload', unloadListener);
             initialize(win);
-
         }
-
     }
 
     function handleWindowTearDown(win) {
-
-        toreDownWindows.add(win);
-
-        // Invoke `teardown` only if `initialize` has actually been invoked
-        // previously.
-        if (initializedWindows.has(win)) teardown(win);
-
+        if (!toreDownWindows.has(win)) {
+            toreDownWindows.add(win);
+            win.removeEventListener('unload', unloadListeners.get(win));
+            unloadListeners.delete(win);
+            teardown(win);
+        }
     }
 
-    function* getCurrentWindows() {
-
+    function* getTopWindows() {
         const windows = wm.getEnumerator(null);
-
         while (windows.hasMoreElements()) yield windows.getNext();
-
     }
 
+    function* getSubWindows(win) {
+        for (let w of Array.from(win)) {
+            yield w;
+            yield* getSubWindows(w);
+        }
+    }
 
 })();
 
 /* -- style integration module ---------------------------------------------- */
 
-// The style integration module has the job to inject styling and icons in a
-// specified window when its `load` funtion is invoked, dynamically update
-// styling when some preference is modified, and remove everything afterwards on
-// its `unload` function invocation.
+// The style integration module has the job to inject styling in a specified
+// window when its `load` funtion is invoked, dynamically update styling when
+// some preference is modified, and remove everything afterwards on its `unload`
+// function invocation.
 
-const StyleIntegration = (() => {
+AIT.Styling = (() => {
 
     const PreferenceAttributeDescriptor = {
 
         init(preference) {
-
             const name =
                 'ait-' +
                 preference.name.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`) +
                 '-preference';
-
             Object.assign(this, { name, preference });
-
             return this;
-
         }
 
     };
@@ -372,74 +307,64 @@ const StyleIntegration = (() => {
     var preferenceAttributeDescriptors;
 
     function main() {
-
         unloadListenersCollections = new WeakMap();
-
         preferenceAttributeDescriptors =
-            Array.from(IntegrationPrefs.getSpecificPreferences())
+            Array.from(AIT.Preferences.getSpecificPreferences())
                 .map(p => Object.create(PreferenceAttributeDescriptor).init(p));
-
     }
 
     function end() {
-
         unloadListenersCollections = null;
-
     }
 
     function load(win) {
-
+        var unloaded = false;
+        var root;
         const doc = win.document;
-        const root = doc.firstElementChild;
-        const unloadListeners = [];
-
+        const unloadListeners = [() => { unloaded = true; }];
         unloadListenersCollections.set(win, unloadListeners);
-
-        handlePreferenceAttributes();
-        handleStyling();
-
+        new Promise((onceDocumentIsInteractive) => {
+            if (doc.readyState === 'interactive' ||
+                doc.readyState === 'complete') onceDocumentIsInteractive();
+            else doc.addEventListener('readystatechange', function listener() {
+                if (unloaded ||
+                    doc.readyState === 'interactive' ||
+                    doc.readyState === 'complete')
+                    doc.removeEventListener('readystatechange', listener);
+                if ((doc.readyState === 'interactive' ||
+                     doc.readyState === 'complete') && !unloaded)
+                    onceDocumentIsInteractive();
+            });
+        }).then(() => {
+            if (unloaded) return;
+            root = doc.firstElementChild;
+            handlePreferenceAttributes();
+            handleStyling();
+        });
         function handlePreferenceAttributes() {
-
             preferenceAttributeDescriptors.forEach(({ name, preference }) => {
-
                 preference.watch(onUpdate);
                 unloadListeners.push(onUnload);
                 onUpdate();
-
                 function onUnload() {
-
                     preference.stopWatching(onUpdate);
-
                 }
-
                 function onUpdate() {
-
                     root.setAttribute(name, preference.value);
-
                 }
-
             });
-
         }
-
         function handleStyling() {
-
             const style = doc.createElementNS(XHTMLNS, 'style');
-
             style.textContent =
                 '@import url("chrome://ait/content/styling.css");';
-
             root.appendChild(style);
             unloadListeners.push(() => { style.remove(); });
-
         }
-
     }
 
     function unload(win) {
-
         for (let fn of unloadListenersCollections.get(win)) fn();
-
     }
 
 })();
@@ -452,72 +377,106 @@ const StyleIntegration = (() => {
 // preferences, where parent preferences generalize more specific child
 // preferences, making customization more simple for the end-user.
 
-const IntegrationPrefs = (() => {
+AIT.Preferences = (() => {
 
     const _init = Symbol('Preference Initializer');
     const _name = Symbol('Preference Name');
-    const _type = Symbol('Preference Type');
+    const _parent = Symbol('Preference Parent');
+    const _configurable = Symbol('Preference Configurability Handle');
     const _domain = Symbol('Preference Domain');
-    const _value = Symbol('Preference Value');
-    const _options = Symbol('Preference Options');
-    const _descriptor = Symbol('Preference Descriptor');
+    const _val = Symbol('Preference Value');
+    const _opts = Symbol('Preference Options');
     const _watchers = Symbol('Preference Watchers');
     const _handleChange = Symbol('Preference Change Handler');
 
-    const _parent = Symbol('ChildPreference Parent');
-    const _configurable = Symbol('ChildPreference Configurability Handle');
-
     const Preference = {
+
+        [_parent]: null,
+        [_configurable]: true,
 
         get name() { return this[_name]; },
 
-        get options() {
+        get parent() { return this[_parent]; },
 
-            if (!(_options in this)) {
+        get configurable() { return this[_configurable]; },
 
-                const options = Array.from(this[_descriptor].options);
-
-                if (this[_type] === 'generic') options.push('custom');
-
-                this[_options] = Object.freeze(options);
-
-            }
-
-            return this[_options];
-
-        },
-
-        get value() {
-
-            if (!(_value in this))
-                this[_value] = prefs.getCharPref(this[_domain]);
-
-            return this[_value];
-
-        },
+        get value() { return this[_val]; },
 
         set value(value) {
-
-            this[_value] = value;
+            if (this[_val] === value) return value;
+            if (!this[_configurable]) {
+                const msg =
+                    'value setter invoked when preference was not configurable';
+                console.assert(false, msg);
+                return;
+            }
+            if (!this[_opts].has(value)) {
+                const msg = 'passed unexpected option to the value setter';
+                console.assert(false, msg);
+                return;
+            }
+            this[_val] = value;
             prefs.setCharPref(this[_domain], value);
             this[_handleChange]();
-
             return value;
-
         },
 
-        [_init](type, name, descriptor) {
-
-            const domain = getPreferenceDomain(type, name);
-
+        [_init](name) {
+            const descriptor = AIT.Parameters.preferences[name];
+            const { options } = descriptor;
+            const watchers = new Set();
+            const optionsSet = new Set(options);
             this[_name] = name;
-            this[_type] = type;
+            this[_opts] = optionsSet;
+            this[_watchers] = watchers;
+            // Initialize domain
+            const camelCasedName =
+                name.replace(/-[a-z]/g, m => m[1].toUpperCase());
+            const domain = AIT_PREFS_DOMAIN + '.' + camelCasedName;
             this[_domain] = domain;
-            this[_watchers] = new Set();
-            this[_descriptor] = descriptor;
-
+            // Initialize value
+            if (!(_val in this)) {
+                let valueRetrieved = false;
+                if (prefs.getPrefType(domain) === nsIPrefBranch.PREF_STRING) {
+                    const value = prefs.getCharPref(domain);
+                    if (optionsSet.has(value)) {
+                        this[_val] = value;
+                        valueRetrieved = true;
+                    }
+                }
+                if (!valueRetrieved) this[_val] = options[0];
+            }
+            // Initialize presets
+            if ('presets' in descriptor) {
+                optionsSet.add('custom');
+                let wasCustom = this[_val] === 'custom';
+                let isCustom = wasCustom;
+                let customizabilityChanged;
+                watchers.add(() => {
+                    isCustom = this[_val] === 'custom';
+                    customizabilityChanged = wasCustom !== isCustom;
+                });
+                Object.entries(descriptor.presets).forEach((entry) => {
+                    const [presetPrefName, presetValues] = entry;
+                    const presetPref = prefsMap.get(presetPrefName);
+                    const presetMap =
+                        new Map(options.map((v, i) => [v, presetValues[i]]));
+                    presetPref[_parent] = this;
+                    presetPref[_configurable] = isCustom;
+                    if (!isCustom) presetPref[_val] = presetMap.get(this[_val]);
+                    watchers.add(() => {
+                        const oldVal = presetPref[_val];
+                        const newVal =
+                            isCustom ? oldVal : presetMap.get(this[_val]);
+                        presetPref[_configurable] = isCustom;
+                        presetPref[_val] = newVal;
+                        if (customizabilityChanged || oldVal !== newVal)
+                            presetPref[_handleChange]();
+                    });
+                });
+                watchers.add(() => { wasCustom = isCustom; });
+            }
             return this;
-
         },
 
         /**
@@ -530,154 +489,49 @@ const IntegrationPrefs = (() => {
          */
         stopWatching(watcher) { this[_watchers].delete(watcher); },
 
+        options: function* () { yield* this[_opts]; },
+
         [_handleChange]() { for (let fn of this[_watchers]) fn(); }
-
-    };
-
-    const ChildPreference = {
-
-        __proto__: Preference,
-
-        get parent() { return this[_parent]; },
-
-        get configurable() {
-
-            if (!(_configurable in this))
-                this[_configurable] = this[_parent].value === 'custom';
-
-            return this[_configurable];
-
-        },
-
-        get value() {
-
-            if (!(_value in this) && !this.configurable)
-                this[_value] = this[_descriptor].presets[this[_parent].value];
-
-            return super.value;
-
-        },
-
-        set value(value) {
-
-            if (!this.configurable) return value;
-
-            return super.value = value;
-
-        },
-
-        [_init](type, name, descriptor) {
-
-            super[_init](type, name, descriptor);
-
-            const parent = this[_parent] =
-                genericPreferences.get(descriptor.parentPref);
-
-            parent.watch(() => {
-
-                const oldValue = this[_value];
-                const oldConfigurability = this[_configurable];
-
-                delete this[_value];
-                delete this[_configurable];
-
-                if (oldConfigurability !== this.configurable ||
-                    oldValue !== this.value) this[_handleChange]();
-
-            });
-
-            return this;
-
-        }
 
     };
 
     return {
         main,
         end,
-        setup,
-        clean,
         getSpecificPreferences,
-        getPreferences,
-        isChildPreference
+        getPreferences
     };
 
-    var genericPreferences;
-    var specificPreferences;
+    var genericPrefsMap;
+    var specificPrefsMap;
+    var prefsMap;
 
     function main() {
-
-        genericPreferences = new Map();
-        specificPreferences = new Map();
-
-        for (let [type, instances, descriptors] of [
-            ['generic', genericPreferences, GENERIC_PREFS],
-            ['specific', specificPreferences, SPECIFIC_PREFS]
-        ])
-            for (let [name, descr] of descriptors) {
-                const isChildPref = 'parentPref' in descr;
-                const prefProto = isChildPref ? ChildPreference : Preference;
-                const pref = Object.create(prefProto)[_init](type, name, descr);
-                instances.set(name, pref);
-            }
-
+        genericPrefsMap = new Map();
+        specificPrefsMap = new Map();
+        prefsMap = new Map();
+        for (let entry of Object.entries(AIT.Parameters.preferences)) {
+            const [name, descr] = entry;
+            const map = 'presets' in descr ? genericPrefsMap : specificPrefsMap;
+            const pref = Object.create(Preference);
+            map.set(name, pref);
+            prefsMap.set(name, pref);
+        }
+        for (let [name, pref] of prefsMap) pref[_init](name);
     }
 
     function end() {
-
-        genericPreferences = null;
-        specificPreferences = null;
-
+        genericPrefsMap = null;
+        specificPrefsMap = null;
+        prefsMap = null;
     }
-
-    function setup() {
-
-        for (let [type, descriptors] of [
-            ['generic', GENERIC_PREFS],
-            ['specific', SPECIFIC_PREFS]
-        ])
-            for (let [name, descr] of descriptors) {
-                const defaultOption = descr.options[0];
-                const domain = getPreferenceDomain(type, name);
-                prefs.setCharPref(domain, defaultOption);
-            }
-
-    }
-
-    function clean() { prefs.deleteBranch(AIT_PREFS_DOMAIN); }
 
     function* getSpecificPreferences() {
-
-        yield* specificPreferences.values();
-
-    }
-
-    function* getGenericPreferences() {
-
-        yield* genericPreferences.values();
-
+        yield* specificPrefsMap.values();
     }
 
     function* getPreferences() {
-
-        yield* getGenericPreferences();
-        yield* getSpecificPreferences();
-
-    }
-
-    function isChildPreference(obj) {
-
-        return ChildPreference.isPrototypeOf(obj);
-
-    }
-
-    /**
-     * @param {string} type
-     * @param {string} name
-     */
-    function getPreferenceDomain(type, name) {
-        const camelCasedName = name.replace(/-[a-z]/g, m => m.toUpperCase());
-        return `${AIT_PREFS_DOMAIN}.${type}.${camelCasedName}`;
+        yield* prefsMap.values();
     }
 
 })();
@@ -687,318 +541,199 @@ const IntegrationPrefs = (() => {
 // The integration preferences panel module has the job to populate the
 // preferences user interface with all the preferences of the integration.
 
-const IntegrationPrefsPanel = (() => {
+AIT.PreferencesPanel = (() => {
 
     return { main, end, load, unload };
 
     var unloadListenersCollections;
 
     function main() {
-
         unloadListenersCollections = new WeakMap();
-
     }
 
     function end() {
-
         unloadListenersCollections = null;
-
     }
 
     function load(win) {
-
         var unloaded = false;
         const doc = win.document;
         const unloadListeners = [() => { unloaded = true; }];
-
         unloadListenersCollections.set(win, unloadListeners);
-
         new Promise((onceDocumentLoads) => {
-
             if (doc.readyState === 'complete') onceDocumentLoads();
-
             else doc.addEventListener('readystatechange', function listenr() {
-
                 if (unloaded || doc.readyState === 'complete')
                     doc.removeEventListener('readystatechange', listenr);
-
                 if (!unloaded && doc.readyState === 'complete')
                     onceDocumentLoads();
-
             });
-
         }).then(() => new Promise((onceDisplayPaneExists) => {
-
             // In each iteration the delay will be incremented by 1ms. This
             // is done to minimize the performance impact of the sniffing
             // routine.
             var delay = 0;
-
             (function sniffer() {
-
                 if (unloaded) return;
-
                 const displayPane =
                     doc.firstElementChild.preferencePanes &&
                     doc.firstElementChild.preferencePanes.paneDisplay;
-
                 if (displayPane) onceDisplayPaneExists(displayPane);
                 else win.setTimeout(sniffer, delay++);
-
             })();
-
         })).then((displayPane) => new Promise((onceDisplayPaneLoads) => {
-
             if (unloaded) return;
-
             if (win.location.hash === '#aitTab')
                 doc.firstElementChild.showPane(displayPane);
-
             if (displayPane.loaded) onceDisplayPaneLoads(displayPane);
-
             else displayPane.addEventListener('paneload', function listener() {
-
                 displayPane.removeEventListener('paneload', listener);
-
                 if (unloaded) return;
-
                 onceDisplayPaneLoads(displayPane);
-
             });
-
         })).then(() => new Promise((onceNecessaryElemsExist) => {
-
             // In each iteration the delay will be incremented by 1ms. This
             // is done to minimize the performance impact of the sniffing
             // routine.
             var delay = 0;
-
             (function sniffer() {
-
                 if (unloaded) return;
-
                 // Try to retrieve the necessary elements for initializing the
                 // preferences panel. If they don't yet exist, postpone
                 // initialization.
-
                 const tabsElem = doc.getElementById('displayPrefsTabs');
-
                 if (tabsElem === null) {
                     // #displayPrefsTabs does not exist, try again later.
                     win.setTimeout(sniffer, delay++);
                     return;
                 }
-
                 const panelsElem = doc.getElementById('displayPrefsPanels');
-
                 if (panelsElem === null) {
                     // #displayPrefsPanels does not exist, try again later.
                     win.setTimeout(sniffer, delay++);
                     return;
                 }
-
                 // #displayPrefsTabs and #displayPrefsPanels both exist
                 onceNecessaryElemsExist([tabsElem, panelsElem]);
-
             })();
-
         })).then(([tabsElem, panelsElem]) => {
-
             if (unloaded) return;
-
             handleTabInitialization(tabsElem);
             handleTabPanelInitialization(panelsElem);
-
         });
-
         function handleTabInitialization(tabsElem) {
-
             const tab = doc.createElement('tab');
-
             tab.setAttribute('id', 'aitTab');
             tab.setAttribute('label', 'Arc Integration');
             tabsElem.appendChild(tab);
-
             win.requestAnimationFrame(() => {
-
                 if (win.location.hash === '#aitTab') tab.click();
-
             });
-
             unloadListeners.push(() => { tab.remove(); });
-
         }
-
         function handleTabPanelInitialization(panelsElem) {
-
             const tabpanel = doc.createElement('tabpanel');
             const form = doc.createElementNS(XHTMLNS, 'form');
             const divs = new WeakMap();
-
             unloadListeners.push(() => { tabpanel.remove(); });
-
             tabpanel.setAttribute('id', 'aitPrefsPanel');
             tabpanel.setAttribute('orient', 'vertical');
-
             Object.assign(form.style, {
                 height: '300px',
                 display: 'block',
                 overflowY: 'scroll',
                 border: `${1 / win.devicePixelRatio}px solid rgba(20,20,20,0.1)`
             });
-
-            const prefs = Array.from(IntegrationPrefs.getPreferences());
-
-            for (let pref of prefs) {
+            const preferences = Array.from(AIT.Preferences.getPreferences());
+            for (let pref of preferences) {
                 const div = doc.createElementNS(XHTMLNS, 'div');
                 divs.set(pref, div);
             }
-
-            prefs.forEach((pref) => {
-
+            preferences.forEach((pref) => {
                 const { type, name } = pref;
                 const div = divs.get(pref);
                 const span = doc.createElementNS(XHTMLNS, 'span');
                 const inputName = `${type}_${name}`;
-
                 span.textContent = `${toCapitalizedWords(name)}:`;
                 div.appendChild(span);
-
                 Object.assign(span.style, {
                     display: 'block',
                     overflow: 'hidden',
                     transition: 'opacity 300ms ease, height 300ms ease',
                     lineHeight: '1.3em'
                 });
-
                 Object.assign(div.style, {
                     marginLeft: '1ch',
                     transition: 'opacity 300ms ease'
                 });
-
-                pref.options.forEach((value) => {
-
+                Array.from(pref.options()).forEach((value) => {
                     const input = doc.createElementNS(XHTMLNS, 'input');
                     const label = doc.createElementNS(XHTMLNS, 'label');
                     const txt = doc.createTextNode(toCapitalizedWords(value));
-
                     input.type = 'radio';
                     input.name = inputName;
-
                     input.addEventListener('change', () => {
-
                         pref.value = value;
-
                     });
-
                     label.appendChild(input);
                     label.appendChild(txt);
-
                     span.appendChild(label);
-
                     pref.watch(onUpdate);
                     onUpdate();
-
                     unloadListeners.push(() => {
-
                         pref.stopWatching(onUpdate);
-
                     });
-
-                    if (IntegrationPrefs.isChildPreference(pref)) {
-
+                    if (pref.parent !== null) {
                         const onChildPrefUpdate = () => {
-
                             if (pref.configurable)
                                 input.removeAttribute('disabled');
-
                             else input.setAttribute('disabled', '');
-
                         };
-
                         pref.watch(onChildPrefUpdate);
                         onChildPrefUpdate();
-
                         unloadListeners.push(() => {
-
                             pref.stopWatching(onChildPrefUpdate);
-
                         });
-
                     }
-
                     function onUpdate() {
-
                         input.checked = value === pref.value;
-
                     }
-
                 });
-
-                if (IntegrationPrefs.isChildPreference(pref)) {
-
+                if (pref.parent !== null) {
                     const onUpdate = () => {
-
                         div.style.opacity =
                             pref.configurable ? null : '0.3';
-
                     };
-
                     pref.watch(onUpdate);
-
                     unloadListeners.push(() => {
-
                         pref.stopWatching(onUpdate);
-
                     });
-
                     onUpdate();
-
                     const parent = pref.parent;
-
-                    if (IntegrationPrefs.isChildPreference(parent)) {
-
+                    if (parent.parent !== null) {
                         const onUpdate = () => {
-
                             span.style.height =
                                 parent.configurable ? '1.3em' : '0';
-
                             span.style.opacity =
                                 parent.configurable ? null : '0';
-
                         };
-
                         parent.watch(onUpdate);
-
                         unloadListeners.push(() => {
-
                             parent.stopWatching(onUpdate);
-
                         });
-
                         onUpdate();
-
                     }
-
                     divs.get(parent).appendChild(div);
-
                 }
-
                 else form.appendChild(div);
-
             });
-
             tabpanel.appendChild(form);
             panelsElem.appendChild(tabpanel);
-
         }
-
     }
 
     function unload(win) {
-
         for (let fn of unloadListenersCollections.get(win)) fn();
-
     }
 
     /**
@@ -1008,11 +743,9 @@ const IntegrationPrefsPanel = (() => {
      * toCapitalizedWords('foo-bar-baz') -> 'Foo Bar Baz'
      */
     function toCapitalizedWords(dashCasedWords) {
-
         return dashCasedWords[0].toUpperCase() +
                dashCasedWords.substr(1)
                    .replace(/-[a-z]/g, m => ` ${m[1].toUpperCase()}`);
-
     }
 
 })();

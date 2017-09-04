@@ -64,7 +64,12 @@ run_build() {
 
     echo building at $1
 
-    src_dir=`realpath "$(dirname "$0")/../../source"`
+    script_dir=`dirname "$0"`
+
+    # Verifies that the integration parameters are not malformed
+    bash "$script_dir"/../params-verify/script.sh || exit $?
+
+    src_dir=`realpath "$script_dir/../../source"`
     build_file=`realpath "$1"`
 
     # Creates a temporary folder

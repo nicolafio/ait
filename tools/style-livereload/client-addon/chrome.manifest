@@ -2,3 +2,6 @@ content ait-lr ./
 overlay chrome://messenger/content/messenger.xul chrome://ait-lr/content/overlay.xul
 overlay chrome://messenger/content/addressbook/addressbook.xul chrome://ait-lr/content/overlay.xul
 overlay chrome://calendar/content/calendar-event-dialog.xul chrome://ait-lr/content/overlay.xul
+overlay chrome://messenger/content/messengercompose/messengercompose.xul chrome://ait-lr/content/overlay.xul
+overlay chrome://messenger/content/preferences/preferences.xul chrome://ait-lr/content/overlay.xul
+overlay chrome://messenger/content/msgAccountCentral.xul chrome://ait-lr/content/overlay.xul
