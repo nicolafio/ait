@@ -37,7 +37,7 @@
         "panel":
             { "options":                    ["light", "dark", "darker", "none"],
               "presets": { "panel-toolbox": ["light", "dark", "darker", "none"],
-                           "panel-content": ["light", "dark", "dark",   "none"] } },
+                           "panel-content": ["light", "dark", "light",  "none"] } },
         "panel-toolbox":
             { "options":                             ["light",   "dark",    "darker",  "none"    ],
               "presets": { "panel-toolbox-coloring": ["light",   "dark",    "darker",  "light"   ],
