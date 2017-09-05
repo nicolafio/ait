@@ -323,6 +323,7 @@ AIT.Styling = (() => {
         var root;
         const doc = win.document;
         const unloadListeners = new Set();
+        unloadListenersCollections.set(win, unloadListeners);
         if (doc.readyState === 'interactive' || doc.readyState === 'complete')
             onceDocumentIsInteractive();
         else {
