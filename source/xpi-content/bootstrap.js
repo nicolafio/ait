@@ -10,14 +10,6 @@
 
 /* -- globals --------------------------------------------------------------- */
 
-const XHTMLNS = 'http://www.w3.org/1999/xhtml';
-const AIT_PREFS_DOMAIN = 'extensions.net.jd342.ait';
-
-const PREFERENECES_DIALOG_LOCATION =
-    'chrome://messenger/content/preferences/preferences.xul';
-
-const PARAMS_LOCATION = 'chrome://ait/content/params.json';
-
 /* global Components */
 const { classes: Cc, utils: Cu } = Components;
 
@@ -46,26 +38,34 @@ const prefs =
         .getService(nsIPrefService)
         .QueryInterface(nsIPrefBranch);
 
-const AIT = {};
+const AIT = {
+    XHTMLNS: 'http://www.w3.org/1999/xhtml',
+    PREFS_DOMAIN: 'extensions.net.jd342.ait',
+    CONFIGURATION_LOCATION: 'chrome://ait/content/configuration.json',
+    PREFERENECES_DIALOG_LOCATION:
+        'chrome://messenger/content/preferences/preferences.xul'
+};
 
 /* -- root logic ------------------------------------------------------------ */
 
 function initialize(win) {
     const url = win.location.href.split('#')[0];
-    if (AIT.Parameters.isWindowToRestyle(url)) AIT.Styling.load(win);
-    if (url === PREFERENECES_DIALOG_LOCATION) AIT.PreferencesPanel.load(win);
+    if (AIT.Configuration.isWindowToRestyle(url)) AIT.Styling.load(win);
+    if (url === AIT.PREFERENECES_DIALOG_LOCATION)
+        AIT.PreferencesPanel.load(win);
 }
 
 function teardown(win) {
     const url = win.location.href.split('#')[0];
-    if (AIT.Parameters.isWindowToRestyle(url)) AIT.Styling.unload(win);
-    if (url === PREFERENECES_DIALOG_LOCATION) AIT.PreferencesPanel.unload(win);
+    if (AIT.Configuration.isWindowToRestyle(url)) AIT.Styling.unload(win);
+    if (url === AIT.PREFERENECES_DIALOG_LOCATION)
+        AIT.PreferencesPanel.unload(win);
 }
 
 function startup() { // eslint-disable-line no-unused-vars
     AIT.fullyInitialized = false;
-    AIT.Parameters.main();
-    AIT.Parameters.retrievalConclusion.then(() => {
+    AIT.Configuration.main();
+    AIT.Configuration.retrievalConclusion.then(() => {
         AIT.Preferences.main();
         AIT.Styling.main();
         AIT.PreferencesPanel.main();
@@ -81,7 +81,7 @@ function shutdown() { // eslint-disable-line no-unused-vars
         AIT.Styling.end();
         AIT.Preferences.end();
     }
-    AIT.Parameters.end();
+    AIT.Configuration.end();
 }
 
 function install(data, reason) { // eslint-disable-line no-unused-vars
@@ -90,19 +90,19 @@ function install(data, reason) { // eslint-disable-line no-unused-vars
 function uninstall(data, reason) { // eslint-disable-line no-unused-vars
 }
 
-/* -- parameters retrieval module ------------------------------------------- */
+/* -- configuration retrieval module ---------------------------------------- */
 
-// The integration parameters retrieval module has the job to retrieve and
-// parse the `params.json` file when its `main` function is invoked.
+// The integration configuration retrieval module has the job to retrieve and
+// parse the `configuration.json` file.
 
-AIT.Parameters = (() => {
+AIT.Configuration = (() => {
 
-    const _conclPr = Symbol('ParamsRetrieval Conclusion Promise');
-    const _aborted = Symbol('ParamsRetrieval Abortion Handle');
-    const _abort = Symbol('ParamsRetrieval Abort Function');
-    const _retrievedObj = Symbol('ParamsRetrieval Retrieved Object');
+    const _conclPr = Symbol('ConfigRetrieval Conclusion Promise');
+    const _aborted = Symbol('ConfigRetrieval Abortion Handle');
+    const _abort = Symbol('ConfigRetrieval Abort Function');
+    const _retrievedObj = Symbol('ConfigRetrieval Retrieved Object');
 
-    const ParamsRetrieval = {
+    const ConfigRetrieval = {
 
         get conclusion() { return this[_conclPr]; },
 
@@ -113,11 +113,13 @@ AIT.Parameters = (() => {
             this[_aborted] = false;
             this[_retrievedObj] = null;
             this[_conclPr] = new Promise((res) => {
-                fetch(PARAMS_LOCATION).then(r => r.json()).then((obj) => {
-                    if (this[_aborted]) return;
-                    this[_retrievedObj] = obj;
-                    res();
-                });
+                fetch(AIT.CONFIGURATION_LOCATION)
+                    .then(r => r.json())
+                    .then((obj) => {
+                        if (this[_aborted]) return;
+                        this[_retrievedObj] = obj;
+                        res();
+                    });
                 this[_abort] = () => { this[_aborted] = true; };
             });
             return this;
@@ -140,7 +142,7 @@ AIT.Parameters = (() => {
     var preferences;
 
     function main() {
-        retrieval = Object.create(ParamsRetrieval).init();
+        retrieval = Object.create(ConfigRetrieval).init();
         retrieval.conclusion.then(() => {
             const { retrievedObject } = retrieval;
             windowsToRestyleSet = new Set(retrievedObject.windowsToRestyle);
@@ -327,19 +329,19 @@ AIT.Styling = (() => {
         if (doc.readyState === 'interactive' || doc.readyState === 'complete')
             onceDocumentIsInteractive();
         else {
-            const rsChangeListener = () => {
+            const rsChListener = () => {
                 const state = doc.readyState;
                 if (state === 'interactive' || state === 'complete') {
                     unloadListeners.delete(unloadListener);
-                    doc.removeEventListener('readystatechange', rsChangeListener);
+                    doc.removeEventListener('readystatechange', rsChListener);
                     onceDocumentIsInteractive();
                 }
             };
             const unloadListener = () => {
-                doc.removeEventListener('readystatechange', rsChangeListener);
+                doc.removeEventListener('readystatechange', rsChListener);
             };
             unloadListeners.add(unloadListener);
-            doc.addEventListener('readystatechange', rsChangeListener);
+            doc.addEventListener('readystatechange', rsChListener);
         }
         function onceDocumentIsInteractive() {
             root = doc.firstElementChild;
@@ -360,7 +362,7 @@ AIT.Styling = (() => {
             });
         }
         function handleStyling() {
-            const style = doc.createElementNS(XHTMLNS, 'style');
+            const style = doc.createElementNS(AIT.XHTMLNS, 'style');
             style.textContent =
                 '@import url("chrome://ait/content/styling.css");';
             root.appendChild(style);
@@ -427,7 +429,7 @@ AIT.Preferences = (() => {
         },
 
         [_init](name) {
-            const descriptor = AIT.Parameters.preferences[name];
+            const descriptor = AIT.Configuration.preferences[name];
             const { options } = descriptor;
             const watchers = new Set();
             const optionsSet = new Set(options);
@@ -437,7 +439,7 @@ AIT.Preferences = (() => {
             // Initialize domain
             const camelCasedName =
                 name.replace(/-[a-z]/g, m => m[1].toUpperCase());
-            const domain = AIT_PREFS_DOMAIN + '.' + camelCasedName;
+            const domain = AIT.PREFS_DOMAIN + '.' + camelCasedName;
             this[_domain] = domain;
             // Initialize value
             if (!(_val in this)) {
@@ -515,7 +517,7 @@ AIT.Preferences = (() => {
         genericPrefsMap = new Map();
         specificPrefsMap = new Map();
         prefsMap = new Map();
-        for (let entry of Object.entries(AIT.Parameters.preferences)) {
+        for (let entry of Object.entries(AIT.Configuration.preferences)) {
             const [name, descr] = entry;
             const map = 'presets' in descr ? genericPrefsMap : specificPrefsMap;
             const pref = Object.create(Preference);
@@ -638,7 +640,7 @@ AIT.PreferencesPanel = (() => {
         }
         function handleTabPanelInitialization(panelsElem) {
             const tabpanel = doc.createElement('tabpanel');
-            const form = doc.createElementNS(XHTMLNS, 'form');
+            const form = doc.createElementNS(AIT.XHTMLNS, 'form');
             const divs = new WeakMap();
             unloadListeners.push(() => { tabpanel.remove(); });
             tabpanel.setAttribute('id', 'aitPrefsPanel');
@@ -651,13 +653,13 @@ AIT.PreferencesPanel = (() => {
             });
             const preferences = Array.from(AIT.Preferences.getPreferences());
             for (let pref of preferences) {
-                const div = doc.createElementNS(XHTMLNS, 'div');
+                const div = doc.createElementNS(AIT.XHTMLNS, 'div');
                 divs.set(pref, div);
             }
             preferences.forEach((pref) => {
                 const { type, name } = pref;
                 const div = divs.get(pref);
-                const span = doc.createElementNS(XHTMLNS, 'span');
+                const span = doc.createElementNS(AIT.XHTMLNS, 'span');
                 const inputName = `${type}_${name}`;
                 span.textContent = `${toCapitalizedWords(name)}:`;
                 div.appendChild(span);
@@ -672,8 +674,8 @@ AIT.PreferencesPanel = (() => {
                     transition: 'opacity 300ms ease'
                 });
                 Array.from(pref.options()).forEach((value) => {
-                    const input = doc.createElementNS(XHTMLNS, 'input');
-                    const label = doc.createElementNS(XHTMLNS, 'label');
+                    const input = doc.createElementNS(AIT.XHTMLNS, 'input');
+                    const label = doc.createElementNS(AIT.XHTMLNS, 'label');
                     const txt = doc.createTextNode(toCapitalizedWords(value));
                     input.type = 'radio';
                     input.name = inputName;

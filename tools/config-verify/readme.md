@@ -1,6 +1,6 @@
-# /tools/params-verify/
+# /tools/config-verify/
 
-This folder contains the script used to verify that the `params.json` file
+This folder contains the script used to verify that the `configurtion.json` file
 is correctly structured and will not cause any unexpected behavior in the
 extension's logic.
 
@@ -8,9 +8,9 @@ This script will be executed by the build script before compilation and creation
 of the .xpi file. If any error is encountered, the build script will abort its
 operation.
 
-It is also possibile to run the parameters verification independently.
+It is also possibile to run the configuration verification independently.
 
 ```
-$ ./tools/params-verify/script.sh
+$ ./tools/config-verify/script.sh
 ```
 

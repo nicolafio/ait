@@ -8,9 +8,9 @@
 
 /* eslint-env node */
 
-const file = `${__dirname}/../../source/xpi-content/params.json`;
+const file = `${__dirname}/../../source/xpi-content/configuration.json`;
 require('fs').readFile(file, (err, data) => {
-    console.log('verifying parameters');
+    console.log('verifying configuration');
     const start = Date.now();
     var error;
     (() => {
@@ -19,7 +19,7 @@ require('fs').readFile(file, (err, data) => {
         try { obj = JSON.parse(data); }
         catch (err) { error = err.message; return; }
         const msg = verifyParams(obj);
-        if (msg !== null) error = `malformed parameters: ${msg}`;
+        if (msg !== null) error = `malformed configuration: ${msg}`;
     })();
     if (error) {
         console.error(error);

@@ -22,7 +22,7 @@ run_help() {
 
     echo
     echo $0
-    echo Verifies that the parameters JSON is not malformed and will not
+    echo Verifies that the configuration JSON is not malformed and will not
     echo cause unexpected behavior.
     echo
     echo $0 --help

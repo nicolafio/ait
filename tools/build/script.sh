@@ -66,8 +66,8 @@ run_build() {
 
     script_dir=`dirname "$0"`
 
-    # Verifies that the integration parameters are not malformed
-    bash "$script_dir"/../params-verify/script.sh || exit $?
+    # Verifies that the integration configurtion is not malformed
+    bash "$script_dir"/../config-verify/script.sh || exit $?
 
     src_dir=`realpath "$script_dir/../../source"`
     build_file=`realpath "$1"`
