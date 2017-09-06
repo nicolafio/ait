@@ -5,8 +5,6 @@
 #  This file is part of the Arc Integration for Thunderbird, licensed under
 #  the terms of the GNU General Public License 3.0.
 
-params_location=
-
 main() {
 
     case $1 in
@@ -28,7 +26,6 @@ run_help() {
     echo $0 --help
     echo Prints this help message
     echo
-
 
 }
 
