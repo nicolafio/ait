@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+   ~  Copyright (c) 2017 Nicola Fiori (JD342)
+   ~
+   ~  This file is part of the Arc Integration for Thunderbird, licensed under
+   ~  the terms of the GNU General Public License 3.0.
+   ~
+   -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.35 6.35" width="24" height="24">
+    <path fill="#fafafa" d="M-293.96-15.954h4.233v5.292h-4.234v-5.292z"/>
+    <path stroke-width=".265" stroke-opacity=".267" stroke-linejoin="round" stroke="#4f6698" fill="none" d="M-294.093-16.086h4.498v5.556h-4.498v-5.556z"/>
+    <path stroke="#b4bfd8" fill="none" d="M0-290.15h2.344zm2.688 0h2.187zm2.53 0h1.938zm2.25 0h.845zm1.188 0zm-8.656 2h3.656zm4.063 0h1.75zm2.062 0H7zm1.219 0h1.593zm1.937 0h1.625zM0-286.12h1.594zm2.094 0H8zM0-283.155h3.094zm3.406 0H8.47zm5.375 0h2.469zm-8.781 2h2.344zm2.688 0h2.156zm2.53 0h1.938zm2.25 0h.845zm1.188 0h1.875zm-8.656 3h3.094zm3.406 0H8.47zm5.375 0h2.469zm-8.781 2h3.875zm4.219 0h1.75zm2.062 0h2.75z"/>
+    <path fill="#fafafa" d="M12.645 61.768h1.12v1.4h-1.12v-1.4z"/>
+    <path stroke-width=".07" stroke-opacity=".267" stroke-linejoin="round" stroke="#4f6698" fill="none" d="M12.61 61.733h1.19v1.47h-1.19v-1.47z"/>
+    <path stroke-width=".265" stroke="#b4bfd8" fill="none" d="M-15.147-56.288h.62zm.71 0h.58zm.67 0h.513zm.596 0h.223zm.314 0zm-2.29.529h.967zm1.075 0h.463zm.545 0h.232zm.323 0h.422zm.513 0h.43zm-2.456.537h.422zm.554 0h1.563zm-.554.784h.818zm.901 0h1.34zm1.422 0h.653zm-2.323.53h.62zm.71 0h.571zm.67 0h.513zm.596 0h.223zm.314 0h.496zm-2.29.793h.818zm.901 0h1.34zm1.422 0h.653zm-2.323.53h1.025zm1.116 0h.463zm.546 0h.727z"/>
+    <path d="M1.058.53h4.234v5.29H1.058z" fill="#fafafa"/>
+    <path d="M.926.397h4.498v5.556H.926z" fill="none" stroke="#4f6698" stroke-width=".265" stroke-linejoin="round" stroke-opacity=".267"/>
+    <path d="M1.587 1.19h.62zm.712 0h.578zm.67 0h.512zm.595 0h.223zm.314 0zm-2.29.53h.967zm1.074 0h.463zm.546 0h.232zm.323 0h.421zm.512 0h.43zm-2.456.537h.422zm.554 0h1.563zm-.554.784h.82zm.902 0h1.34zm1.422 0h.653zm-2.324.53h.62zm.712 0h.57zm.67 0h.512zm.595 0h.223zm.314 0h.496zm-2.29.793h.818zm.9 0h1.34zm1.423 0h.653zm-2.324.53h1.026zm1.117 0h.463zm.545 0h.728z" fill="none" stroke="#b4bfd8" stroke-width=".265"/>
+</svg>

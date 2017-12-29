@@ -1,0 +1,33 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    #{ coloring(panel-content, $variant) + $addr-book-win } {
+        #abContent splitter {
+            @extend %splitter-coloring-#{ $variant }-content;
+        }
+        #dirTree {
+            @extend %tree-coloring-#{ $variant }-side-panel;
+        }
+        #abResultsTree {
+            @extend %tree-coloring-#{ $variant }-standard;
+        }
+    }
+}
+#{ styling(address-book-panel-content) + $addr-book-win } {
+    #abContent splitter {
+        @extend %splitter-styling;
+    }
+    #dirTree {
+        @extend %tree-styling;
+        @include tree-icon-styling(DirCol, addressbook, 16px);
+    }
+    #abResultsTree {
+        @extend %tree-styling;
+    }
+}

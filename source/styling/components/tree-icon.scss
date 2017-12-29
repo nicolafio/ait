@@ -1,0 +1,29 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    %tree-icon-coloring-#{ $variant } {
+        @each $icon-name in $icon-names-16pt {
+            --ait-tree-#{ $icon-name }-icon: icon($icon-name, '16', map_get($text-color-variants, $variant));
+        }
+    }
+}
+@mixin tree-icon-styling($tree-image-props, $icon-name, $icon-size: '') {
+    treechildren {
+        &:-moz-tree-image(#{ $tree-image-props }) {
+            list-style-image: var(--ait-tree-#{ $icon-name }-icon);
+            @if $icon-size != '' {
+                width: $icon-size;
+                height: $icon-size;
+            }
+        }
+        &:-moz-tree-image(#{ $tree-image-props } selected) {
+            list-style-image: icon($icon-name, '16', $btn-active-text-color);
+        }
+    }
+}

@@ -1,0 +1,39 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+$tasks-panel: '#task-toolbox-container:not([collapsed="true"]) ~ #calendarContent';
+
+@each $variant in light, dark {
+    #{ coloring(panel-content, $variant) + $main-win } {
+        #{ $tasks-panel } {
+            @extend %splitter-coloring-#{ $variant }-panel;
+        }
+        #task-text-filter-field {
+            @extend %searchbox-coloring-#{ $variant };
+        }
+        #view-task-edit-field {
+            @extend %textbox-coloring-#{ $variant };
+        }
+    }
+}
+#{ styling(lightning-extension-tasks-panel-content) + $main-win } {
+    #{ $tasks-panel } {
+        #ltnSidebar {
+            border-bottom-color: var(--ait-panel-content-panel-border-color);
+        }
+        splitter {
+            @extend %splitter-styling;
+        }
+    }
+    #task-text-filter-field {
+        @extend %searchbox-styling;
+    }
+    #view-task-edit-field {
+        @extend %textbox-styling;
+    }
+}

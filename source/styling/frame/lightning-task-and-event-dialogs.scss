@@ -1,0 +1,33 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    #{ $event-dialog }, #{ $task-dialog } {
+        &#{ coloring(frame, $variant) } {
+            .mail-toolbox {
+                @extend %toolset-coloring-#{ $variant }-borderless;
+            }
+        }
+    }
+}
+#{ $event-dialog + styling(lightning-extension-event-dialog-frame) },
+#{ $task-dialog + styling(lightning-extension-task-dialog-frame) } {
+    @include toolset-btn-icon-styling(#button-save, btn, drive);
+    @include toolset-btn-icon-styling(#button-saveandclose, btn, check);
+    @include toolset-btn-icon-styling(#button-delete, btn, delete);
+    @include toolset-btn-icon-styling(#button-attendees, btn, avatar);
+    @include toolset-btn-icon-styling(#button-privacy, menubtn-btn, lock);
+    @include toolset-btn-icon-styling(#button-freebusy, menubtn-btn, time);
+    @include toolset-btn-icon-styling(#button-timezones, check-btn, globe);
+    @include toolset-btn-icon-styling(#button-status, menubtn-btn, status);
+    @include toolset-btn-icon-styling(#button-url, menubtn-btn, attachment);
+    @include toolset-btn-icon-styling(#button-priority, menubtn-btn, important);
+    .mail-toolbox {
+        @extend %toolset-styling;
+    }
+}

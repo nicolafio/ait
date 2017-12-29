@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+   ~  Copyright (c) 2017 Nicola Fiori (JD342)
+   ~
+   ~  This file is part of the Arc Integration for Thunderbird, licensed under
+   ~  the terms of the GNU General Public License 3.0.
+   ~
+   -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <path d="M5 5h.773a.78.78 0 0 1 .516.234L8 6.945l1.734-1.71c.2-.174.335-.23.516-.235H11v.75c0 .215-.026.413-.188.562l-1.71 1.711 1.687 1.688c.141.141.211.34.211.539V11h-.75a.761.761 0 0 1-.54-.21L8 9.077 6.29 10.79a.76.76 0 0 1-.54.211H5v-.75a.76.76 0 0 1 .21-.54l1.712-1.687-1.711-1.71A.681.681 0 0 1 5 5.75V5z"/>
+</svg>

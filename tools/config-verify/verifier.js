@@ -8,7 +8,7 @@
 
 /* eslint-env node */
 
-const file = `${__dirname}/../../source/xpi-content/configuration.json`;
+const file = `${__dirname}/../../source/package-contents/configuration.json`;
 require('fs').readFile(file, (err, data) => {
     console.log('verifying configuration');
     const start = Date.now();

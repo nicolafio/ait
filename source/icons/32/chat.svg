@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+   ~  Copyright (c) 2017 Nicola Fiori (JD342)
+   ~
+   ~  This file is part of the Arc Integration for Thunderbird, licensed under
+   ~  the terms of the GNU General Public License 3.0.
+   ~
+   -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.467 8.467" width="32" height="32">
+    <path d="M1.366 1.588a.304.304 0 0 0-.31.3V6.05c0 .166.139.3.31.3H4.93l.62.601.619-.6h.929c.171 0 .31-.135.31-.301V1.888c0-.166-.139-.3-.31-.3z" fill="#f5f5f5"/>
+    <path d="M1.366 1.323a.574.574 0 0 0-.574.565V6.05c0 .313.265.565.574.565h3.456l.727.705.726-.705h.822c.31 0 .574-.252.574-.565V1.888a.574.574 0 0 0-.574-.565zm0 .265h5.73c.172 0 .31.134.31.3V6.05c0 .166-.138.3-.31.3h-.928l-.62.601-.619-.6H1.366a.305.305 0 0 1-.31-.301V1.888c0-.167.139-.3.31-.3z" style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;isolation:auto;mix-blend-mode:normal" color="#000" font-weight="400" font-family="sans-serif" white-space="normal" overflow="visible" fill="#4f6698" fill-opacity=".267"/>
+</svg>

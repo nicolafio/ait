@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+   ~  Copyright (c) 2017 Nicola Fiori (JD342)
+   ~
+   ~  This file is part of the Arc Integration for Thunderbird, licensed under
+   ~  the terms of the GNU General Public License 3.0.
+   ~
+   -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.467 8.467" width="32" height="32">
+    <path d="M.926 2.647v4.365c0 .293.236.529.53.529H7.01c.294 0 .53-.236.53-.53V2.646" fill="none" stroke="#4f6698" stroke-width=".265" stroke-opacity=".267"/>
+    <path d="M6.747 5.689H1.72zm-.004-2.376L1.72 3.309v3.173h5.027zm.004 1.582H1.72m5.027-.794H1.72m.797-.785L2.51 6.483M3.573 3.33l-.002 3.153m1.058-3.164l.002 3.164m1.055-3.175l.005 3.175" fill="none" stroke="#b4bfd8" stroke-width=".265" stroke-opacity=".718"/>
+    <path d="M1.587 1.059a.528.528 0 0 0-.529.529v.794h6.35v-.794a.528.528 0 0 0-.529-.53z" fill="none" stroke="#9d0b0d" stroke-width=".529" stroke-opacity=".549"/>
+    <path d="M1.587 1.059a.528.528 0 0 0-.529.529v.794h6.35v-.794a.528.528 0 0 0-.529-.53z" fill="#f46062"/>
+    <path d="M1.92 1.72a.198.198 0 1 1-.396 0 .199.199 0 1 1 .397 0zm5.025 0a.199.199 0 1 1-.397 0 .199.199 0 1 1 .397 0z" opacity=".2"/>
+</svg>

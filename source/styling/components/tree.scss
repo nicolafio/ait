@@ -1,0 +1,70 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    %tree-coloring-#{ $variant }-standard, %tree-coloring-#{ $variant }-side-panel {
+        @extend %tree-icon-coloring-#{ $variant };
+        --ait-tree-text-color: map_get($text-color-variants, $variant);
+        --ait-tree-item-hover-bg-clip-color: map_get($item-hover-bg-clip-color-variants, $variant);
+        --ait-tree-down-arrow-icon: icon(down, '16', map_get($text-color-variants, $variant));
+        --ait-tree-right-arrow-icon: icon(right, '16', map_get($text-color-variants, $variant));
+    }
+    %tree-coloring-#{ $variant }-standard {
+        --ait-tree-bg-color: map_get($content-bg-color-variants, $variant);
+        --ait-tree-row-height: 20px;
+    }
+    %tree-coloring-#{ $variant }-side-panel {
+        --ait-tree-bg-color: map_get($side-panel-bg-color-variants, $variant);
+        --ait-tree-row-height: 22px;
+    }
+}
+%tree-styling {
+    font-size: 14px;
+    color: var(--ait-tree-text-color);
+    background: var(--ait-tree-bg-color);
+    treechildren {
+        &:-moz-tree-row {
+            background: transparent;
+            height: var(--ait-tree-row-height);
+        }
+        &:-moz-tree-row(selected) {
+            background: $blue-color;
+            border-color: $blue-color;
+        }
+        &:-moz-tree-row(hover) {
+            background: var(--ait-tree-item-hover-bg-clip-color);
+        }
+        &:-moz-tree-row(selected hover) {
+            background: $darker-blue-color;
+        }
+        &:-moz-tree-row(focus selected) {
+            outline: 1px dashed $item-focus-active-outline-color;
+            outline-offset: $item-focus-outline-offset;
+            -moz-outline-radius: $item-focus-outline-radius;
+        }
+        &:-moz-tree-twisty {
+            -moz-appearance: none;
+            list-style-image: none;
+            background-image: var(--ait-tree-right-arrow-icon);
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+        &:-moz-tree-twisty(selected) {
+            background-image: icon(right, '16', $btn-active-text-color);
+        }
+        &:-moz-tree-twisty(open) {
+            background-image: var(--ait-tree-down-arrow-icon);
+        }
+        &:-moz-tree-twisty(open selected) {
+            background-image: icon(down, '16', $btn-active-text-color);
+        }
+        &:-moz-tree-cell-text(selected) {
+            color: $btn-active-text-color;
+        }
+    }
+}

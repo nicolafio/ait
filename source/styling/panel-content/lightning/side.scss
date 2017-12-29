@@ -1,0 +1,68 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    #{ coloring(panel-content, $variant) + $main-win } {
+        #today-pane-panel {
+            @extend %textbox-coloring-#{ $variant };
+        }
+        #today-splitter {
+            @extend %splitter-coloring-#{ $variant }-panel;
+        }
+    }
+}
+#{ styling(lightning-extension-side-panel-content) + $main-win } {
+    #unifinder-task-edit-field {
+        @extend %textbox-styling;
+    }
+    #today-splitter {
+        @extend %splitter-styling;
+    }
+    #today-pane-panel sidebarheader, #today-pane-panel {
+        background: var(--ait-panel-content-side-panel-bg-color);
+    }
+    #today-pane-panel {
+        position: relative;
+        border-bottom-color: var(--ait-panel-content-panel-border-color);
+        sidebarheader {
+            font-weight: bold;
+            margin: 0.5em 0.5em 0.5em 0;
+        }
+    }
+    #calendar-task-tree-detail {
+        margin: 3px;
+        display: flex;
+        overflow: hidden;
+        flex-flow: column;
+        border-radius: $input-border-radius;
+        background: var(--ait-panel-content-actions-box-bg-color);
+        border: 1px solid var(--ait-panel-content-panel-border-color);
+    }
+    #unifinder-todo-tree {
+        flex: 1;
+        tree {
+            width: 100%;
+            height: 100%;
+        }
+        .calendar-task-tree {
+            border-bottom: 1px solid var(--ait-panel-content-panel-border-color);
+        }
+    }
+    #unifinder-task-edit-field {
+        margin: $actions-box-input-margin;
+    }
+    #today-pane-cycler-prev, #today-pane-cycler-next {
+        height: $input-height;
+        .toolbarbutton-icon {
+            width: 16px;
+            height: 16px;
+            list-style-image: none;
+            background-image: var(--ait-panel-content-btn-right-arrow-icon);;
+        }
+    }
+}

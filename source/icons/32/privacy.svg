@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+   ~  Copyright (c) 2017 Nicola Fiori (JD342)
+   ~
+   ~  This file is part of the Arc Integration for Thunderbird, licensed under
+   ~  the terms of the GNU General Public License 3.0.
+   ~
+   -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.467 8.467" width="32" height="32">
+    <defs>
+        <clipPath id="privacy-32-a">
+            <circle cx="24" cy="24" r="8" opacity=".2"/>
+        </clipPath>
+    </defs>
+    <g transform="translate(-169.353 -18.29) scale(.26458)">
+        <rect ry="0" rx="0" y="223.567" x="1239.509" height="32" width="32" fill="none"/>
+        <path d="M656.076 72.13c-7.18 0-13 5.82-13 12.999 0 7.18 5.82 13 13 13s13-5.82 13-13-5.82-13-13-13z" fill="#eff0f1"/>
+        <ellipse ry="6" rx="6" cx="656.076" cy="85.129" opacity=".15" fill-opacity=".663"/>
+        <circle transform="matrix(.75 0 0 .75 638.076 67.13)" clip-path="url(#privacy-32-a)" cx="24" cy="24" r="8" fill="none" stroke="#313f5e" stroke-width="2.667" stroke-opacity=".165"/>
+        <path d="M656.076 71.63c-7.449 0-13.5 6.05-13.5 13.5 0 7.448 6.051 13.5 13.5 13.5s13.5-6.052 13.5-13.5c0-7.45-6.051-13.5-13.5-13.5z" style="marker:none" color="#000" overflow="visible" fill="none" stroke="#232d44" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".337"/>
+        <path d="M654.076 77.63h4v7.853l-1.434 1.209 1.434 1.259v4.178h-4v-7.854l1.508-1.214-1.508-1.248z" fill="#4c5263"/>
+        <ellipse ry="11.5" rx="11.5" cy="85.129" cx="656.076" fill="none" stroke="#000" stroke-width="3" stroke-opacity=".055"/>
+    </g>
+</svg>

@@ -64,35 +64,27 @@ run_build() {
 
     echo building at $1
 
-    script_dir=`dirname "$0"`
+    script_dir=$(realpath "`dirname "$0"`")
+	tools_dir=$script_dir/..
+	project_dir=$tools_dir/..
+	src_dir=$project_dir/source
+	style_compile_script=$tools_dir/style-compile/script.sh
+	config_verify_script=$tools_dir/config-verify/script.sh
 
     # Verifies that the integration configurtion is not malformed
-    bash "$script_dir"/../config-verify/script.sh || exit $?
+    bash "$config_verify_script" || exit $?
 
-    src_dir=`realpath "$script_dir/../../source"`
     build_file=`realpath "$1"`
 
     # Creates a temporary folder
     tmp_dir=`mktemp -d`
 
     # Generates styling.css
-    sassc --style compressed \
-          "$src_dir/windows-styling/index.scss" "$tmp_dir/styling.css" \
-    || abort_build "$tmp_dir" "windows' styling compilation failed"
+	bash "$style_compile_script" >> "$tmp_dir/styling.css" \
+	|| abort_build "$tmp_dir" "styling compilation failed"
 
-    # Generates icons.svg
-    icons_css=`sassc --style compressed "$src_dir/icons/styling.scss"`
-    (( $? )) && abort_build "$tmp_dir" "icons' styling compilation failed"
-    icons_css_base64=`echo "$icons_css" | base64 -w 0`
-    icons_css_import_rule="@import url(data:text/css;base64,$icons_css_base64)"
-    cat "$src_dir/icons/set.svg" \
-    | xmlstarlet edit -N ns=http://www.w3.org/2000/svg \
-                      --subnode /ns:svg \
-                                --type elem \
-                                --name style \
-                                --value "$icons_css_import_rule" \
-    >> "$tmp_dir/icons.svg" \
-    || abort_build "$tmp_dir" "svg file generation failed"
+    # Includes the extension icon
+    ln -s "$src_dir/icons/32/appearance.svg" "$tmp_dir/icon.svg"
 
     # Removes previous .xpi file.
     rm -f "$build_file"
@@ -103,11 +95,11 @@ run_build() {
 
     # Includes all sources that do not need to be processed into the new .xpi
     # file.
-    cd "$src_dir/xpi-content"
+    cd "$src_dir/package-contents"
     zip "$build_file" `find . -not -path "./readme.md"`
 
     # Includes the license file into the new .xpi file.
-    cd ../..
+    cd "$project_dir"
     zip "$build_file" license
 
     # Removes the temporary directory

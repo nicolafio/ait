@@ -88,6 +88,7 @@ This integration contains work originating from:
  - [Arc Theme](https://github.com/horst3180/Arc-theme) by [horst3180](https://horst3180.deviantart.com/) (licensed under the terms of GPLv3);
  - [Arc Icon Theme](https://github.com/horst3180/arc-icon-theme) by [horst3180](https://horst3180.deviantart.com/) (licensed under the terms of GPLv3);
  - [Adwaita Icon Theme](https://github.com/GNOME/adwaita-icon-theme) by the [GNOME Project](https://www.gnome.org/) (licensed under the terms of either CCBYSAv3 or LGPLv3).
+ - [Numix Icon Theme](https://github.com/numixproject/numix-icon-theme) by the [Numix Project](https://numixproject.org/) (licensed under the terms of GPLv3+)
 
 The icons were copied and altered to be used in the integration.
 

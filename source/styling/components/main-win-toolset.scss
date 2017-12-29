@@ -1,0 +1,21 @@
+@each $variant in light, dark {
+    %main-win-toolset-coloring-#{ $variant } {
+        @extend %toolset-coloring-#{ $variant }-borderless;
+    }
+}
+%main-win-toolset-styling {
+    @extend %toolset-styling;
+    @include toolset-btn-icon-styling('.button-appmenu', appmenu-btn, menu);
+    @include toolset-btn-icon-styling(#button-print, menubtn-btn, printer);
+    @include toolset-btn-icon-styling(#button-getmsg, menubtn-btn, inbox);
+    @include toolset-btn-icon-styling(#button-newmsg, menubtn-btn, write);
+    @include toolset-btn-icon-styling(#extractTaskButton, menubtn-btn, new);
+    @include toolset-btn-icon-styling(#extractEventButton, menubtn-btn, schedule);
+    @include toolset-btn-icon-styling(#button-tag, toggle-btn, tag);
+    @include toolset-btn-icon-styling(#qfb-show-filter-bar, check-btn, search);
+    @include toolset-btn-icon-styling(#button-chat, btn, message);
+    @include toolset-btn-icon-styling(#button-address, btn, addressbook);
+    @include toolset-btn-icon-styling(#lightning-button-tasks, btn, task);
+    @include toolset-btn-icon-styling(#lightning-button-calendar, btn, calendar);
+    @include toolset-btn-icon-styling(#button-showconversation, btn, conversation);
+}

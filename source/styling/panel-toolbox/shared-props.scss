@@ -1,0 +1,35 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+:root {
+    --ait-panel-toolbox-height: 36px;
+    --ait-panel-toolbox-tab-height: 29px;
+    --ait-panel-toolbox-items-margin: 5px;
+    --ait-panel-toolbox-tab-border-radius: 1px;
+}
+#{ coloring(panel-toolbox, light) } {
+    --ait-panel-toolbox-bg-color: map_get($panel-bg-color-variants, light);
+    --ait-panel-toolbox-border-color: map_get($panel-border-color-variants, light);
+    --ait-panel-toolbox-upper-border-color: map_get($panel-border-color-variants, light);
+    --ait-panel-toolbox-tab-hover-bg-color: rgba(map_get($panel-bg-color-variants, light), 0.6);
+    --ait-panel-toolbox-selected-tab-close-icon: icon(close, '16', map_get($text-color-variants, light));
+}
+#{ coloring(panel-toolbox, dark) } {
+    --ait-panel-toolbox-bg-color: map_get($panel-bg-color-variants, dark);
+    --ait-panel-toolbox-border-color: map_get($panel-border-color-variants, dark);
+    --ait-panel-toolbox-upper-border-color: map_get($panel-border-color-variants, dark);
+    --ait-panel-toolbox-tab-hover-bg-color: rgba(map_get($panel-bg-color-variants, dark), 0.6);
+    --ait-panel-toolbox-selected-tab-close-icon: icon(close, '16', map_get($text-color-variants, dark));
+}
+#{ coloring(panel-toolbox, darker) } {
+    --ait-panel-toolbox-bg-color: map_get($panel-bg-color-variants, light);
+    --ait-panel-toolbox-border-color: map_get($panel-border-color-variants, light);
+    --ait-panel-toolbox-upper-border-color: map_get($panel-border-color-variants, dark);
+    --ait-panel-toolbox-tab-hover-bg-color: rgba(map_get($panel-bg-color-variants, light), 0.25);
+    --ait-panel-toolbox-selected-tab-close-icon: icon(close, '16', map_get($text-color-variants, light));
+}

@@ -1,0 +1,148 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    #{ coloring(panel-content, $variant) + $main-win } {
+        #attachment-view-toolbox, #header-view-toolbox {
+            @extend %toolset-coloring-#{ $variant }-standard;
+        }
+    }
+}
+#{ styling(mails-mail-view-content) + $main-win } {
+    @include toolset-btn-icon-styling(#hdrReplyButton, btn, reply);
+    @include toolset-btn-icon-styling(#hdrForwardButton, btn, forward);
+    @include toolset-btn-icon-styling(#hdrArchiveButton, btn, folder);
+    @include toolset-btn-icon-styling(#hdrJunkButton, btn, junk);
+    @include toolset-btn-icon-styling(#hdrTrashButton, btn, delete);
+    @include toolset-btn-icon-styling(#hdrReplyAllButton, menubtn-btn, replyall);
+    @include toolset-btn-icon-styling(#attachmentSaveAllSingle, menubtn-btn, download);
+    @include toolset-btn-icon-styling(#attachmentSaveAllMultiple, menubtn-btn, download);
+    // notifications styling
+    #msgNotificationBar, #imip-bar {
+        -moz-box-ordinal-group: 2;
+    }
+    #msgNotificationBar notification {
+        padding: $toolset-items-margin;
+        &[value="remoteContent"], &[value="maybeScam"] {
+            image {
+                display: none;
+            }
+            [anonid="details"]::before {
+                content: "";
+                width: 16px;
+                height: 16px;
+                display: block;
+                margin-left: $toolset-items-margin;
+                background: var(--ait-notification-icon);
+            }
+        }
+        &[value="remoteContent"] {
+            --ait-notification-icon: icon(shield, '16', $btn-active-text-color);
+        }
+        &[value="maybeScam"] {
+            --ait-notification-icon: icon(important, '16', $btn-active-text-color)
+        }
+    }
+    // header styling
+    #msgHeaderView {
+        color: var(--ait-panel-content-text-color);
+        background: var(--ait-panel-content-content-bg-color);
+        border-bottom-width: calc(1px / var(--ait-pixel-ratio));
+        row > label {
+            color: var(--ait-panel-content-text-color);
+            opacity: 0.55;
+        }
+    }
+    .emaillabel {
+        color: var(--ait-panel-content-text-color);
+    }
+    .emailStar {
+        position: relative;
+        transform: translateY(2px);
+        list-style-image: none;
+        background: var(--ait-panel-content-unstarred-icon);
+        &[hascard="true"] {
+            background: var(--ait-panel-content-starred-icon);
+        }
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+    mail-emailaddress:hover .emailStar {
+        background: icon(unstarred, '16', $btn-active-text-color);
+        &[hascard="true"] {
+            background: icon(starred, '16', $btn-active-text-color);
+        }
+    }
+    #expandedBoxSpacer {
+        display: none;
+    }
+    #expandedHeaders2 description {
+        color: var(--ait-panel-content-text-color);
+    }
+    #expandedfromRow, #expandedHeaders2 row:not(#expandedsubjectRow), #dateLabel {
+        font-size: 0.9em;
+    }
+    // toolbox styling
+    #singlemessage {
+        position: relative;
+        padding-bottom: $actions-box-height;
+    }
+    #header-view-toolbox {
+        @extend %toolset-styling;
+        bottom: 0;
+        width: 100%;
+        position: absolute;
+        height: $actions-box-height;
+        background: var(--ait-panel-content-actions-box-bg-color);
+        border-top: 1px solid var(--ait-panel-content-panel-border-color);
+    }
+    #header-view-toolbar {
+        .toolbarbutton-1 {
+            margin-right: 0;
+        }
+    }
+    #msgHeaderView[collapsed="true"] #header-view-toolbox {
+        visibility: visible;
+        > * {
+            visibility: collapse;
+        }
+    }
+    // attachment box styling
+    #attachment-view-toolbox {
+        @extend %toolset-styling;
+    }
+    #attachmentToggle {
+        margin-right: 0;
+    }
+    #attachmentView {
+        background: var(--ait-panel-content-content-bg-color);
+        border-top-width: calc(1px / var(--ait-pixel-ratio));
+        padding: $toolset-items-margin 0;
+    }
+    #attachment-splitter {
+        border-width: calc(1px / var(--ait-pixel-ratio));
+        &:not([collapsed="true"]) + #attachmentView {
+            border-top: none;
+        }
+    }
+    #attachmentIcon {
+        width: 16px;
+        height: 16px;
+        list-style-image: none;
+        background: var(--ait-panel-content-attachment-icon);
+    }
+    #attachmentList {
+        overflow: hidden;
+        margin: $toolset-items-margin;
+        margin-bottom: 0;
+        border-radius: $input-border-radius;
+        padding-left: $toolset-items-margin;
+        border: 1px solid var(--ait-panel-content-input-border-color);
+    }
+}

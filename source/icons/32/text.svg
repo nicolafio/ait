@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+   ~  Copyright (c) 2017 Nicola Fiori (JD342)
+   ~
+   ~  This file is part of the Arc Integration for Thunderbird, licensed under
+   ~  the terms of the GNU General Public License 3.0.
+   ~
+   -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.467 8.467" width="32" height="32">
+    <path d="M1.323.265h5.82v7.408h-5.82V.265z" fill="#fafafa"/>
+    <path d="M1.19.133h6.086v7.673H1.191V.133z" fill="none" stroke="#4f6698" stroke-width=".265" stroke-linejoin="round" stroke-opacity=".267"/>
+    <path d="M2.117 1.456h.593zm.71 0h.58zm.67 0h.513zm.596 0h.223zm-1.976.529h.967zm1.075 0h.463zm.545 0h.232zm.323 0h.421zm.512 0h.43zm-2.455.528h1.132zm1.223 0h1.224zm.451 2.116h.223zm.314 0h.496zm.595 0H6zm-.71.55h.487zm-.273 1.567h.786zm1.02 0h.315z" fill="#b4bfd8" stroke="#b4bfd8" stroke-width=".265"/>
+    <path d="M3.04 4.511h.247v.264H3.04zm.288 0h.108v.264h-.108zM2.117 6.098h.528v.265h-.528zm.569 0h.566v.265h-.566zm.608 0h.226v.265h-.226zm.267 0h.533v.265H3.56zm.98 0h.142v.265h-.142zm-.406 0H4.5v.265h-.365zm.59 0h.083v.265h-.083zm.125 0h.225v.265H4.85zM2.803 5.04h.633v.265h-.633zm-.686.529h.478v.265h-.478zm.517 0h.15v.265h-.15zm.19 0h.344v.265h-.344zm.383 0h.234v.265h-.234zm-1.09 1.058h.393v.265h-.393zm.456 0h.7v.265h-.7zm-.456-3.453v.265h.81v-.265zm0 .53v.264h.818v-.265zm1.165-.53v.265h1.48v-.265zm.009.53v.264h1.347v-.265zm-1.174.793v.264h.67v-.264zm0 .537v.257h.587v-.257z" fill="#b4bfd8"/>
+</svg>

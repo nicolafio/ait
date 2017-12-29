@@ -1,0 +1,29 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    #{ $addr-book-win + coloring(frame, $variant) } {
+        #ab-toolbox {
+            @extend %toolset-coloring-#{ $variant }-borderless;
+        }
+    }
+}
+#{ $addr-book-win + styling(address-book-window-frame) } {
+    @include toolset-btn-icon-styling(#button-newim, btn, message);
+    @include toolset-btn-icon-styling(#button-abdelete, btn, delete);
+    @include toolset-btn-icon-styling(#button-newmessage, btn, write);
+    @include toolset-btn-icon-styling(#button-editcard, btn, properties);
+    @include toolset-btn-icon-styling(#button-newcard, btn, register);
+    @include toolset-btn-icon-styling(#button-newlist, btn, addressbook);
+    #ab-toolbox {
+        @extend %toolset-styling;
+    }
+    #abContent {
+        border-top: 1px solid var(--ait-frame-bottom-border-color);
+    }
+}

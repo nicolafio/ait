@@ -1,0 +1,18 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    #{ coloring(frame, $variant) } {
+        --ait-frame-bottom-border-color: map_get($panel-border-color-variants, $variant);
+        --ait-frame-toolset-task-icon: icon(task, '16', map_get($text-color-variants, $variant));
+        --ait-frame-toolset-down-arrow-icon: icon(down, '16', map_get($text-color-variants, $variant));
+        --ait-frame-toolset-left-arrow-icon: icon(left, '16', map_get($text-color-variants, $variant));
+        --ait-frame-toolset-calendar-icon: icon(calendar, '16', map_get($text-color-variants, $variant));
+        --ait-frame-unselected-tab-close-icon: icon(close, '16', map_get($text-color-variants, $variant))
+    }
+}

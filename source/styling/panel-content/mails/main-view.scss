@@ -1,0 +1,187 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    #{ coloring(panel-content, $variant) + $main-win } {
+        #messengerBox {
+            @extend %splitter-coloring-#{ $variant }-content;
+        }
+        #threadpane-splitter {
+            @extend %splitter-coloring-#{ $variant }-panel;
+        }
+        #folderTree {
+            @extend %tree-coloring-#{ $variant }-side-panel;
+        }
+        #threadTree {
+            @extend %tree-coloring-#{ $variant }-standard;
+        }
+        #quick-filter-bar {
+            @extend %toolset-btn-icon-coloring-#{ $variant };
+            @extend %searchbox-coloring-#{ $variant };
+        }
+    }
+}
+#{ styling(mails-main-view-content) + $main-win } {
+    #accountCentralBox, #folderTree, #threadTree, #messagepanebox {
+        border-bottom-color: var(--ait-panel-content-panel-border-color);
+    }
+    #messengerBox splitter {
+        @extend %splitter-styling;
+    }
+    #messagesBox {
+        overflow: hidden;
+    }
+    // folder side bar styling
+    #folderTree {
+        @extend %tree-styling;
+        @include tree-icon-styling(specialFolder-Inbox, inbox);
+        @include tree-icon-styling(specialFolder-Outbox, outbox);
+        @include tree-icon-styling(specialFolder-Drafts, document);
+        @include tree-icon-styling(specialFolder-Sent, mail);
+        @include tree-icon-styling(specialFolder-Junk, junk);
+        @include tree-icon-styling(specialFolder-Trash, trash);
+        @include tree-icon-styling(specialFolder-none, folder);
+        @include tree-icon-styling(specialFolder-Archive, folder);
+        @include tree-icon-styling(isServer-true, letter);
+        @include tree-icon-styling(isServer-true serverType-none, drive);
+    }
+    // quick filter bar styling
+    @include toolset-btn-icon-styling(#qfb-attachment, check-btn, attachment);
+    @include toolset-btn-icon-styling(#qfb-tags, check-btn, tag);
+    @include toolset-btn-icon-styling(#qfb-inaddrbook, check-btn, addressbook);
+    @include toolset-btn-icon-styling(#qfb-starred, check-btn, starred);
+    @include toolset-btn-icon-styling(#qfb-unread, check-btn, unreadletter);
+    #qfb-qs-textbox {
+        @extend %searchbox-styling;
+    }
+    #qfb-separator {
+        border: none;
+        min-width: 1px;
+        -moz-appearance: none;
+        margin-left: $toolset-items-margin;
+        margin-right: $toolset-items-margin;
+        background: linear-gradient(transparent calc(50% - #{ $input-height / 3 }),
+                                    var(--ait-panel-content-content-border-color) calc(50% - #{ $input-height / 3 }),
+                                    var(--ait-panel-content-content-border-color) calc(50% + #{ $input-height / 3 }),
+                                    transparent calc(50% + #{ $input-height / 3 }));
+    }
+    #quick-filter-bar-main-bar {
+        transition: margin-top 300ms ease;
+    }
+    #quick-filter-bar {
+        overflow: hidden;
+        padding-top: 1px;
+        margin-top: -1px;
+        background: var(--ait-panel-content-content-bg-color);
+        border-bottom-color: var(--ait-panel-content-content-border-color);
+        &[collapsed="true"] {
+            transition: visibility 300ms step-end;
+            #quick-filter-bar-main-bar {
+                margin-top: -$input-height - 12px;
+            }
+        }
+    }
+    #qfb-results-label {
+        transition: color 300ms ease;
+    }
+    #threadTree {
+        @extend %tree-styling;
+        @include tree-icon-styling(attachmentCol attach, attachment, 12px);
+        @include tree-icon-styling(flaggedCol, unstarred, 12px);
+        @include tree-icon-styling(flaggedCol flagged, starred);
+        &:not([filterActive]) {
+            outline: 1px solid transparent;
+            #qfb-results-label {
+                color: transparent;
+            }
+        }
+    }
+    #qfb-sticky {
+        @extend %toolset-check-btn-folders-icon-styling;
+        -moz-appearance: none;
+        height: $input-height;
+        border: 1px solid transparent;
+        border-radius: $input-border-radius;
+        padding: 0 $input-horizontal-padding;
+        transition: background 300ms ease, border-color 300ms ease;
+        &:not(:active):not([checked="true"]):hover {
+            background: var(--ait-panel-content-btn-hover-bg-color);
+            border-color: var(--ait-panel-content-input-border-color);
+        }
+        &:active, &[checked="true"] {
+            background: $blue-color;
+            border-color: var(--ait-panel-content-btn-active-border-color);
+            transition: none;
+        }
+        image {
+            width: 16px;
+            height: 16px;
+        }
+    }
+    #quick-filter-bar-filter-text-bar {
+        overflow: hidden;
+        height: $actions-box-height;
+        transition: height 300ms ease, opacity 300ms ease;
+        &[collapsed="true"] {
+            height: 0;
+            opacity: 0;
+            transition: height 300ms ease, opacity 300ms ease, visibility 300ms step-end;
+        }
+    }
+    #quick-filter-bar[filterActive] #quick-filter-bar-collapsible-buttons,
+    #quick-filter-bar:focus-within #quick-filter-bar-collapsible-buttons,
+    #quick-filter-bar:hover #quick-filter-bar-collapsible-buttons,
+    #quick-filter-bar-filter-text-bar {
+        > toolbarbutton:not(:active):not([checked="true"]) {
+            border-color: var(--ait-panel-content-input-border-color);
+            &:not(:hover) {
+                background: var(--ait-panel-content-btn-bg-color);
+            }
+        }
+    }
+    #quick-filter-bar-collapsible-buttons, #quick-filter-bar-filter-text-bar {
+        > toolbarbutton {
+            -moz-appearance: none;
+            height: $input-height;
+            border-top: 1px solid ;
+            border-bottom: 1px solid;
+            border-color: transparent;
+            font-size: $input-font-size;
+            color: var(--ait-panel-text-color);
+            padding: 0 $input-horizontal-padding;
+            transition: background 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+            &:not(:active):not([checked="true"]):hover {
+                background: var(--ait-panel-content-btn-hover-bg-color);
+                &:not(:first-of-type), + toolbarbutton {
+                    box-shadow: -1px 0 var(--ait-panel-content-input-border-color);
+                }
+            }
+            &:active, &[checked="true"] {
+                transition: none;
+                background: $blue-color;
+                color: $btn-active-text-color;
+                border-color: var(--ait-panel-content-btn-active-border-color);
+            }
+            &:first-of-type {
+                border-left-width: 1px;
+                border-left-style: solid;
+                border-top-left-radius: $input-border-radius;
+                border-bottom-left-radius: $input-border-radius;
+            }
+            &:not(:first-of-type) {
+                box-shadow: -1px 0 transparent;
+            }
+            &:last-of-type {
+                border-right-width: 1px;
+                border-right-style: solid;
+                border-top-right-radius: $input-border-radius;
+                border-bottom-right-radius: $input-border-radius;
+            }
+        }
+    }
+}

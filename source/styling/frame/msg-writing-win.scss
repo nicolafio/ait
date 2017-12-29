@@ -1,0 +1,31 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    #{ $msg-writing-win + coloring(frame, $variant) } {
+        #compose-toolbox {
+            @extend %toolset-coloring-#{ $variant }-borderless;
+        }
+    }
+}
+#{ $msg-writing-win + styling(message-writing-window-frame) } {
+    @include toolset-btn-icon-styling(#button-send, btn, mail);
+    @include toolset-btn-icon-styling(#spellingButton, menubtn-btn, check);
+    @include toolset-btn-icon-styling(#button-attach, menubtn-btn, attachment);
+    @include toolset-btn-icon-styling(#button-security, menubtn-btn, lock);
+    @include toolset-btn-icon-styling(#button-save, menubtn-btn, drive);
+    @include toolset-btn-icon-styling(#button-contacts, btn, addressbook);
+    @include toolset-btn-icon-styling(#button-print, menubtn-btn, printer);
+    @include toolset-btn-icon-styling(#cut-button, btn, cut);
+    @include toolset-btn-icon-styling(#copy-button, btn, copy);
+    @include toolset-btn-icon-styling(#paste-button, btn, paste);
+    @include toolset-btn-icon-styling(#quoteButton, btn, conversation);
+    #compose-toolbox {
+        @extend %toolset-styling;
+    }
+}

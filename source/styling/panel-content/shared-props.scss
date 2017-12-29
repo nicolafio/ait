@@ -1,0 +1,41 @@
+/*
+ ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~
+ ~  This file is part of the Arc Integration for Thunderbird, licensed under
+ ~  the terms of the GNU General Public License 3.0.
+ ~
+ */
+
+@each $variant in light, dark {
+    #{ coloring(panel-content, $variant) } {
+        --ait-panel-content-text-color: map_get($text-color-variants, $variant);
+        --ait-panel-content-panel-bg-color: map_get($panel-bg-color-variants, $variant);
+        --ait-panel-content-content-bg-color: map_get($content-bg-color-variants, $variant);
+        --ait-panel-content-input-border-color: map_get($input-border-color-variants, $variant);
+        --ait-panel-content-panel-border-color: map_get($panel-border-color-variants, $variant);
+        --ait-panel-content-side-panel-bg-color: map_get($side-panel-bg-color-variants, $variant);
+        --ait-panel-content-content-border-color: map_get($content-border-color-variants, $variant);
+        --ait-panel-content-actions-box-bg-color: map_get($actions-box-bg-color-variants, $variant);
+        --ait-panel-content-btn-bg-color: map_get($btn-bg-color-variants, $variant);
+        --ait-panel-content-btn-hover-bg-color: map_get($btn-hover-bg-color-variants, $variant);
+        --ait-panel-content-btn-active-border-color: map_get($btn-active-border-color-variants, $variant);
+        --ait-panel-content-item-hover-bg-clip-color: map_get($item-hover-bg-clip-color-variants, $variant);
+        --ait-panel-content-item-focus-outline-color: map_get($item-focus-outline-color-variants, $variant);
+        --ait-panel-content-starred-icon: icon(starred, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-unstarred-icon: icon(unstarred, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-btn-right-arrow-icon: icon(right, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-btn-down-arrow-icon: icon(down, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-attachment-icon: icon(attachment, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-inbox-icon: icon(inbox, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-document-icon: icon(document, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-mail-icon: icon(mail, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-folder-icon: icon(folder, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-letter-icon: icon(letter, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-drive-icon: icon(drive, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-junk-icon: icon(junk, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-trash-icon: icon(trash, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-conversation-icon: icon(conversation, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-feed-icon: icon(feed, '16', map_get($text-color-variants, $variant));
+        --ait-panel-content-gear-icon: icon(gear, '16', map_get($text-color-variants, $variant));
+    }
+}
