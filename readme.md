@@ -1,8 +1,8 @@
-# Arc Theme integration for Thunderbird (alpha v0.4.3)
+# Arc Theme integration for Thunderbird (alpha v0.5.0)
 
 ![alt tag](doc-data/preview.png)
 
-> Tested in Thunderbird 45.8.0, GNOME 3.22.3, Debian GNU/Linux 9, Surface Pro 4, Arc Theme 20161119-1.
+> Tested in Thunderbird 52.5.0, GNOME 3.26.2, Ubuntu 17.10.
 
 > Stability in other versions is not guaranteed, but you can still try.
 
@@ -15,27 +15,19 @@ _You can also reach me on the [**#arc-thunderbird-integration** IRC channel on *
  - Changes the appearance of the tabs and the toolbox to match the look found in the official [Arc Firefox Theme](https://github.com/horst3180/arc-firefox-theme);
  - changes the appearance of the Lightning add-on to be in syntony with the overall look;
  - supports Light, Dark and Darker theme variants;
- - every specific part of the integration can be configured and/or disabled through the preferences panel at Preferences > Display > Arc Integration.
+ - every specific part of the integration can be configured and/or disabled through the extension preferences panel.
 
 ## Notes
 
-A major addition in the 0.4.0 version is support for "Dark" and "Darker" theme variants.
-If you are using Arc Dark or Arc Darker as your OS theme, you should change the styling of the integration to match the theme variant.
-You can switch to those variants by going to **Preferences > Display > Arc Integration** and tweaking the styling as you like.
+Version 0.5.0 comes with some fixes and new styling in several parts of Thunderbird. Thew extension is still in alpha state (sorry!), meaning that it may not be very stable and may contain several unforseen bugs.
 
 Similarly to [Arc Firefox Theme](https://github.com/horst3180/arc-firefox-theme), this integration is meant to be used along with the official [Arc Theme](https://github.com/horst3180/arc-theme), you can however also use it with other operating systems and themes. If the integration is used with other OS theming, it is possible that some parts will look broken. It is possible to tweak or disable certain styling through the preferences panel.
+
+The integration supports three variants.
 
 <img height=300 src="doc-data/variants.png"/>
 
 > From up to down: Light, Dark and Darker theme variants
-
-As of version 0.4.0 the majority the integration is done, but it still needs more polishing. Now the things that remain are the following:
-
- - Completing styling of the Lightning extension (calendar view, tasks view, side pane, minimonth view);
- - comleting styling of the mails view (buttons & views);
- - applying styling in the dialog for writing messages;
- - applying styling in the add-ons manager;
- - applying styling in the status bar.
 
 ## Installation
 
@@ -52,6 +44,8 @@ The content in this repository is licensed under GPLv3.
 
 ## History
 
+  - 0.5.0 2017/12/30
+    - Fixed buggy preferences panel (for real, I hope) and included more styling
   - 0.4.3 2017/07/03
     - Fixed some buggy behavior in the preferences panel
   - 0.4.2 2017/06/13
