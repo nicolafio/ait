@@ -19,7 +19,7 @@ _You can also reach me on the [**#arc-thunderbird-integration** IRC channel on *
 
 ## Notes
 
-Version 0.5.0 comes with some fixes and new styling in several parts of Thunderbird. Thew extension is still in alpha state (sorry!), meaning that it may not be very stable and may contain several unforseen bugs.
+Version 0.5.0 comes with some fixes and new styling in several parts of Thunderbird. The extension is still in alpha state (sorry!), meaning that it may not be very stable and may contain several unforseen bugs.
 
 Similarly to [Arc Firefox Theme](https://github.com/horst3180/arc-firefox-theme), this integration is meant to be used along with the official [Arc Theme](https://github.com/horst3180/arc-theme), you can however also use it with other operating systems and themes. If the integration is used with other OS theming, it is possible that some parts will look broken. It is possible to tweak or disable certain styling through the preferences panel.
 
@@ -45,7 +45,8 @@ The content in this repository is licensed under GPLv3.
 ## History
 
   - 0.5.0 2017/12/30
-    - Fixed buggy preferences panel (for real, I hope) and included more styling
+    - Fixed buggy preferences panel (for real, I hope)
+    - Included more styling
   - 0.4.3 2017/07/03
     - Fixed some buggy behavior in the preferences panel
   - 0.4.2 2017/06/13

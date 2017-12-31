@@ -1,4 +1,4 @@
-# /source/xpi-content/
+# /source/package-contents/
 
 This folder contains the files that the build script will directly include into the .xpi add-on.
 
