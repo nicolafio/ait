@@ -1,5 +1,5 @@
 /*
- ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~  Copyright (c) 2017-2019 Nicola Fiori
  ~
  ~  This file is part of the Arc Integration for Thunderbird, licensed under
  ~  the terms of the GNU General Public License 3.0.
@@ -28,7 +28,7 @@ module.exports = {
     // in the specified folder (eg. 16, 24, ...).
     //
     ['icon-names($dir)'](dir) {
-        
+
         // Fetch icon names
         const d = dir.getValue();
         const path = join(__dirname, '..', 'icons', String(d));
@@ -38,7 +38,7 @@ module.exports = {
         // Generate list
         const list = SassList(names.length);
         names.forEach((n, i) => { list.setValue(i, SassString(n)); });
-        
+
         // Return result
         return list;
 

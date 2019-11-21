@@ -1,5 +1,5 @@
 /*
- ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~  Copyright (c) 2017-2019 Nicola Fiori (JD342)
  ~
  ~  This file is part of the Arc Integration for Thunderbird, licensed under
  ~  the terms of the GNU General Public License 3.0.
@@ -46,7 +46,7 @@ const AIT = {
     PREFS_DOMAIN: 'extensions.net.jd342.ait',
     STYLING_LOCATION: 'chrome://ait/content/styling.css',
     CONFIGURATION_LOCATION: 'chrome://ait/content/configuration.json',
-    PREFERENECES_DIALOG_LOCATION: 'chrome://ait/content/prefs.htm'
+    PREFERENECES_DIALOG_LOCATION: 'chrome://ait/content/prefs.html'
 };
 
 /* -- root logic ------------------------------------------------------------ */
@@ -189,7 +189,10 @@ AIT.WindowManager = (() => {
         unloadListeners = new WeakMap();
         documentListener = {
             QueryInterface:
-                XPCOMUtils.generateQI([
+                // - (Nov 19) `XPCOMUtils.generateQI` changed to
+                //   `ChromeUtils.generateQI`.
+                //   https://github.com/mozilla/tls-canary/issues/171#issuecomment-511116692
+                ChromeUtils.generateQI([
                     nsIWebProgressListener,
                     nsISupportsWeakReference
                 ]),
@@ -234,7 +237,7 @@ AIT.WindowManager = (() => {
     }
 
     function handleTopWindowInitialization(win) {
-        win.document.docShell.QueryInterface(nsIInterfaceRequestor)
+        win.docShell.QueryInterface(nsIInterfaceRequestor)
             .getInterface(nsIWebProgress)
             .addProgressListener(documentListener, nsIWebProgress.NOTIFY_ALL);
         for (let w of [win, ...getSubWindows(win)])
@@ -243,7 +246,7 @@ AIT.WindowManager = (() => {
     }
 
     function handleTopWindowTeardown(win) {
-        win.document.docShell.QueryInterface(nsIInterfaceRequestor)
+        win.docShell.QueryInterface(nsIInterfaceRequestor)
             .getInterface(nsIWebProgress)
             .removeProgressListener(documentListener);
         for (let w of [win, ...getSubWindows(win)])

@@ -1,5 +1,5 @@
 /*
- ~  Copyright (c) 2017 Nicola Fiori (JD342)
+ ~  Copyright (c) 2017-2019 Nicola Fiori
  ~
  ~  This file is part of the Arc Integration for Thunderbird, licensed under
  ~  the terms of the GNU General Public License 3.0.

@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+    "legacy": { "type": "bootstrap" },
+    "name": "Arc Integration for Thunderbird",
+    "version": "0.6.0",
+    "author": "Nicola Fiori (JD342)",
+    "homepage_url": "https://github.com/JD342/arc-thunderbird-integration",
+    "options_ui": { "page": "prefs.html" },
+    "icons": { "32": "icon.svg" },
+    "applications": {
+        "gecko": {
+            "id": "arcthunderbird@jd342.net",
+            "strict_min_version": "68.0"
+        }
+    }
+}
